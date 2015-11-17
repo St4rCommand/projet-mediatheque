@@ -1,19 +1,36 @@
 class UTILISATEUR
+--
+-- Utilisateur de la médiatèque
+--
+--
 
 creation {ANY}
-	make
+	nouveau
+	
+feature {}
+       -- Identifiant de l'utilisateur (pour la connexion)
+       identifiant: STRING
+       
+       -- Nom
+       nom: STRING
+       
+       -- Prénom
+       prenom: STRING
 
 feature {ANY}
 	
 	-- Constructeur
-	make is
+	nouveau(p_identifiant: STRING; p_nom: STRING; p_prenom: STRING) is
+	       require
+	              -- identifiant unique
 		do
-			io.put_string("Constructeur utilisateur")
+			create identifiant.make_from_string(p_identifiant)
+			create nom.make_from_string(p_nom)
+			create prenom.make_from_string(p_prenom)
 		end
 		
-feature {MEDIATHEQUE}
-	coucou is
+	afficher is
 	       do 
-	              io.put_string("Coucou depuis utilisateur")
+	              io.put_string(identifiant+" ("+prenom+" "+nom+")%N")
 	       end
 end
