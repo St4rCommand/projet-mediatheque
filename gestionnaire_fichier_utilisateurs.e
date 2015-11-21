@@ -1,13 +1,9 @@
-class LIRE_FICHIER_UTILISATEURS
+class GESTIONNAIRE_FICHIER_UTILISATEURS
 
-creation {ANY}
-       nouveau
+insert
+       GESTIONNAIRE_FICHIER_DONNEES
 
-feature {ANY} 
-
-       nouveau is
-              do
-              end
+feature {ANY}
               
 	-- Lecture du fichier utilisateurs.txt  
 	lire_fichier_utilisateurs(fichier:STRING): ARRAY[UTILISATEUR] is
@@ -84,20 +80,5 @@ feature {ANY}
                      end
                      
                      Result := utilisateur
-              end
-              
-       -- Lire un attribut d'une ligne d'un fichier
-       -- Renvoie une chaine vide si l'attribut n'existe pas
-       lire_attribut(ligne: STRING; attribut: STRING): STRING is
-              local 
-                     index: INTEGER
-              do
-                     index := ligne.substring_index(attribut, 1)
-                     
-                     if index /= 0 then
-                            Result := ligne.substring(ligne.index_of('<',index)+1,ligne.index_of('>',index)-1)
-                     else
-                            Result := ""
-                     end
               end
 end

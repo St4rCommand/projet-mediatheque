@@ -6,7 +6,7 @@ creation {ANY}
 feature {}
        utilisateurs:ARRAY[UTILISATEUR]
        medias:ARRAY[MEDIA]
-       lecteur_fichier_utilisateur:LIRE_FICHIER_UTILISATEURS
+       gestionnaire_fichier_utilisateur:GESTIONNAIRE_FICHIER_UTILISATEURS
 
 feature {ANY}
 	
@@ -17,11 +17,11 @@ feature {ANY}
 	       
 		do
 		       
-		       create lecteur_fichier_utilisateur.nouveau
+		       create gestionnaire_fichier_utilisateur
 			io.put_string("Bienvenue à la médiathèque%N")
 			--create utilisateur.nouveau("roro","hunault","romain")
 			--utilisateur.afficher
-                     create utilisateurs_lus.from_collection(lecteur_fichier_utilisateur.lire_fichier_utilisateurs("utilisateurs.txt"))
+                     create utilisateurs_lus.from_collection(gestionnaire_fichier_utilisateur.lire_fichier_utilisateurs("utilisateurs.txt"))
                      
                      io.put_string("Nombre d'utilisateurs créés : "+utilisateurs_lus.count.to_string+"%N")
 		end
