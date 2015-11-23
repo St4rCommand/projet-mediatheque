@@ -1,6 +1,6 @@
 class GESTIONNAIRE_FICHIER_UTILISATEURS
 
-insert
+inherit
        GESTIONNAIRE_FICHIER_DONNEES
 
 feature {ANY}
@@ -12,16 +12,16 @@ feature {ANY}
             utilisateur: UTILISATEUR
             utilisateurs: ARRAY[UTILISATEUR]
         do
-            -- Création du tableau
+            -- Création du tableau des utilisateurs lus
             create utilisateurs.with_capacity(0,0)
 	              
-            --connexion au fichier
+            -- Connexion au fichier
             create file_read.connect_to(fichier)
 	              
-            -- si le fichier existe
+            -- Si le fichier existe
             if file_read.is_connected then
 	                     
-                -- lecture jusqu'à la fin du fichier (ligne par ligne)
+                -- Lecture jusqu'à la fin du fichier (ligne par ligne)
                 from 
                 until file_read.end_of_input
                 loop
@@ -40,6 +40,7 @@ feature {ANY}
                     end
                 end
 
+                -- Déconnexion du fichier
                 file_read.disconnect
             else
                 io.put_string("Erreur : le fichier n'existe pas%N")
@@ -51,9 +52,11 @@ feature {ANY}
                 Result := utilisateurs
             end
         end
-	       
+        
+feature {NONE}
+
     -- Lecture d'un utilisateur (une ligne du fichier utilisateurs.txt)
-    lire_utilisateur(string_utilisateur: STRING):UTILISATEUR is
+    lire_utilisateur(cdc_utilisateur: STRING): UTILISATEUR is
         local
             utilisateur: UTILISATEUR
             identifiant: STRING
@@ -63,9 +66,9 @@ feature {ANY}
         do
               
             -- recherche des attributs
-            create identifiant.make_from_string(lire_attribut(string_utilisateur, "Identifiant"))
-            create prenom.make_from_string(lire_attribut(string_utilisateur, "Prenom"))
-            create nom.make_from_string(lire_attribut(string_utilisateur, "Nom"))
+            create identifiant.make_from_string(lire_attribut(cdc_utilisateur, "Identifiant"))
+            create prenom.make_from_string(lire_attribut(cdc_utilisateur, "Prenom"))
+            create nom.make_from_string(lire_attribut(cdc_utilisateur, "Nom"))
                      
             -- validation des contraintes
             if identifiant.is_empty or prenom.is_empty or nom.is_empty then
@@ -73,7 +76,7 @@ feature {ANY}
                 Result := Void
             else
                 -- déterminer le type d'utilisateur
-                admin := string_utilisateur.has_substring("Admin")
+                admin := cdc_utilisateur.has_substring("Admin")
                 if admin then
                     create utilisateur.nouveau(identifiant, nom, prenom)
                 else
