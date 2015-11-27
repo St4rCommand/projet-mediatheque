@@ -7,27 +7,34 @@ class LIVRE
 inherit 
 	MEDIA
 
+creation {ANY}
+    nouveau_livre,
+    nouveau_livre1,
+    nouveau
+
 feature {NONE}
 	-- L'attribut propre au livre
 	-- auteur
 	auteur : STRING
 
-
 feature {ANY}
-	--constructeur
-	nouveau (l_titre: STRING, l_auteur: STRING, l_nombre: INTEGER) is
-	local
+
+
+	-- Constructeur
+	nouveau_livre (p_titre: STRING; p_auteur: STRING; p_nombre: INTEGER) is
+    	local
 		do
-			create media.(titre.make_from_make(l_titre))
-			create media.(nombre.make_from_make(l_nombre))
-			create auteur.make_from_make(l_realisateur)
-	
+            create titre.make_from_string(p_titre)
+            nombre := p_nombre
+			create auteur.make_from_string(p_auteur)
 		end
-	nouveau1 (l_titre: STRING, l_auteur: STRING) is
-	local
+
+    -- Constructeur
+	nouveau_livre1 (p_titre: STRING; p_auteur: STRING) is
+    	local
 		do
-			create media.(titre.make_from_make(l_titre))
-			create auteur.make_from_make(l_auteur)
+			create titre.make_from_string(p_titre)
+			create auteur.make_from_string(p_auteur)
 		end
 end
 

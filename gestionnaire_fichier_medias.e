@@ -63,43 +63,62 @@ feature {NONE}
             nombre: STRING
         do
             -- Récupération du type de média
-            create type.make_from_string(lire_type_media(cdc_media))
+            create media.nouveau
+            media := lire_type_media(cdc_media)
             
-            -- Recherche des attribut
-            create titre.make_from_string(lire_attribut(cdc_media, "Titre"))
-            create nombre.make_from_string(lire_attribut(cdc_media, "Nombre"))
-            
-            if titre.is_empty then
-                io.put_string("Erreur : Un des attributs du média n'est pas présent%N")
+            if media /= Void then
+                io.put_string("Erreur : Le type de média n'a pas pu être déterminé.%N")
                 Result := Void
             else
+
+                Result := media
+
+                -- Recherche des attribut
+                create titre.make_from_string(lire_attribut(cdc_media, "Titre"))
+                create nombre.make_from_string(lire_attribut(cdc_media, "Nombre"))
+
                 
-                if nombre.is_integer then
-                    -- message d'erreur pour dire que le nombre n'a pas pu être lu
-                    create media.nouveau1(titre, nombre.to_integer)
+                if titre.is_empty then
+                    media.set_titre(titre)
                 else
-                    create media.nouveau2(titre)
+                    io.put_string("Erreur : Le titre n'a pas pu être déterminé.%N")
+                    Result := Void
                 end
                 
-                inspect type
-                    when "Livre" then
-                        io.put_string("Livre lu%N")
-                        Result := media
-                    when "DVD" then
-                        io.put_string("DVD lu%N")
-                        Result := media
-                    else
-                        io.put_string("Erreur : le type de média n'a pas pu être lu%N")
-                        Result := Void
+                if Result /= Void and nombre.is_integer then
+                    media.set_nombre(nombre.to_integer)
+                else
                 end
+
+                
+
             end
             
         end
         
     -- Lecture du type de média d'une ligne
-    lire_type_media(cdc_media: STRING): STRING is
+    lire_type_media(cdc_media: STRING): MEDIA is
         local
+            type: STRING
+            dvd: DVD
+            livre: LIVRE
         do
-            Result := cdc_media.substring(1, cdc_media.first_index_of(';')-2)
+            type := cdc_media.substring(1, cdc_media.first_index_of(';')-2)
+
+            inspect type
+                when "Livre" then
+                    create livre.nouveau
+                    io.put_string("Livre : %N")
+                        
+                    Result := livre
+                when "DVD" then         
+                    create dvd.nouveau
+                    io.put_string("DVD : %N")
+
+                    Result := dvd
+                else
+                    io.put_string("Erreur : le type de média n'a pas pu être lu%N")
+                    Result := Void
+            end
         end
 end

@@ -7,10 +7,13 @@ class DVD
 inherit 
 	MEDIA
 
+creation {ANY}
+    nouveau_dvd, nouveau
+
 feature {NONE}
 	-- Les attributs du DVD
-	-- année
-	annee : STRING
+	-- Année
+	annee : INTEGER
 
 	-- Réalisateur
 	realisateur : STRING
@@ -23,15 +26,14 @@ feature {NONE}
 
 feature {ANY}
 	--constructeur
-	nouveau (d_titre: STRING, d_annee: STRING, d_realisateur: STRING, d_type: STRING, d_nombre: INTEGER) is
-	local
+	nouveau_dvd (d_titre: STRING; d_annee: INTEGER; d_realisateur: STRING; d_type: STRING; d_nombre: INTEGER) is
+	    local
 		do
-			create media.(titre.make_from_make(d_titre))
-			create media.(nombre.make_from_make(d_nombre))
+			create titre.make_from_string(d_titre)
+            nombre := d_nombre
 			annee := d_annee
-			create realisateur.make_from_make(d_realisateur)
-			create type.make_from_make(d_type)
-	
+			create realisateur.make_from_string(d_realisateur)
+			create type.make_from_string(d_type)
 		end
 end
 
