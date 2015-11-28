@@ -5,12 +5,14 @@ inherit
 
 feature {ANY}
     --lire_fichier_medias(fichier:STRING): ARRAY[MEDIA] is
-    lire_fichier_medias(fichier:STRING) is
+    lire_fichier_medias(fichier:STRING): ARRAY[MEDIA] is
         local
             file_read: TEXT_FILE_READ
             media: MEDIA
             medias: ARRAY[MEDIA]
         do
+            io.put_string(" ===== Médias ===== %N")
+
             -- Création du tableau des médias lus
             create medias.with_capacity(0,0)
             
@@ -29,11 +31,12 @@ feature {ANY}
                     if not file_read.last_string.is_empty then
                         media := lire_media(file_read.last_string)
 	                                   
-                        --if media /= Void then
-                        --    medias.add_last(media)
-                        --else
-                        --    io.put_string("Erreur : Média non créé%N")
-                        --end
+                        if media /= Void then
+                            medias.add_last(media)
+                            io.put_string(media.to_string + "%N")
+                        else
+                            io.put_string("Erreur : Média non créé%N")
+                        end
                     else
                                    
                     end
@@ -46,79 +49,111 @@ feature {ANY}
             end
 	              
             if medias.is_empty then
-                --Result := Void
+                Result := Void
             else
-                --Result := medias
+                Result := medias
             end
+
+            io.put_string(" ===== %N")
         end
         
 feature {NONE}
-
-    -- Lecture d'un media (une ligne du fichier medias.txt)
-    lire_media(cdc_media: STRING): MEDIA is
-        local
-            media: MEDIA
-            type: STRING
-            titre: STRING
-            nombre: STRING
-        do
-            -- Récupération du type de média
-            create media.nouveau
-            media := lire_type_media(cdc_media)
-            
-            if media /= Void then
-                io.put_string("Erreur : Le type de média n'a pas pu être déterminé.%N")
-                Result := Void
-            else
-
-                Result := media
-
-                -- Recherche des attribut
-                create titre.make_from_string(lire_attribut(cdc_media, "Titre"))
-                create nombre.make_from_string(lire_attribut(cdc_media, "Nombre"))
-
-                
-                if titre.is_empty then
-                    media.set_titre(titre)
-                else
-                    io.put_string("Erreur : Le titre n'a pas pu être déterminé.%N")
-                    Result := Void
-                end
-                
-                if Result /= Void and nombre.is_integer then
-                    media.set_nombre(nombre.to_integer)
-                else
-                end
-
-                
-
-            end
-            
-        end
         
     -- Lecture du type de média d'une ligne
-    lire_type_media(cdc_media: STRING): MEDIA is
+    lire_media(cdc_media: STRING): MEDIA is
         local
             type: STRING
-            dvd: DVD
-            livre: LIVRE
         do
             type := cdc_media.substring(1, cdc_media.first_index_of(';')-2)
 
             inspect type
                 when "Livre" then
-                    create livre.nouveau
-                    io.put_string("Livre : %N")
-                        
-                    Result := livre
-                when "DVD" then         
-                    create dvd.nouveau
-                    io.put_string("DVD : %N")
-
-                    Result := dvd
+                    Result := lire_livre(cdc_media)
+                when "DVD" then
+                    Result := lire_dvd(cdc_media)
                 else
-                    io.put_string("Erreur : le type de média n'a pas pu être lu%N")
+                    io.put_string("Erreur : le type de média n'a pas pu être déterminé%N")
                     Result := Void
+            end
+        end
+
+    -- Lire DVD
+    lire_dvd(cdc_media: STRING): DVD is
+        local
+            dvd : DVD
+            titre: STRING
+            nombre: STRING
+	        annee: STRING
+	        type: STRING
+        do
+            create dvd.nouveau
+            Result := dvd
+
+            -- Recherche des attribut
+            create titre.make_from_string(lire_attribut(cdc_media, "Titre"))
+            create nombre.make_from_string(lire_attribut(cdc_media, "Nombre"))
+            create annee.make_from_string(lire_attribut(cdc_media, "Annee"))
+            create type.make_from_string(lire_attribut(cdc_media, "Type"))
+
+            if not titre.is_empty then
+                dvd.set_titre(titre)
+            else
+                io.put_string("Erreur : Le titre n'a pas pu être déterminé.%N")
+                Result := Void
+            end
+            
+            if Result /= Void and annee.is_integer then
+                dvd.set_annee(annee.to_integer)
+            else
+                io.put_string("Erreur : L'annee n'a pas pu être déterminé.%N")
+                Result := Void
+            end
+           
+            if Result /= Void and not type.is_empty then
+                dvd.set_type(type)
+            else
+            end
+           
+            if Result /= Void and nombre.is_integer then
+                dvd.set_nombre(nombre.to_integer)
+            else
+            end
+        end        
+
+    -- Lire Livre
+    lire_livre(cdc_media: STRING): LIVRE is
+        local
+            livre: LIVRE
+            titre: STRING
+            nombre: STRING
+	        auteur: STRING
+        do
+            create livre.nouveau
+            Result := livre
+
+            -- Recherche des attribut
+            create titre.make_from_string(lire_attribut(cdc_media, "Titre"))
+            create nombre.make_from_string(lire_attribut(cdc_media, "Nombre"))
+            create auteur.make_from_string(lire_attribut(cdc_media, "Auteur"))
+
+            
+            if not titre.is_empty then
+                livre.set_titre(titre)
+            else
+                io.put_string("Erreur : Le titre n'a pas pu être déterminé.%N")
+                Result := Void
+            end
+            
+            if Result /= Void and not auteur.is_empty then
+                livre.set_auteur(auteur)
+            else
+                io.put_string("Erreur : L'auteur n'a pas pu être déterminé.%N")
+                Result := Void
+            end
+           
+            if Result /= Void and nombre.is_integer then
+                livre.set_nombre(nombre.to_integer)
+            else
             end
         end
 end

@@ -7,6 +7,11 @@ class LIVRE
 inherit 
 	MEDIA
 
+    redefine
+        nouveau,
+        to_string
+    end 
+
 creation {ANY}
     nouveau_livre,
     nouveau_livre1,
@@ -19,6 +24,13 @@ feature {NONE}
 
 feature {ANY}
 
+    -- Constructeur
+    nouveau is
+        do
+            create titre.make_empty
+            create auteur.make_empty
+            nombre := 0
+        end
 
 	-- Constructeur
 	nouveau_livre (p_titre: STRING; p_auteur: STRING; p_nombre: INTEGER) is
@@ -36,6 +48,24 @@ feature {ANY}
 			create titre.make_from_string(p_titre)
 			create auteur.make_from_string(p_auteur)
 		end
+
+    -- Set auteur
+    set_auteur (p_auteur: STRING) is
+        do
+            auteur := p_auteur
+        end
+
+    -- Get auteur
+    get_auteur: STRING is
+        do
+            Result := auteur
+        end
+
+    -- To string
+    to_string: STRING is
+        do
+            Result := "Livre : " + titre + " de " + auteur + "(" + nombre.to_string + " exemplaires)"
+        end
 end
 
 

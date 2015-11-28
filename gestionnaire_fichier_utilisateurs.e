@@ -12,6 +12,8 @@ feature {ANY}
             utilisateur: UTILISATEUR
             utilisateurs: ARRAY[UTILISATEUR]
         do
+            io.put_string(" ===== Utilisateurs ===== %N")
+
             -- Création du tableau des utilisateurs lus
             create utilisateurs.with_capacity(0,0)
 	              
@@ -32,6 +34,7 @@ feature {ANY}
 	                                   
                         if utilisateur /= Void then
                             utilisateurs.add_last(utilisateur)
+                            io.put_string(utilisateur.to_string + "%N")
                         else
                             io.put_string("Erreur : Utilisateur non créé%N")
                         end
@@ -51,6 +54,8 @@ feature {ANY}
             else
                 Result := utilisateurs
             end
+
+            io.put_string(" ===== %N")
         end
         
 feature {NONE}

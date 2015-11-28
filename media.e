@@ -1,9 +1,7 @@
 class MEDIA
 
 creation {ANY}
-    nouveau,
-	nouveau1,
-	nouveau2
+    nouveau
 
 feature {NONE}
     -- Titre du média
@@ -12,37 +10,14 @@ feature {NONE}
     --Nombre d'exemplaire du média
     nombre: INTEGER
     
-
 feature {ANY}
 
     -- Constructeur
     nouveau is
-        require
-            --identifiant unique
-        local
         do
-
+            create titre.make_empty
+            nombre := 0
         end
-
-	
-	-- Constructeur
-	nouveau1 (p_titre: STRING; p_nombre:INTEGER) is
-	    require
-	        -- identifiant unique
-        local
-		do
-			create titre.make_from_string(p_titre)
-			nombre := p_nombre
-		end
-		
-	-- Constructeur
-	nouveau2 (p_titre: STRING) is
-	    require
-	        -- identifiant unique
-        local
-		do
-			create titre.make_from_string(p_titre)
-		end
 
     -- Set titre
     set_titre (p_titre: STRING) is
@@ -54,5 +29,23 @@ feature {ANY}
     set_nombre (p_nombre: INTEGER) is
         do
             nombre := p_nombre
+        end
+
+    -- Get titre
+    get_titre: STRING is
+        do
+            Result := titre
+        end
+
+    -- Get nombre
+    get_nombre: INTEGER is
+        do
+            Result := nombre
+        end
+
+    -- To string
+    to_string: STRING is
+        do
+            Result := titre + " (" + nombre.to_string + "exemplaires)"
         end
 end
