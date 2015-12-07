@@ -40,15 +40,35 @@ feature {ANY}
     -- Menu principal de l'application
     menu_principal is
         local
-            --choix_menu: INTEGER
+            choix_menu: INTEGER
         do
             -- Affichage du lancement de l'application
             affichage_menus.afficher_lancement
             
-            affichage_menus.afficher_menu_principal
+            choix_menu := -1
             
-            -- Afficher les médias
-            gestionnaire_medias.rechercher_medias
+            from
+            until choix_menu = 0
+            loop
+                choix_menu := affichage_menus.afficher_menu_principal
+                
+                inspect choix_menu
+                    when 1 then
+                        -- Afficher les utilisateurs
+                        --gestionnaire_utilisateurs.rechercher_medias
+                        io.put_string(" ***%N")
+                        io.put_string(" *** Vous avez choisi les utilisateurs, fonctionnalités à implémenter%N")
+                        io.put_string(" ***%N%N")
+                    when 2 then
+                        -- Afficher les médias
+                        gestionnaire_medias.rechercher_medias
+                    when 0 then
+                        -- Afficher la fin du programme
+                        affichage_menus.afficher_sortie_programme
+                    else 
+                        affichage_menus.afficher_erreur_saisie_menu
+                end
+            end
         end
 
 end

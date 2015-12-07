@@ -19,7 +19,7 @@ feature {ANY}
 		        i := i+1
 		    end
 		    
-            io.put_string("%N%N ****** %N%N")
+            io.put_string(" ****** %N%N")
         end
         
     afficher_media(p_media: MEDIA) is
