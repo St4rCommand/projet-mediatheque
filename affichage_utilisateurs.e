@@ -8,25 +8,27 @@ feature {ANY}
         local
             i: INTEGER
         do
-            
+        	io.put_string(" *** Liste des utilisateurs *** %N%N")    
     		from
-			    i := 0
+			    i := 1
 		    until
 			    i = p_utilisateurs.capacity
 		    loop
 		        afficher_utilisateur(p_utilisateurs.item(i))
+				i := i+1
 		    end
+			io.put_string(" ****** %N%N")
         end
         
     afficher_utilisateur(p_utilisateur: UTILISATEUR) is
         local
-            
+            utilisateur:UTILISATEUR
         do
 	    create utilisateur.nouveau
-            utilisateur ::= p_utilisateur
-            io.put_string(p_utilisateur.get_identifiant)
-            io.put_string("nom : "+p_utilisateur.get_nom)
-            io.put_string("prénom :"+p_utilisateur.get_prenom)
+            utilisateur := p_utilisateur
+            io.put_string("| Identifiant : "+p_utilisateur.get_identifiant+"%N")
+            io.put_string("| Nom : "+p_utilisateur.get_nom+"%N")
+            io.put_string("| Prénom :"+p_utilisateur.get_prenom+"%N")
             
         end
 

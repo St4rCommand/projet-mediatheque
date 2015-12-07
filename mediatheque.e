@@ -7,7 +7,7 @@ feature {}
        gestionnaire_fichier_utilisateurs:GESTIONNAIRE_FICHIER_UTILISATEURS
        gestionnaire_fichier_medias:GESTIONNAIRE_FICHIER_MEDIAS
        gestionnaire_medias:GESTIONNAIRE_MEDIAS
-       --gestionnaire_utilisateurs:GESTIONNAORE_UTILISATEURS
+       gestionnaire_utilisateurs:GESTIONNAIRE_UTILISATEURS
        affichage_menus:AFFICHAGE_MENUS
 
 feature {ANY}
@@ -55,10 +55,11 @@ feature {ANY}
                 inspect choix_menu
                     when 1 then
                         -- Afficher les utilisateurs
+						gestionnaire_utilisateurs.lister_utilisateurs
                         --gestionnaire_utilisateurs.rechercher_medias
-                        io.put_string(" ***%N")
-                        io.put_string(" *** Vous avez choisi les utilisateurs, fonctionnalités à implémenter%N")
-                        io.put_string(" ***%N%N")
+                       -- io.put_string(" ***%N")
+                        --io.put_string(" *** Vous avez choisi les utilisateurs, fonctionnalités à implémenter%N")
+                        --io.put_string(" ***%N%N")
                     when 2 then
                         -- Afficher les médias
                         gestionnaire_medias.rechercher_medias

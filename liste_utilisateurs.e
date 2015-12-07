@@ -5,7 +5,7 @@ creation {ANY}
 
 feature {NONE}
     -- Liste des UTILISATEURS
-    liste_utilisateurs: ARRAY[UTILISATEURS]
+    liste_utilisateurs: ARRAY[UTILISATEUR]
     
 feature {ANY}
 
@@ -13,6 +13,12 @@ feature {ANY}
     nouveau is
         do
             create liste_utilisateurs.make(0,0)
+        end
+
+	-- Lister les utilisateurs		
+		lister_utilisateurs:ARRAY[UTILISATEUR] is
+        do
+            Result := liste_utilisateurs
         end
 
     -- Ajouter

@@ -19,6 +19,15 @@ feature {ANY}
             create affichage_utilisateurs
         end
 
+    -- Lister les utilisateurs
+    lister_utilisateurs is
+       local
+            utilisateurs: ARRAY[UTILISATEUR]
+        do
+            create utilisateurs.from_collection(liste_utilisateurs.lister_utilisateurs)
+            affichage_utilisateurs.afficher_utilisateurs(utilisateurs)
+        end
+
     -- Ajouter un utilisateur
     ajouter_utilisateur(p_utilisateur:UTILISATEUR) is
         do
