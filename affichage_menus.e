@@ -26,4 +26,12 @@ feature {ANY}
             io.put_string(" --- %N%N")
             io.put_string("Choix : ")
         end
+	afficher_menu_admin is
+        do
+            io.put_string(" *** Menu admin *** %N")
+            io.put_string(" 1 - Afficher tous %N")
+            io.put_string(" 2 - AJouter %N")
+            io.put_string(" --- %N%N")
+            io.put_string("Choix : ")
+        end
 end

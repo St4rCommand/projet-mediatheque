@@ -1,4 +1,4 @@
-class UTILISATEUR
+class GESTIONNAIRE_UTILISATEURS
 
 creation {ANY}
     nouveau
@@ -8,39 +8,38 @@ feature {NONE}
     liste_utilisateurs: LISTE_UTILISATEURS
 
     -- Affichage des médias
-    affichage_utilisateur: AFFICHAGE_UTILISATEURS
+    affichage_utilisateurs: AFFICHAGE_UTILISATEURS
     
 feature {ANY}
 
     -- Constructeur
     nouveau is
         do
-            create liste_utilisateurs.make_empty
+            create liste_utilisateurs.nouveau
+            create affichage_utilisateurs
         end
-
-    -- 
 
     -- Ajouter un utilisateur
-    ajouter_utilisateur is
+    ajouter_utilisateur(p_utilisateur:UTILISATEUR) is
         do
-
+            liste_utilisateurs.ajouter_utilisateur(p_utilisateur)
+			affichage_utilisateurs.afficher_utilisateur(p_utilisateur)
+			--gestionnaire_menu.afficher_menu_admin
         end
 
-    -- Rechercher un utilisateur dans la liste des utilisateurs
-    rechercher_utilisateur is
-        do
-
-        end
-
-    -- Modifier le compte de l'utilisateur
-    modifier_utilisateur is
-        do
-        -- Appel la fonction rechercher utilisateur
-        -- Affichage de l'utilisateur
-        -- Appel focntion modifier (parametre à changer)
-        -- Affichage modification
-        -- Menu principal
-
-        end
+    -- Rechercher un utilisateur
+--    rechercher_utilisateur is 
+  --      local
+            
+   --     do
+            
+    --    end
 
 
+    -- Modifier le compte utilisateur
+    --modifier_utilisateur is
+    --    do
+    --
+    --    end
+
+end

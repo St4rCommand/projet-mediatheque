@@ -7,7 +7,7 @@ feature {}
        gestionnaire_fichier_utilisateurs:GESTIONNAIRE_FICHIER_UTILISATEURS
        gestionnaire_fichier_medias:GESTIONNAIRE_FICHIER_MEDIAS
        gestionnaire_medias:GESTIONNAIRE_MEDIAS
-       --gestionnaire_medias:GESTIONNAORE_UTILISATEURS
+       --gestionnaire_utilisateurs:GESTIONNAORE_UTILISATEURS
        affichage_menus:AFFICHAGE_MENUS
 
 feature {ANY}

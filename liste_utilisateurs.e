@@ -1,40 +1,25 @@
-class LISTE_MEDIAS
+class LISTE_UTILISATEURS
 
 creation {ANY}
     nouveau
 
 feature {NONE}
-    -- Liste des médias
-    liste_medias: ARRAY[MEDIA]
+    -- Liste des UTILISATEURS
+    liste_utilisateurs: ARRAY[UTILISATEURS]
     
 feature {ANY}
 
     -- Constructeur
     nouveau is
         do
-            create liste_media.make_empty
+            create liste_utilisateurs.make(0,0)
         end
 
     -- Ajouter
-    ajouter_utilisateur is
+    ajouter_utilisateur(p_utilisateur: UTILISATEUR) is
         do
-
+            liste_utilisateurs.add_last(p_utilisateur)
         end
 
-    -- Modifier
-    modifier_utilisateur is
-        do
-
-        end
-
-    -- Rechercher
-    rechercher_utilisateur:ARRAY[UTILISATEUR] is
-        do
-
-        end
-
-    -- Get
-    get_utilisateur:UTILISATEUR is
-        do
-
-        end
+        
+end
