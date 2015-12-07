@@ -11,11 +11,12 @@ feature {ANY}
         
     afficher_menu_principal is
         do
-            io.put_string(" *** Menu principal *** %N")
+            io.put_string(" *** Menu principal *** %N%N")
             io.put_string(" 1 - Utilisateurs %N")
             io.put_string(" 2 - Médias%N")
-            io.put_string(" --- %N%N")
+            io.put_string("%N%N --- %N")
             io.put_string("Choix : ")
+            io.put_string("%N%N ****** %N%N")
         end
         
     afficher_menu_medias is
@@ -25,6 +26,7 @@ feature {ANY}
             io.put_string(" 2 - Rechercher%N")
             io.put_string(" --- %N%N")
             io.put_string("Choix : ")
+            io.put_string(" ****** %N%N")
         end
 	afficher_menu_admin is
         do
@@ -33,5 +35,6 @@ feature {ANY}
             io.put_string(" 2 - AJouter %N")
             io.put_string(" --- %N%N")
             io.put_string("Choix : ")
+            io.put_string(" ****** %N%N")
         end
 end

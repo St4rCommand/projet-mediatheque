@@ -24,7 +24,9 @@ feature {ANY}
     -- Ajouter
     ajouter_medias(p_medias: ARRAY[MEDIA]) is
         do
+            io.put_string("avant : "+liste_medias.count.to_string+"%N")
             liste_medias.append_collection(p_medias)
+            io.put_string("après : "+liste_medias.count.to_string+"%N")
         end
 
     -- Modifier
