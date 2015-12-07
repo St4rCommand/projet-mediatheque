@@ -1,39 +1,54 @@
 class MEDIATHEQUE
 
 creation {ANY}
-	make
+	lancement
 	
 feature {}
-       utilisateurs:ARRAY[UTILISATEUR]
-       medias:ARRAY[MEDIA]
        gestionnaire_fichier_utilisateurs:GESTIONNAIRE_FICHIER_UTILISATEURS
        gestionnaire_fichier_medias:GESTIONNAIRE_FICHIER_MEDIAS
+       gestionnaire_medias:GESTIONNAIRE_MEDIAS
+       --gestionnaire_medias:GESTIONNAORE_UTILISATEURS
+       affichage_menus:AFFICHAGE_MENUS
 
 feature {ANY}
 	
-    -- Constructeur
-	make is
+	-- Lancement de l'application
+    lancement is
         local
             utilisateurs_lus: ARRAY[UTILISATEUR]
             medias_lus: ARRAY[MEDIA]
-		do
+        do
+            -- Chargement des gestionnaires
             create gestionnaire_fichier_utilisateurs
             create gestionnaire_fichier_medias
-            io.put_string("Bienvenue à la médiathèque%N")
-
-            -- Chargement des utilisateurs
-            create utilisateurs_lus.from_collection(gestionnaire_fichier_utilisateurs.lire_fichier_utilisateurs("utilisateurs.txt"))                
-            io.put_string("Nombre d'utilisateurs créés : "+utilisateurs_lus.count.to_string+"%N")
+            create gestionnaire_medias.nouveau
+            --create gestionnaire_utilisateurs
+            create affichage_menus
             
-            -- Chargement des médias
+            -- Chargement des médias depuis le fichier de données
             create medias_lus.from_collection(gestionnaire_fichier_medias.lire_fichier_medias("medias.txt"))
-            io.put_string("Nombre de médias créés : "+medias_lus.count.to_string+"%N")
+            gestionnaire_medias.ajouter_medias(medias_lus)
+            
+            -- Chargement des utilisateurs depuis le fichier de données
+            create utilisateurs_lus.from_collection(gestionnaire_fichier_utilisateurs.lire_fichier_utilisateurs("utilisateurs.txt")) 
+            --gestionnaire_utilisateurs.ajouter_utilisateurs(utilisateurs_lus)
+            
+            -- Menu principal
+            menu_principal
         end
-		
-    ajouter_utilisateurs (nouveaux_utilisateurs : ARRAY[UTILISATEUR]) is
+    
+    -- Menu principal de l'application
+    menu_principal is
+        local
+            --choix_menu: INTEGER
         do
+            -- Affichage du lancement de l'application
+            affichage_menus.afficher_lancement
+            
+            affichage_menus.afficher_menu_principal
+            
+            -- Afficher les médias
+            gestionnaire_medias.rechercher_medias
         end
-	
-		
 
 end

@@ -11,7 +11,6 @@ feature {ANY}
             media: MEDIA
             medias: ARRAY[MEDIA]
         do
-            io.put_string(" ===== Médias ===== %N")
 
             -- Création du tableau des médias lus
             create medias.with_capacity(0,0)
@@ -33,7 +32,6 @@ feature {ANY}
 	                                   
                         if media /= Void then
                             medias.add_last(media)
-                            io.put_string(media.to_string + "%N")
                         else
                             io.put_string("Erreur : Média non créé%N")
                         end
@@ -54,7 +52,6 @@ feature {ANY}
                 Result := medias
             end
 
-            io.put_string(" ===== %N")
         end
         
 feature {NONE}

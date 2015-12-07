@@ -12,29 +12,37 @@ feature {ANY}
     -- Constructeur
     nouveau is
         do
-            create liste_media.make_empty
+            create liste_medias.make(0,0)
         end
 
     -- Ajouter
-    ajouter_media is
+    ajouter_media(p_media: MEDIA) is
         do
-
+            liste_medias.add_last(p_media)
+        end
+        
+    -- Ajouter
+    ajouter_medias(p_medias: ARRAY[MEDIA]) is
+        do
+            liste_medias.append_collection(p_medias)
         end
 
     -- Modifier
-    modifier_media( is
-        do
+    --modifier_media is
+    --    do
 
-        end
+    --    end
 
     -- Rechercher
     rechercher_media:ARRAY[MEDIA] is
         do
-
+            Result := liste_medias
         end
 
-    -- Get
-    get_media:MEDIA is
-        do
-
-        end
+    -- Obtenir
+    --Obtenir_media:MEDIA is
+    --    do
+    --
+    --    end
+        
+end
