@@ -43,6 +43,7 @@ feature {ANY}
             io.put_string(" Choix : ")
             io.put_string(" ****** %N%N")
         end
+        
 	afficher_menu_admin is
         do
             io.put_string(" *** Menu admin *** %N%N")
