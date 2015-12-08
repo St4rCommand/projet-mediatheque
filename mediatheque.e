@@ -22,7 +22,7 @@ feature {ANY}
             create gestionnaire_fichier_utilisateurs
             create gestionnaire_fichier_medias
             create gestionnaire_medias.nouveau
-            --create gestionnaire_utilisateurs
+            create gestionnaire_utilisateurs.nouveau
             create affichage_menus
             
             -- Chargement des médias depuis le fichier de données
@@ -31,7 +31,7 @@ feature {ANY}
             
             -- Chargement des utilisateurs depuis le fichier de données
             create utilisateurs_lus.from_collection(gestionnaire_fichier_utilisateurs.lire_fichier_utilisateurs("utilisateurs.txt")) 
-            --gestionnaire_utilisateurs.ajouter_utilisateurs(utilisateurs_lus)
+            gestionnaire_utilisateurs.ajouter_utilisateurs(utilisateurs_lus)
             
             -- Menu principal
             menu_principal

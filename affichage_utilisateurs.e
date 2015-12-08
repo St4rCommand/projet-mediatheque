@@ -12,7 +12,7 @@ feature {ANY}
     		from
 			    i := 1
 		    until
-			    i = p_utilisateurs.capacity
+			    i = p_utilisateurs.count
 		    loop
 		        afficher_utilisateur(p_utilisateurs.item(i))
 				i := i+1
@@ -21,15 +21,11 @@ feature {ANY}
         end
         
     afficher_utilisateur(p_utilisateur: UTILISATEUR) is
-        local
-            utilisateur:UTILISATEUR
         do
-	    create utilisateur.nouveau
-            utilisateur := p_utilisateur
             io.put_string("| Identifiant : "+p_utilisateur.get_identifiant+"%N")
             io.put_string("| Nom : "+p_utilisateur.get_nom+"%N")
             io.put_string("| Prénom :"+p_utilisateur.get_prenom+"%N")
-            
+            io.put_string("%N")
         end
 
 end

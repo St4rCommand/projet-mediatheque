@@ -33,7 +33,21 @@ feature {ANY}
         do
             liste_utilisateurs.ajouter_utilisateur(p_utilisateur)
 			affichage_utilisateurs.afficher_utilisateur(p_utilisateur)
+			
+			-- from
+			-- until unique
+			-- loop
+			--      unique = liste_utilisateurs.existe(identifiant):boolen
+			--      afficage_menu.saisir identiifant
+			-- end
+			
 			--gestionnaire_menu.afficher_menu_admin
+        end
+        
+    -- Ajouter des utilisateurs
+    ajouter_utilisateurs(p_utilisateurs:ARRAY[UTILISATEUR]) is
+        do
+            liste_utilisateurs.ajouter_utilisateurs(p_utilisateurs)
         end
 
     -- Rechercher un utilisateur
