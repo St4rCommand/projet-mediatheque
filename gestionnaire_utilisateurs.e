@@ -63,15 +63,15 @@ feature {ANY}
 					io.put_string("Identifiant déjà connu %N")
 				end
 			 end
+
 			-- saisir le nom
 			nom := affichage_utilisateurs.saisir_nom
+
 			-- saisir le prénom
-
 			prenom := affichage_utilisateurs.saisir_prenom
+
 			-- instancier l'utilisateur
-
 			create p_utilisateur.nouveau(identifiant,nom,prenom)
-
 			Result := p_utilisateur
 		end	
 

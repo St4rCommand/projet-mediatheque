@@ -43,7 +43,8 @@ feature {ANY}
 				i := 1
 			until existe or i = liste_utilisateurs.count
 			loop
-				existe := not identifiant.is_equal((liste_utilisateurs.item(i)).get_identifiant)			
+				io.put_string (" i = "+i.to_string +"identifiant : "+liste_utilisateurs.item(i).get_identifiant)
+				existe := identifiant.is_equal((liste_utilisateurs.item(i)).get_identifiant)			
 				i := i+1
 			end
 			Result := existe
