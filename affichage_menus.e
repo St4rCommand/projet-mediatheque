@@ -66,6 +66,11 @@ feature {ANY}
             io.put_string(" ***%N%N")
         end
         
+    afficher_retour_menu_principal is
+        do
+        
+        end
+        
     afficher_sortie_programme is
         do
             io.put_string("================================%N")

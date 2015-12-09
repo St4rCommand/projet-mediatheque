@@ -95,7 +95,7 @@ feature {ANY}
                         gestionnaire_utilisateurs.ajouter_form_utilisateur
                     when 0 then
                         -- Afficher le menu principal
-                        menu_principal
+                        affichage_menus.afficher_retour_menu_principal
                     else 
                         affichage_menus.afficher_erreur_saisie_menu
                 end
