@@ -82,6 +82,8 @@ feature {NONE}
             nombre: STRING
 	        annee: STRING
 	        type: STRING
+	        realisateurs: ARRAY[STRING]
+	        acteurs: ARRAY[STRING]
         do
             create dvd.nouveau
             Result := dvd
@@ -91,6 +93,8 @@ feature {NONE}
             create nombre.make_from_string(lire_attribut(cdc_media, "Nombre"))
             create annee.make_from_string(lire_attribut(cdc_media, "Annee"))
             create type.make_from_string(lire_attribut(cdc_media, "Type"))
+            create realisateurs.from_collection(lire_attribut_multiple(cdc_media, "Realisateur"))
+            create acteurs.from_collection(lire_attribut_multiple(cdc_media, "Acteur"))
 
             if not titre.is_empty then
                 dvd.set_titre(titre)
@@ -115,6 +119,9 @@ feature {NONE}
                 dvd.set_nombre(nombre.to_integer)
             else
             end
+            
+            
+            
         end        
 
     -- Lire Livre

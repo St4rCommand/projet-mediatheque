@@ -30,6 +30,7 @@ feature {NONE}
             until index = 0
             loop
                 valeurs_attribut.add_last(ligne.substring(ligne.index_of('<',index)+1,ligne.index_of('>',index)-1))
+                io.put_string(ligne.substring(ligne.index_of('<',index)+1,ligne.index_of('>',index)-1)+"%N")
                 index := ligne.substring_index(attribut, 1)
             end
 
