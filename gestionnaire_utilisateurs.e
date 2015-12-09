@@ -51,27 +51,33 @@ feature {ANY}
 			prenom : STRING
 			p_utilisateur : UTILISATEUR
 		do
+			existe := True
+			
+			create nom.make_empty
+			create prenom.make_empty
+			create identifiant.make_empty
+			
 			-- demander de saisir l'identifiant
-			io.put_string("valeur booleen : "+existe.to_string)
-			 from
-			 until existe
-			 loop
-	      		identifiant := affichage_utilisateurs.saisir_identifiant
+		    from
+			until not existe
+            loop
+	      		identifiant.copy(affichage_utilisateurs.saisir_identifiant)
 			    existe := liste_utilisateurs.existe_id(identifiant)
-				io.put_string("val : "+existe.to_string)
+				--io.put_string("val : "+existe.to_string)
 				if existe then
-					io.put_string("Identifiant déjà connu %N")
+				    affichage_utilisateurs.afficher_identifiant_existe
 				end
 			 end
 
 			-- saisir le nom
-			nom := affichage_utilisateurs.saisir_nom
+			nom.copy(affichage_utilisateurs.saisir_nom)
 
 			-- saisir le prénom
-			prenom := affichage_utilisateurs.saisir_prenom
+			prenom.copy(affichage_utilisateurs.saisir_prenom)
 
 			-- instancier l'utilisateur
 			create p_utilisateur.nouveau(identifiant,nom,prenom)
+			io.put_string(p_utilisateur.to_string)
 			Result := p_utilisateur
 		end	
 
@@ -80,9 +86,13 @@ feature {ANY}
 		local
 			utilisateur : UTILISATEUR
 		do
+		    affichage_utilisateurs.afficher_nouvel_utilisateur
+		    
 			utilisateur := formulaire_utilisateur
 			liste_utilisateurs.ajouter_utilisateur(utilisateur)
-			io.put_string ("utilisateur crée ! ") 
+			
+			affichage_utilisateurs.afficher_nouvel_utilisateur_cree(utilisateur)
+			affichage_utilisateurs.afficher_fin_nouvel_utilisateur
 		end	
 			
 end

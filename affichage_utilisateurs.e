@@ -17,15 +17,30 @@ feature {ANY}
 		        afficher_utilisateur(p_utilisateurs.item(i))
 				i := i+1
 		    end
-			io.put_string(" ****** %N%N")
         end
         
     afficher_utilisateur(p_utilisateur: UTILISATEUR) is
         do
             io.put_string("| Identifiant : "+p_utilisateur.get_identifiant+"%N")
             io.put_string("| Nom : "+p_utilisateur.get_nom+"%N")
-            io.put_string("| Prénom :"+p_utilisateur.get_prenom+"%N")
+            io.put_string("| Prénom : "+p_utilisateur.get_prenom+"%N")
             io.put_string("%N")
+        end
+        
+    afficher_nouvel_utilisateur_cree(p_utilisateur : UTILISATEUR) is
+        do
+            io.put_string("%N%N Utilisateur créé :%N")
+            afficher_utilisateur(p_utilisateur)
+        end
+        
+    afficher_nouvel_utilisateur is
+        do
+            io.put_string(" *** Nouvel Utilisateur *** %N%N")
+        end
+        
+    afficher_fin_nouvel_utilisateur is
+        do
+			io.put_string(" ****** %N%N")
         end
 
 	saisir_identifiant: STRING is
@@ -33,10 +48,7 @@ feature {ANY}
             identifiant:STRING
         do
             identifiant := ""
-        
-            io.put_string(" *** Nouvel Utilisateur *** %N%N")
-            io.put_string("  %N")
-            io.put_string(" Saisir votre identifiant : %N")
+            io.put_string(" Saisir votre identifiant : ")
             io.read_line
             identifiant := io.last_string
             
@@ -48,7 +60,7 @@ feature {ANY}
             nom:STRING
         do
             nom := ""
-            io.put_string(" Saisir votre nom : %N")
+            io.put_string(" Saisir votre nom : ")
             io.read_line
             nom := io.last_string
             
@@ -60,11 +72,18 @@ feature {ANY}
             prenom:STRING
         do
             prenom := ""
-            io.put_string(" Saisir votre prenom : %N")
+            io.put_string(" Saisir votre prenom : ")
             io.read_line
             prenom := io.last_string
             
             Result := prenom
+        end
+        
+    afficher_identifiant_existe is
+        do
+            io.put_string(" ***%N")
+            io.put_string(" *** Identifiant déjà connu%N")
+            io.put_string(" ***%N%N")
         end
 
 end
