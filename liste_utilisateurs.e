@@ -33,5 +33,21 @@ feature {ANY}
             liste_utilisateurs.append_collection(p_utilisateurs)
         end
 
+	-- On recherche l'unicité de l'identifiant
+	existe_id(identifiant:STRING):BOOLEAN is
+		local
+			i : INTEGER	
+			existe : BOOLEAN	
+		do
+			from 
+				i := 1
+			until existe or i = liste_utilisateurs.count
+			loop
+				existe := not identifiant.is_equal((liste_utilisateurs.item(i)).get_identifiant)			
+				i := i+1
+			end
+			Result := existe
+		end
+
         
 end

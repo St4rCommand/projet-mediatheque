@@ -34,24 +34,29 @@ feature {ANY}
             Result := choix_menu.to_integer
         end
         
-    afficher_menu_medias is
+	afficher_menu_utilisateur:INTEGER is
+         local
+            choix_sous_menu:STRING
         do
-            io.put_string(" *** Menu utilisateurs *** %N%N")
-            io.put_string(" 1 - Afficher tous%N")
-            io.put_string(" 2 - Rechercher%N")
-            io.put_string("%N --- %N")
-            io.put_string(" Choix : ")
-            io.put_string(" ****** %N%N")
-        end
+            choix_sous_menu := ""
         
-	afficher_menu_admin is
-        do
             io.put_string(" *** Menu admin *** %N%N")
-            io.put_string(" 1 - Afficher tous %N")
-            io.put_string(" 2 - AJouter %N")
+            io.put_string(" 1 - Lister les utilisateurs%N")
+            io.put_string(" 2 - Ajouter un utilisateur%N")
+            io.put_string("%N 0 - Menu principal%N")
             io.put_string("%N --- %N")
-            io.put_string(" Choix : ")
+            
+            from
+            until choix_sous_menu.is_integer
+            loop
+                io.put_string(" Choix : ")
+                io.read_line
+                choix_sous_menu := io.last_string
+            end
+            
             io.put_string("%N ****** %N%N")
+            
+            Result := choix_sous_menu.to_integer
         end
         
     afficher_erreur_saisie_menu is

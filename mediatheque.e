@@ -54,8 +54,10 @@ feature {ANY}
                 
                 inspect choix_menu
                     when 1 then
+						-- Sous menu offrant les fonctionnalités
+						sous_menu_utilisateur
                         -- Afficher les utilisateurs
-						gestionnaire_utilisateurs.lister_utilisateurs
+						--gestionnaire_utilisateurs.lister_utilisateurs
                         --gestionnaire_utilisateurs.rechercher_medias
                        -- io.put_string(" ***%N")
                         --io.put_string(" *** Vous avez choisi les utilisateurs, fonctionnalités à implémenter%N")
@@ -66,6 +68,34 @@ feature {ANY}
                     when 0 then
                         -- Afficher la fin du programme
                         affichage_menus.afficher_sortie_programme
+                    else 
+                        affichage_menus.afficher_erreur_saisie_menu
+                end
+            end
+        end
+
+    -- Sous menu des fonctionnalités concernant l'admin
+    sous_menu_utilisateur is
+        local
+			choix_sous_menu: INTEGER
+        do            
+            choix_sous_menu := -1
+            
+            from
+            until choix_sous_menu = 0
+            loop
+                choix_sous_menu := affichage_menus.afficher_menu_utilisateur
+                
+                inspect choix_sous_menu
+                    when 1 then
+                        -- Afficher les utilisateurs
+						gestionnaire_utilisateurs.lister_utilisateurs
+                    when 2 then
+                        -- Ajouter un utilisateur
+                        gestionnaire_utilisateurs.ajouter_form_utilisateur
+                    when 0 then
+                        -- Afficher le menu principal
+                        menu_principal
                     else 
                         affichage_menus.afficher_erreur_saisie_menu
                 end

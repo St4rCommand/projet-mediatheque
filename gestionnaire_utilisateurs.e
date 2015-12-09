@@ -28,20 +28,12 @@ feature {ANY}
             affichage_utilisateurs.afficher_utilisateurs(utilisateurs)
         end
 
-    -- Ajouter un utilisateur
+    -- Ajouter un utilisateur avec en entrée l'utilisateur
     ajouter_utilisateur(p_utilisateur:UTILISATEUR) is
         do
             liste_utilisateurs.ajouter_utilisateur(p_utilisateur)
 			affichage_utilisateurs.afficher_utilisateur(p_utilisateur)
 			
-			-- from
-			-- until unique
-			-- loop
-			--      unique = liste_utilisateurs.existe(identifiant):boolen
-			--      afficage_menu.saisir identiifant
-			-- end
-			
-			--gestionnaire_menu.afficher_menu_admin
         end
         
     -- Ajouter des utilisateurs
@@ -50,19 +42,47 @@ feature {ANY}
             liste_utilisateurs.ajouter_utilisateurs(p_utilisateurs)
         end
 
-    -- Rechercher un utilisateur
---    rechercher_utilisateur is 
-  --      local
-            
-   --     do
-            
-    --    end
+	-- Formulaire de saisi pour un utilisateur
+	formulaire_utilisateur:UTILISATEUR is
+		local
+			existe : BOOLEAN
+			identifiant : STRING
+			nom : STRING
+			prenom : STRING
+			p_utilisateur : UTILISATEUR
+		do
+			-- demander de saisir l'identifiant
+			io.put_string("valeur booleen : "+existe.to_string)
+			 from
+			 until existe
+			 loop
+	      		identifiant := affichage_utilisateurs.saisir_identifiant
+			    existe := liste_utilisateurs.existe_id(identifiant)
+				io.put_string("val : "+existe.to_string)
+				if existe then
+					io.put_string("Identifiant déjà connu %N")
+				end
+			 end
+			-- saisir le nom
+			nom := affichage_utilisateurs.saisir_nom
+			-- saisir le prénom
 
+			prenom := affichage_utilisateurs.saisir_prenom
+			-- instancier l'utilisateur
 
-    -- Modifier le compte utilisateur
-    --modifier_utilisateur is
-    --    do
-    --
-    --    end
+			create p_utilisateur.nouveau(identifiant,nom,prenom)
 
+			Result := p_utilisateur
+		end	
+
+	-- Ajouter un utilisateur par le formulaire rempli 
+	ajouter_form_utilisateur is
+		local
+			utilisateur : UTILISATEUR
+		do
+			utilisateur := formulaire_utilisateur
+			liste_utilisateurs.ajouter_utilisateur(utilisateur)
+			io.put_string ("utilisateur crée ! ") 
+		end	
+			
 end
