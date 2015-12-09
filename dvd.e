@@ -22,9 +22,12 @@ feature {NONE}
 
 	-- Type
 	type : STRING
-
-	--Acteurs
-	--acteurs: ARRAY[ACTEUR]
+  
+   -- Realisateurs
+   realisateurs: ARRAY[STRING]
+   
+   -- Acteurs
+   acteurs: ARRAY[STRING]
 
 feature {ANY}
 
@@ -32,19 +35,23 @@ feature {ANY}
     nouveau is
         do
             create titre.make_empty
-            create type.make_empty            
+            create type.make_empty
+            create realisateurs.make(0,0)
+            create acteurs.make(0,0)         
             annee := 0
             nombre := 0
         end
 
 	--constructeur
-	nouveau_dvd (d_titre: STRING; d_annee: INTEGER; d_type: STRING; d_nombre: INTEGER) is
+	nouveau_dvd (d_titre: STRING; d_annee: INTEGER; d_type: STRING; d_nombre: INTEGER; d_realisateurs: ARRAY[STRING]; d_acteurs: ARRAY[STRING]) is
 	    local
 		do
 			create titre.make_from_string(d_titre)
             nombre := d_nombre
 			annee := d_annee
 			create type.make_from_string(d_type)
+			create realisateurs.from_collection(d_realisateurs)
+			create acteurs.from_collection(d_acteurs)
 		end
 
     -- Set annee
@@ -59,6 +66,18 @@ feature {ANY}
             type := p_type
         end
 
+    -- Set realisateurs
+    add_realisateurs (p_realisateurs: ARRAY[STRING]) is
+        do
+            realisateurs.append_collection(p_realisateurs)
+        end
+
+    -- Set acteurs
+    add_acteurs (p_acteurs: ARRAY[STRING]) is
+        do
+            acteurs.append_collection(p_acteurs)
+        end
+
     -- Get annee
     get_annee: INTEGER is
         do
@@ -69,6 +88,18 @@ feature {ANY}
     get_type: STRING is
         do
             Result := type
+        end
+        
+    -- Get realisateurs
+    get_realisateurs: ARRAY[STRING] is
+        do
+            Result := realisateurs
+        end
+        
+    -- Get acteurs
+    get_acteurs: ARRAY[STRING] is
+        do
+            Result := acteurs
         end
 
     -- To string

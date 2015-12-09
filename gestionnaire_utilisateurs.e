@@ -63,7 +63,6 @@ feature {ANY}
             loop
 	      		identifiant.copy(affichage_utilisateurs.saisir_identifiant)
 			    existe := liste_utilisateurs.existe_id(identifiant)
-				--io.put_string("val : "+existe.to_string)
 				if existe then
 				    affichage_utilisateurs.afficher_identifiant_existe
 				end
@@ -77,7 +76,6 @@ feature {ANY}
 
 			-- instancier l'utilisateur
 			create p_utilisateur.nouveau(identifiant,nom,prenom)
-			io.put_string(p_utilisateur.to_string)
 			Result := p_utilisateur
 		end	
 

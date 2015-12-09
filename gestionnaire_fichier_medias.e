@@ -120,7 +120,19 @@ feature {NONE}
             else
             end
             
+            if Result /= Void and realisateurs.count > 0 then
+                dvd.add_realisateurs(realisateurs)
+            else
+                io.put_string("Erreur : Aucun réalisateur n'a pu être lu.%N")
+                Result := Void
+            end
             
+            if Result /= Void and acteurs.count > 0 then
+                dvd.add_acteurs(acteurs)
+            else
+                io.put_string("Erreur : Aucun acteur n'a pu être lu.%N")
+                Result := Void
+            end
             
         end        
 

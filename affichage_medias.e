@@ -1,7 +1,29 @@
 class AFFICHAGE_MEDIAS
 
 feature {NONE}
-    
+
+    afficher_tableau_string(tab: ARRAY[STRING]): STRING is
+        local
+            i: INTEGER
+            string: STRING
+        do
+            create string.make_empty
+            
+            from i := 1
+            until i = tab.count
+            loop
+                string.append(tab.item(i))
+                
+                if i /= tab.count-1 then
+                    string.append(", ")
+                end
+                
+                i := i+1
+            end
+            
+            Result := string
+        end
+        
 feature {ANY}
         
 	-- Afficher une liste de médias en les affichant 1 par 1
@@ -56,9 +78,13 @@ feature {ANY}
     -- Afficher un dvd avec ses caractéristiques    
     afficher_dvd(p_dvd: DVD) is
         do
-            io.put_string("| "+p_dvd.get_titre+"("+p_dvd.get_annee.to_string+")%N")
+            io.put_string("| "+p_dvd.get_titre+" ("+p_dvd.get_annee.to_string+")%N")
             io.put_string("| "+p_dvd.get_type+"%N")
             io.put_string("| ("+p_dvd.get_nombre.to_string+" exemplaires)%N")
+            io.put_string("| Réalisateur(s) : "+afficher_tableau_string(p_dvd.get_realisateurs)+"%N")
+            io.put_string("| Acteurs : "+afficher_tableau_string(p_dvd.get_acteurs)+"%N")
             io.put_string("%N")
         end
+        
+
 end
