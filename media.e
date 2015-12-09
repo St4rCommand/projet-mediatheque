@@ -4,15 +4,16 @@ creation {ANY}
     nouveau
 
 feature {NONE}
+
     -- Titre du média
     titre: STRING
     
-    --Nombre d'exemplaire du média
+    --Nombre d'exemplaires du média
     nombre: INTEGER
     
 feature {ANY}
 
-    -- Constructeur
+    -- Constructeur vide
     nouveau is
         do
             create titre.make_empty
