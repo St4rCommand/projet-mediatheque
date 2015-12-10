@@ -101,5 +101,36 @@ feature {ANY}
                 end
             end
         end
+        
+    -- Sous menu des fonctionnalités concernant l'admin
+    sous_menu_medias is
+        local
+			choix_sous_menu: INTEGER
+        do            
+            choix_sous_menu := -1
+            
+            from
+            until choix_sous_menu = 0
+            loop
+                choix_sous_menu := affichage_menus.afficher_menu_utilisateur
+                
+                inspect choix_sous_menu
+                    when 1 then
+                        -- Rechercher et consulter un ou plusieurs médias
+						gestionnaire_medias.consulter
+                    when 2 then
+                        -- Ajouter un média
+                        gestionnaire_medias.ajouter
+                    when 3 then
+                        -- Modifier un média
+                        gestionnaire_medias.modifier
+                    when 0 then
+                        -- Afficher le menu principal
+                        affichage_menus.afficher_retour_menu_principal
+                    else 
+                        affichage_menus.afficher_erreur_saisie_menu
+                end
+            end
+        end
 
 end
