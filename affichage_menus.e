@@ -105,9 +105,7 @@ feature {ANY}
         
     afficher_erreur_saisie_menu is
         do
-            io.put_string(" ***%N")
-            io.put_string(" *** Le choix du menu ne correspond à aucune option%N")
-            io.put_string(" ***%N%N")
+            afficher_message_erreur("Le choix du menu ne correspond à aucune option")
         end
         
     afficher_retour_menu_principal is
@@ -128,7 +126,7 @@ feature {ANY}
         do
             identifiant := ""
             io.put_string(" *** Connexion *** %N%N")
-            io.put_string(" Saisir votre identifiant : ")
+            io.put_string(" Saisir un identifiant : ")
             io.read_line
             identifiant := io.last_string
             
@@ -138,9 +136,7 @@ feature {ANY}
         
     afficher_saisie_identifiant_incorrecte is
         do
-            io.put_string(" ***%N")
-            io.put_string(" *** Aucun utilisateur ne correspond à cet identifiant%N")
-            io.put_string(" ***%N%N")
+            afficher_message_erreur("Aucun utilisateur ne correspond à cet identifiant")
         end
         
     afficher_menu_medias: INTEGER is
@@ -167,5 +163,14 @@ feature {ANY}
             io.put_string("%N ****** %N%N")
             
             Result := choix_menu.to_integer
+        end
+        
+feature {NONE}
+
+    afficher_message_erreur(p_string: STRING) is
+        do
+            io.put_string(" ***%N")
+            io.put_string(" *** "+p_string+"%N")
+            io.put_string(" ***%N%N")
         end
 end
