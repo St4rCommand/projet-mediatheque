@@ -28,13 +28,13 @@ feature {ANY}
             
             -- Chargement des médias depuis le fichier de données
             create medias_lus.from_collection(gestionnaire_fichier_medias.lire_fichier_medias("medias.txt"))
-            gestionnaire_medias.ajouter_medias(medias_lus)
+            gestionnaire_medias.ajouter_liste(medias_lus)
             
             -- Chargement des utilisateurs depuis le fichier de données
             create utilisateurs_lus.from_collection(gestionnaire_fichier_utilisateurs.lire_fichier_utilisateurs("utilisateurs.txt")) 
             gestionnaire_utilisateurs.ajouter_utilisateurs(utilisateurs_lus)
             
-            -- Menu principal
+            -- Menu principal de l'application
             menu_principal
         end
     
@@ -43,25 +43,29 @@ feature {ANY}
         local
             fin: BOOLEAN
         do
-            -- Affichage du lancement de l'application
-            affichage_menus.afficher_lancement
-            --choix_menu := choix_menu := affichage_menus.afficher_menu_principal
             fin := False
             
+            -- Affichage du lancement de l'application
+            affichage_menus.afficher_lancement
+
             from
             until fin
             loop
+                -- Interface publique
                 if utilisateur_connecte = Void then
                     fin := menu_principal_non_connecte
+                -- Interface d'administration
                 elseif utilisateur_connecte.is_admin then
                     fin := menu_principal_admin
+                -- Interface client
                 else
-                    --fin := menu_principal_client
+                    fin := menu_principal_client
                 end
             end
             
         end
-        
+    
+    -- Menu public de l'application
     menu_principal_non_connecte: BOOLEAN is
         local
             choix_menu: INTEGER
@@ -80,7 +84,7 @@ feature {ANY}
 						Result := False
                     when 2 then
                         -- Afficher les médias
-                        gestionnaire_medias.rechercher_medias
+                        gestionnaire_medias.consulter
                     when 0 then
                         -- Afficher la fin du programme
                         affichage_menus.afficher_sortie_programme
@@ -90,7 +94,8 @@ feature {ANY}
                 end
             end
         end
-
+    
+    -- Menu d'administration de l'application
     menu_principal_admin: BOOLEAN is
         local
             choix_menu: INTEGER
@@ -110,7 +115,7 @@ feature {ANY}
 						
                     -- Consulter un utilisateur						
                     when 2 then
-                        io.put_string(" Fonctionnalité a implémenté %N ")
+                        io.put_string(" Fonctionnalité à implémenter %N ")
                      
                     -- Ajouter un utilisateur    
                     when 3 then
@@ -118,31 +123,31 @@ feature {ANY}
                     
                     -- Supprimer un utilisateur    
                     when 4 then
-						io.put_string(" Fonctionnalité a implémenté %N ")
+                        io.put_string(" Fonctionnalité à implémenter %N ")
                         
                     -- lister les medias    
                     when 5 then
-                        gestionnaire_medias.rechercher_medias
+                        gestionnaire_medias.consulter
                     
                     -- Consulter un média    
                     when 6 then
-                        io.put_string(" Fonctionnalité a implémenté %N ")
+                        io.put_string(" Fonctionnalité à implémenter %N ")
                         
                     -- Ajouter un media     
                     when 7 then
-						io.put_string(" Fonctionnalité a implémenté %N ")
+                        io.put_string(" Fonctionnalité à implémenter %N ")
 						
 					-- Supprimer un media	
                     when 8 then
-                        io.put_string(" Fonctionnalité a implémenté %N ")
+                        io.put_string(" Fonctionnalité à implémenter %N ")
                         
                     -- Modifier un média    
                     when 9 then
-                        io.put_string(" Fonctionnalité a implémenté %N ")
+                        io.put_string(" Fonctionnalité à implémenter %N ")
                         
                     -- Emprunter    
                     when 10 then
-                        io.put_string(" Fonctionnalité a implémenté %N ")
+                        io.put_string(" Fonctionnalité à implémenter %N ")
                         
                     -- deconnecter
                     when 0 then
@@ -154,33 +159,46 @@ feature {ANY}
             end
         end
         
-    -- Sous menu des fonctionnalités concernant l'admin
-    sous_menu_utilisateur is
+    -- Menu clientèle de l'application
+    menu_principal_client: BOOLEAN is
         local
-			choix_sous_menu: INTEGER
-        do            
-            choix_sous_menu := -1
+            choix_menu: INTEGER
+        do
+            choix_menu := -1
             
             from
-            until choix_sous_menu = 0
+            until choix_menu = 0 or utilisateur_connecte = Void
             loop
-             --   choix_sous_menu := affichage_menus.afficher_menu_utilisateur
+                choix_menu := affichage_menus.afficher_menu_principal_client
                 
-                inspect choix_sous_menu
+                inspect choix_menu
+                
+                	-- Consulter les informations de son compte
                     when 1 then
-                        -- Afficher les utilisateurs
-						gestionnaire_utilisateurs.lister_utilisateurs
+						io.put_string(" Fonctionnalité à implémenter %N ")
+                        
+                    -- lister les medias    
                     when 2 then
-                        -- Ajouter un utilisateur
-                        gestionnaire_utilisateurs.ajouter_form_utilisateur
+                        gestionnaire_medias.consulter
+                    
+                    -- Consulter un média    
+                    when 3 then
+                        io.put_string(" Fonctionnalité à implémenter %N ")
+                        
+                    -- Réserver un média    
+                    --when 10 then
+                    --    io.put_string(" Fonctionnalité à implémenter %N ")
+                        
+                    -- deconnecter
                     when 0 then
-                        -- Afficher le menu principal
-                        affichage_menus.afficher_retour_menu_principal
+                        deconnecter
+                        Result := False                          
                     else 
                         affichage_menus.afficher_erreur_saisie_menu
                 end
             end
         end
+        
 feature {NONE}
 
     -- Se connecter

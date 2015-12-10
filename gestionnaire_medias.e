@@ -21,20 +21,28 @@ feature {ANY}
         end
 
     -- Ajouter des médias dans la liste existante
-    ajouter_medias(p_medias:ARRAY[MEDIA]) is
+    ajouter_liste(p_medias:ARRAY[MEDIA]) is
         do
             liste_medias.ajouter_medias(p_medias)
         end
+    
+    -- 
+    ajouter is
+        local
+        do
+        end
 
     -- Rechercher un média dans la liste des médias proposés
-    rechercher_medias is 
+    consulter is 
         local
             medias: ARRAY[MEDIA]
             choix_recherche: INTEGER
             
         do
             create medias.from_collection(liste_medias.rechercher_media)
-            choix_recherche := affichage_medias.afficher_menu_recherche
+            affichage_medias.afficher_menu_recherche
+            affichage_medias.afficher_menu_recherche_type
+            choix_recherche := affichage_medias.saisir_choix_menu
             
             inspect choix_recherche
                 when 1 then
@@ -45,10 +53,29 @@ feature {ANY}
                     --rechercher_medias
             end
             
-            affichage_medias.afficher_resultats_recherche(medias)
+            affichage_medias.afficher_medias(medias)
             
+        end
+        
+    modifier is
+        local
+        do
         end
         
 feature {NONE}
 
+    creer_dvd is
+        local
+        do
+        end
+        
+    creer_livre is
+        local
+        do
+        end
+        
+    creer_media is
+        local
+        do
+        end
 end

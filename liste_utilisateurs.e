@@ -56,7 +56,7 @@ feature {ANY}
 			end
 			
 			if existe then
-				Result := liste_utilisateurs.item(i)			
+				Result := liste_utilisateurs.item(i-1)			
 			else
     			Result := Void
 			end

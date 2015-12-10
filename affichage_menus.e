@@ -35,6 +35,11 @@ feature {ANY}
             
             Result := choix_menu.to_integer
         end
+        
+        
+
+        
+--	afficher_menu_utilisateur:INTEGER is
     
     -- Afficher le menu des admins    
 	afficher_menu_principal_admin:INTEGER is
@@ -56,6 +61,32 @@ feature {ANY}
             io.put_string(" 8 - Supprimer un média%N")
             io.put_string(" 9 - Modifier un média%N")
             io.put_string(" 10 - Effectuer un emprunt%N")                                 
+            io.put_string("%N 0 - Se deconnecter%N")
+            io.put_string("%N --- %N")
+            
+            from
+            until choix_sous_menu.is_integer
+            loop
+                io.put_string(" Choix : ")
+                io.read_line
+                choix_sous_menu := io.last_string
+            end
+            
+            io.put_string("%N ****** %N%N")
+            
+            Result := choix_sous_menu.to_integer
+        end
+        
+    afficher_menu_principal_client:INTEGER is
+         local
+            choix_sous_menu:STRING
+        do
+            choix_sous_menu := ""
+        
+            io.put_string(" *** Menu client *** %N%N")
+            io.put_string(" 1 - Consulter mon compte%N")
+            io.put_string(" 2 - Lister les médias%N")
+            io.put_string(" 3 - Consulter un média%N")                               
             io.put_string("%N 0 - Se deconnecter%N")
             io.put_string("%N --- %N")
             
@@ -96,11 +127,13 @@ feature {ANY}
             identifiant:STRING
         do
             identifiant := ""
+            io.put_string(" *** Connexion *** %N%N")
             io.put_string(" Saisir votre identifiant : ")
             io.read_line
             identifiant := io.last_string
             
             Result := identifiant
+            io.put_string("%N ****** %N%N")
         end
         
     afficher_saisie_identifiant_incorrecte is
@@ -108,5 +141,31 @@ feature {ANY}
             io.put_string(" ***%N")
             io.put_string(" *** Aucun utilisateur ne correspond à cet identifiant%N")
             io.put_string(" ***%N%N")
+        end
+        
+    afficher_menu_medias: INTEGER is
+        local
+            choix_menu:STRING
+        do
+            choix_menu := ""
+        
+            io.put_string(" *** Accueil *** %N%N")
+            io.put_string(" 1 - Consulter %N")
+            io.put_string(" 2 - Ajouter%N")
+            io.put_string(" 3 - Modifier%N")
+            io.put_string("%N 0 - Quitter%N")
+            io.put_string("%N --- %N")
+            
+            from
+            until choix_menu.is_integer
+            loop
+                io.put_string(" Choix : ")
+                io.read_line
+                choix_menu := io.last_string
+            end
+            
+            io.put_string("%N ****** %N%N")
+            
+            Result := choix_menu.to_integer
         end
 end
