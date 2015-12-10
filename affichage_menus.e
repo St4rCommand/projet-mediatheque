@@ -16,8 +16,8 @@ feature {ANY}
             choix_menu := ""
         
             io.put_string(" *** Menu principal *** %N%N")
-            io.put_string(" 1 - Utilisateurs %N")
-            io.put_string(" 2 - Médias%N")
+            io.put_string(" 1 - Se connecter %N")
+            io.put_string(" 2 - Consulter médias%N")
             io.put_string("%N 0 - Quitter%N")
             io.put_string("%N --- %N")
             
@@ -102,5 +102,24 @@ feature {ANY}
             io.put_string("================================%N")
             io.put_string("=== Au revoir et à bientôt ! ===%N")
             io.put_string("================================%N%N")
+        end
+        
+	saisir_identifiant: STRING is
+        local
+            identifiant:STRING
+        do
+            identifiant := ""
+            io.put_string(" Saisir votre identifiant : ")
+            io.read_line
+            identifiant := io.last_string
+            
+            Result := identifiant
+        end
+        
+    afficher_saisie_identifiant_incorrecte is
+        do
+            io.put_string(" ***%N")
+            io.put_string(" *** Aucun utilisateur ne correspond à cet identifiant%N")
+            io.put_string(" ***%N%N")
         end
 end

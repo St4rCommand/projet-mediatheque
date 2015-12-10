@@ -9,6 +9,7 @@ feature {}
        gestionnaire_medias:GESTIONNAIRE_MEDIAS
        gestionnaire_utilisateurs:GESTIONNAIRE_UTILISATEURS
        affichage_menus:AFFICHAGE_MENUS
+       utilisateur_connecte: UTILISATEUR
 
 feature {ANY}
 	
@@ -40,22 +41,45 @@ feature {ANY}
     -- Menu principal de l'application
     menu_principal is
         local
-            choix_menu: INTEGER
+            fin: BOOLEAN
         do
             -- Affichage du lancement de l'application
             affichage_menus.afficher_lancement
+            --choix_menu := choix_menu := affichage_menus.afficher_menu_principal
+            fin := False
             
+            from
+            until fin
+            loop
+                if utilisateur_connecte = Void then
+                    fin := menu_principal_non_connecte
+                elseif utilisateur_connecte.is_admin then
+                    io.put_string("Coucou%N")
+                else
+                
+                end
+            end
+            
+        end
+        
+    menu_principal_non_connecte: BOOLEAN is
+        local
+            choix_menu: INTEGER
+        do
             choix_menu := -1
             
             from
-            until choix_menu = 0
+            until choix_menu = 0 or utilisateur_connecte /= Void
             loop
                 choix_menu := affichage_menus.afficher_menu_principal
                 
                 inspect choix_menu
                     when 1 then
-						-- Sous menu offrant les fonctionnalités
-						sous_menu_utilisateur
+						-- Sous menu offrant les fonctionnalités pour les non connectes
+						connecter
+						Result := False
+						
+						--sous_menu_utilisateur
                         -- Afficher les utilisateurs
 						--gestionnaire_utilisateurs.lister_utilisateurs
                         --gestionnaire_utilisateurs.rechercher_medias
@@ -68,6 +92,7 @@ feature {ANY}
                     when 0 then
                         -- Afficher la fin du programme
                         affichage_menus.afficher_sortie_programme
+                        Result := True
                     else 
                         affichage_menus.afficher_erreur_saisie_menu
                 end
@@ -132,5 +157,27 @@ feature {ANY}
                 end
             end
         end
+        
+feature {NONE}
 
+    -- Se connecter
+	connecter is
+		local
+			utilisateur : UTILISATEUR
+			identifiant : STRING
+		do
+		    create identifiant.make_from_string(affichage_menus.saisir_identifiant)
+		    utilisateur:= gestionnaire_utilisateurs.get_utilisateur(identifiant)
+		    
+		    if utilisateur /= Void then
+		        utilisateur_connecte := utilisateur
+	        else
+	            affichage_menus.afficher_saisie_identifiant_incorrecte
+            end
+		end
+		
+	deconnecter is
+	    do
+	        utilisateur_connecte := Void
+	    end
 end

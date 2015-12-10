@@ -24,6 +24,11 @@ feature {ANY}
             io.put_string("| Identifiant : "+p_utilisateur.get_identifiant+"%N")
             io.put_string("| Nom : "+p_utilisateur.get_nom+"%N")
             io.put_string("| Prénom : "+p_utilisateur.get_prenom+"%N")
+            if p_utilisateur.is_admin then
+               io.put_string("| Admin %N")
+            else
+                io.put_string("| Client %N")
+            end
             io.put_string("%N")
         end
         
@@ -77,6 +82,18 @@ feature {ANY}
             prenom := io.last_string
             
             Result := prenom
+        end
+
+	saisir_admin: STRING is
+        local
+            rep:STRING
+        do
+            rep := ""
+            io.put_string(" administrateur (O/N)? ")
+            io.read_line
+            rep := io.last_string
+            
+            Result := rep
         end
         
     afficher_identifiant_existe is
