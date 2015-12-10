@@ -32,6 +32,7 @@ feature {ANY}
             until i = p_medias.count
             loop
                 ajouter(p_medias.item(i))
+                i := i+1
             end
         end
 
