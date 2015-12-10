@@ -2,7 +2,7 @@ class AFFICHAGE_MEDIAS
 
 feature {NONE}
 
-    afficher_tableau_string(tab: ARRAY[STRING]): STRING is
+    tableau_to_string(tab: ARRAY[STRING]): STRING is
         local
             i: INTEGER
             string: STRING
@@ -25,6 +25,123 @@ feature {NONE}
         end
         
 feature {ANY}
+
+    --
+    -- Fonction de saisie
+    --
+    
+    saisir_string: STRING is
+        local
+        do
+            io.flush
+            io.read_line
+            Result := io.last_string
+        end
+        
+    saisir_titre: STRING is
+        local
+            titre: STRING
+        do
+            titre.make_from_string("")
+            io.put_string(" Saisir le titre : ")
+            titre.copy(saisir_string)
+            
+            Result := titre
+        end
+        
+    saisir_nombre: INTEGER is
+        local
+            nombre: STRING
+        do
+            from
+            until nombre.is_integer
+            loop
+                nombre.make_from_string("")
+                io.put_string(" Saisir le nombre d'exemplaires : ")
+                nombre.copy(saisir_string)
+            end
+            
+            Result := nombre.to_integer
+        end
+        
+    saisir_auteur: STRING is
+        local
+            auteur: STRING
+        do
+            auteur.make_from_string("")
+            io.put_string(" Saisir l'auteur : ")
+            auteur.copy(saisir_string)
+            
+            Result := auteur
+        end
+        
+    saisir_annee: INTEGER is
+        local
+            annee: STRING
+        do
+            from
+            until annee.is_integer
+            loop
+                annee.make_from_string("")
+                io.put_string(" Saisir l'année : ")
+                annee.copy(saisir_string)
+            end
+            
+            Result := annee.to_integer
+        end
+        
+    saisir_realisateur: STRING is
+        local
+            realisateur: STRING
+        do
+            realisateur.make_from_string("")
+            io.put_string(" Saisir le prénom et le nom du realisateur : ")
+            realisateur.copy(saisir_string)
+            
+            Result := realisateur
+        end
+        
+    saisir_acteur: STRING is
+        local
+            acteur: STRING
+        do
+            acteur.make_from_string("")
+            io.put_string(" Saisir le prénom et le nom de l'acteur : ")
+            acteur.copy(saisir_string)
+            
+            Result := acteur
+        end
+        
+    saisir_type_dvd: STRING is
+        local
+            type: STRING
+        do
+            type.make_from_string("")
+            io.put_string(" Saisir le type de DVD : ")
+            type.copy(saisir_string)
+            
+            Result := type
+        end
+        
+    saisir_choix_menu: INTEGER is
+        local
+            annee: STRING
+        do
+            from
+            until annee.is_integer
+            loop
+                annee.make_from_string("")
+                io.put_string(" Choix : ")
+                annee.copy(saisir_string)
+            end
+            
+            Result := annee.to_integer
+        end
+        
+        
+    --
+    -- Fonction d'affichage
+    --
         
 	-- Afficher une liste de médias en les affichant 1 par 1
     afficher_medias(p_medias: ARRAY[MEDIA]) is
@@ -53,13 +170,12 @@ feature {ANY}
             livre: LIVRE
             dvd: DVD
         do
-        	-- En fonction du type du média on crée un livre
+        	-- Déterminer le type de média
             if {LIVRE} ?:= p_media then
                 create livre.nouveau
                 livre ::= p_media
                 afficher_livre(livre)
-            else
-				-- sinon on crée un DVD
+            elseif {DVD} ?:= p_media then
                 create dvd.nouveau
                 dvd ::= p_media
                 afficher_dvd(dvd)
@@ -75,16 +191,40 @@ feature {ANY}
             io.put_string("%N")
         end
 
-    -- Afficher un dvd avec ses caractéristiques    
+    -- Afficher un DVD avec ses caractéristiques    
     afficher_dvd(p_dvd: DVD) is
         do
             io.put_string("| "+p_dvd.get_titre+" ("+p_dvd.get_annee.to_string+")%N")
             io.put_string("| "+p_dvd.get_type+"%N")
             io.put_string("| ("+p_dvd.get_nombre.to_string+" exemplaires)%N")
-            io.put_string("| Réalisateur(s) : "+afficher_tableau_string(p_dvd.get_realisateurs)+"%N")
-            io.put_string("| Acteurs : "+afficher_tableau_string(p_dvd.get_acteurs)+"%N")
+            io.put_string("| Réalisateur(s) : "+tableau_to_string(p_dvd.get_realisateurs)+"%N")
+            io.put_string("| Acteurs : "+tableau_to_string(p_dvd.get_acteurs)+"%N")
             io.put_string("%N")
         end
         
+    afficher_menu_recherche is
+        do
+            io.put_string(" *** Rechercher des médias *** %N%N")
+        end
+    
+    afficher_menu_recherche_dvd is
+        do
+            io.put_string(" *** Rechercher des DVD *** %N%N")
+        end
+    
+    afficher_menu_recherche_livre is
+        do
+            io.put_string(" *** Rechercher des livres *** %N%N")
+        end
+        
+    afficher_menu_recherche_type is
+        do
+            io.put_string(" *** Type de média à rechercher *** %N%N")
+            io.put_string(" 1 - DVD %N")
+            io.put_string(" 2 - Livre%N")
+            io.put_string(" 3 - Tout%N")
+            io.put_string("%N 0 - Quitter%N")
+            io.put_string("%N --- %N")
+        end
 
 end

@@ -34,6 +34,32 @@ feature {ANY}
             Result := choix_menu.to_integer
         end
         
+    afficher_menu_medias: INTEGER is
+        local
+            choix_menu:STRING
+        do
+            choix_menu := ""
+        
+            io.put_string(" *** Menu principal *** %N%N")
+            io.put_string(" 1 - Consulter %N")
+            io.put_string(" 2 - Ajouter%N")
+            io.put_string(" 3 - Modifier%N")
+            io.put_string("%N 0 - Quitter%N")
+            io.put_string("%N --- %N")
+            
+            from
+            until choix_menu.is_integer
+            loop
+                io.put_string(" Choix : ")
+                io.read_line
+                choix_menu := io.last_string
+            end
+            
+            io.put_string("%N ****** %N%N")
+            
+            Result := choix_menu.to_integer
+        end
+        
 	afficher_menu_utilisateur:INTEGER is
          local
             choix_sous_menu:STRING
