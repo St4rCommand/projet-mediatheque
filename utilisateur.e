@@ -16,11 +16,14 @@ feature {NONE}
        
        -- Prénom
        prenom: STRING
+       
+       -- Admin
+       admin: BOOLEAN
 
 feature {ANY}
 	
 	-- Constructeurs
-	nouveau(p_identifiant: STRING; p_nom: STRING; p_prenom: STRING) is
+	nouveau(p_identifiant: STRING; p_nom: STRING; p_prenom: STRING; p_admin: BOOLEAN) is
         require
             -- identifiant unique
         local
@@ -28,6 +31,7 @@ feature {ANY}
 			create identifiant.make_from_string(p_identifiant)
 			create nom.make_from_string(p_nom)
 			create prenom.make_from_string(p_prenom)
+			admin:= p_admin
 		end
 
 	 -- Set identifiant
@@ -47,11 +51,17 @@ feature {ANY}
         do
             prenom := p_prenom
         end
-
-    -- Get identifiant
-    get_identifiant: STRING is
+        
+    -- Set admin
+    set_admin (p_admin: BOOLEAN) is
         do
-            Result := identifiant
+            admin := p_admin
+        end
+
+    -- Get admin
+    is_admin: BOOLEAN is
+        do
+            Result := admin
         end
 
     -- Get nom
@@ -60,6 +70,12 @@ feature {ANY}
             Result := nom
         end
 
+    -- Get identifiant
+    get_identifiant: STRING is
+        do
+            Result := identifiant
+        end
+        
     -- Get prenom
     get_prenom: STRING is
         do

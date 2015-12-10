@@ -80,9 +80,9 @@ feature {NONE}
                 -- déterminer le type d'utilisateur
                 admin := cdc_utilisateur.has_substring("Admin")
                 if admin then
-                    create utilisateur.nouveau(identifiant, nom, prenom)
+                    create utilisateur.nouveau(identifiant, nom, prenom,True)
                 else
-                    create utilisateur.nouveau(identifiant, nom, prenom)
+                    create utilisateur.nouveau(identifiant, nom, prenom,False)
                 end
             end
                      

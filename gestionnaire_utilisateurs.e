@@ -49,6 +49,8 @@ feature {ANY}
 			identifiant : STRING
 			nom : STRING
 			prenom : STRING
+			rep : STRING
+			admin : BOOLEAN
 			p_utilisateur : UTILISATEUR
 		do
 			existe := True
@@ -56,7 +58,7 @@ feature {ANY}
 			create nom.make_empty
 			create prenom.make_empty
 			create identifiant.make_empty
-			
+			admin := False			
 			-- demander de saisir l'identifiant
 		    from
 			until not existe
@@ -73,9 +75,22 @@ feature {ANY}
 
 			-- saisir le prénom
 			prenom.copy(affichage_utilisateurs.saisir_prenom)
+			
+			-- saisir le type de l'utilisateur
+			rep := "O"
+			from
+			until rep.is_equal("O") or rep.is_equal("N")
+			loop
+			    rep.copy(affichage_utilisateurs.saisir_admin)			
+			end
+            if rep.is_equal("O") then
+                admin := True
+            else
+                admin := False
+            end
 
 			-- instancier l'utilisateur
-			create p_utilisateur.nouveau(identifiant,nom,prenom)
+			create p_utilisateur.nouveau(identifiant,nom,prenom,admin)
 			Result := p_utilisateur
 		end	
 
@@ -92,5 +107,10 @@ feature {ANY}
 			affichage_utilisateurs.afficher_nouvel_utilisateur_cree(utilisateur)
 			affichage_utilisateurs.afficher_fin_nouvel_utilisateur
 		end	
+		
+    get_utilisateur(p_identifiant:STRING): UTILISATEUR is
+        do
+            Result := liste_utilisateurs.get_utilisateur(p_identifiant)
+        end
 			
 end

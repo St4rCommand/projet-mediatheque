@@ -15,6 +15,6 @@ feature {ANY}
             create gestionnaire_menus.lancement
             
             -- Menu principal
-            gestionnaire_menus.menu_principal
+            --gestionnaire_menus.menu_principal
         end
 end
