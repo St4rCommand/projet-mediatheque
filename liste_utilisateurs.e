@@ -35,6 +35,15 @@ feature {ANY}
 
 	-- On recherche l'unicité de l'identifiant
 	existe_id(identifiant:STRING):BOOLEAN is
+	    do
+	        if get_utilisateur(identifiant) = Void then
+	            Result := False
+            else
+                Result := True
+            end
+	    end
+		
+	get_utilisateur(p_identifiant : STRING):UTILISATEUR is
 		local
 			i : INTEGER	
 			existe : BOOLEAN	
@@ -42,10 +51,15 @@ feature {ANY}
 			from i := 1
 			until existe or i = liste_utilisateurs.count
 			loop
-				existe := identifiant.is_equal((liste_utilisateurs.item(i)).get_identifiant)	
+				existe := p_identifiant.is_equal((liste_utilisateurs.item(i)).get_identifiant)				
 				i := i+1
 			end
-			Result := existe
+			
+			if existe then
+				Result := liste_utilisateurs.item(i)			
+			else
+    			Result := Void
+			end
 		end
 
         
