@@ -30,9 +30,25 @@ feature {ANY}
     rechercher_medias is 
         local
             medias: ARRAY[MEDIA]
+            choix_recherche: INTEGER
+            
         do
             create medias.from_collection(liste_medias.rechercher_media)
-            affichage_medias.afficher_medias(medias)
+            choix_recherche = affichage_medias.afficher_menu_recherche
+            
+            inspect choix_recherche
+                when 1 then
+                    rechercher_livres
+                when 2 then
+                    rechercher_dvd
+                when 3 then
+                    rechercher_medias
+            end
+            
+            affichage_medias.afficher_resultats_recherche(medias)
+            
         end
+        
+feature {NONE}
 
 end
