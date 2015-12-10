@@ -17,16 +17,22 @@ feature {ANY}
         end
 
     -- Ajouter un média dans la mémoire
-    ajouter_media(p_media: MEDIA) is
+    ajouter(p_media: MEDIA) is
         do
 			-- Ajout du média en fin de la liste des médias existante
             liste_medias.add_last(p_media)
         end
         
     -- Ajouter un ensemble de médias
-    ajouter_medias(p_medias: ARRAY[MEDIA]) is
+    ajouter_liste(p_medias: ARRAY[MEDIA]) is
+        local
+            i: INTEGER
         do
-            liste_medias.append_collection(p_medias)
+            from i:= 1
+            until i = p_medias.count
+            loop
+                ajouter(p_medias.item(i))
+            end
         end
 
     -- Rechercher : retourne la liste des médias de la médiathèque

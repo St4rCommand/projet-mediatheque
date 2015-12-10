@@ -23,7 +23,7 @@ feature {ANY}
     -- Ajouter des médias dans la liste existante
     ajouter_liste(p_medias:ARRAY[MEDIA]) is
         do
-            liste_medias.ajouter_medias(p_medias)
+            liste_medias.ajouter_liste(p_medias)
         end
     
     -- 

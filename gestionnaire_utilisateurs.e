@@ -52,21 +52,27 @@ feature {ANY}
 			rep : STRING
 			admin : BOOLEAN
 			p_utilisateur : UTILISATEUR
+			correct: BOOLEAN
 		do
 			existe := True
 			
 			create nom.make_empty
 			create prenom.make_empty
 			create identifiant.make_empty
-			admin := False			
+			admin := False	
+			correct := False		
 			-- demander de saisir l'identifiant
 		    from
-			until not existe
+			until (not existe) and correct
             loop
 	      		identifiant.copy(affichage_utilisateurs.saisir_identifiant)
 			    existe := liste_utilisateurs.existe_id(identifiant)
 				if existe then
 				    affichage_utilisateurs.afficher_identifiant_existe
+			    elseif identifiant.first_substring_index(" ") /= 0 then
+			        affichage_utilisateurs.afficher_identifiant_incorrect
+		        else
+		            correct := True
 				end
 			 end
 

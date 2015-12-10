@@ -56,6 +56,10 @@ feature {ANY}
             io.put_string(" Saisir votre identifiant : ")
             io.read_line
             identifiant := io.last_string
+	       
+	        identifiant.left_adjust
+	        identifiant.right_adjust
+           
             
             Result := identifiant
         end
@@ -100,6 +104,13 @@ feature {ANY}
         do
             io.put_string(" ***%N")
             io.put_string(" *** Identifiant déjà connu%N")
+            io.put_string(" ***%N%N")
+        end
+        
+    afficher_identifiant_incorrect is
+        do
+            io.put_string(" ***%N")
+            io.put_string(" *** Identifiant a un espace%N")
             io.put_string(" ***%N%N")
         end
 

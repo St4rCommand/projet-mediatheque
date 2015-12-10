@@ -61,6 +61,17 @@ feature {ANY}
     			Result := Void
 			end
 		end
-
+		
+	--valid_identifiant(p_string: STRING): STRING is
+	 --   do
+	 --       p_string.left_adjust
+	 --       p_string.right_adjust
+	        
+	  --      if p_string.first_substring_index(" ") = 0 else
+	 --           Result := p_string
+     --       else
+      --          Result := Void
+      --      end
+	  --  end
         
 end
