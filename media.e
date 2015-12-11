@@ -17,7 +17,7 @@ feature {ANY}
     nouveau is
         do
             create titre.make_empty
-            nombre := 0
+            nombre := 1
         end
 
     -- Set titre

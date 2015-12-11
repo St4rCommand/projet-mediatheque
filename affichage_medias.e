@@ -123,19 +123,52 @@ feature {ANY}
             Result := type
         end
         
-    saisir_choix_menu: INTEGER is
+    saisir_choix_menu(choix_max: INTEGER): INTEGER is
         local
-            annee: STRING
+            choix: STRING
         do
+            create choix.make_empty
+        
             from
-            until annee.is_integer
+            until choix_correct(choix, choix_max)
             loop
-                annee.make_from_string("")
                 io.put_string(" Choix : ")
-                annee.copy(saisir_string)
+                choix.copy(saisir_string)
             end
             
-            Result := annee.to_integer
+            Result := choix.to_integer
+        end
+        
+    saisir_media_selectionne(choix_max: INTEGER): INTEGER is
+        local
+            choix: STRING
+        do
+            create choix.make_empty
+        
+            from
+            until choix_correct(choix, choix_max)
+            loop
+                io.put_string(" Choix (0 - Nouvelle recherche) : ")
+                choix.copy(saisir_string)
+            end
+            
+            Result := choix.to_integer
+            
+            io.put_string(" --- %N%N")
+        end
+        
+    choix_correct(choix: STRING; choix_max: INTEGER):BOOLEAN is
+        do
+            if choix.is_integer then
+                if choix.to_integer >= 0  and choix.to_integer <= choix_max then
+                    Result := True
+                else
+                    Result := False
+                end
+            else
+                Result := False
+            end
+        
         end
         
         
@@ -202,7 +235,7 @@ feature {ANY}
             io.put_string("%N")
         end
         
-    afficher_menu_recherche is
+    afficher_recherche_debut is
         do
             io.put_string(" *** Rechercher des médias *** %N%N")
         end
@@ -217,7 +250,7 @@ feature {ANY}
             io.put_string(" *** Rechercher des livres *** %N%N")
         end
         
-    afficher_menu_recherche_type is
+    afficher_recherche_menu_type is
         do
             io.put_string(" *** Type de média à rechercher *** %N%N")
             io.put_string(" 1 - DVD %N")
@@ -225,6 +258,49 @@ feature {ANY}
             io.put_string(" 3 - Tout%N")
             io.put_string("%N 0 - Quitter%N")
             io.put_string("%N --- %N")
+        end
+        
+    afficher_recherche_resultats(medias: ARRAY[MEDIA]) is
+        local
+            i: INTEGER
+            media_courant: MEDIA
+        do
+            if medias.count = 0 then
+                io.put_string(" | Aucun média ne correspond à votre recherche !%N")
+            else
+                from i := 1
+                until i = medias.count
+                loop
+                    media_courant := medias.item(i)
+                    io.put_string(i.to_string+"| ")
+                    
+                    if {LIVRE} ?:= media_courant then
+                        io.put_string("Livre : ")
+                    elseif {DVD} ?:= media_courant then
+                        io.put_string("DVD : ")
+                    end
+                    
+                    io.put_string(media_courant.get_titre+"%N")
+                    
+                    i := i+1
+                end
+            end
+            
+            io.put_string("%N --- %N")
+        end
+        
+    afficher_consultation_suivante is
+        do
+            io.put_string(" *** %N")
+            io.put_string(" 1 - Nouvelle recherche %N")
+            io.put_string(" 2 - Sélectionner un autre média%N")
+            io.put_string("%N 0 - Quitter%N")
+            io.put_string("%N --- %N")
+        end
+        
+    afficher_recherche_fin is
+        do
+            io.put_string(" ****** %N%N")
         end
 
 end
