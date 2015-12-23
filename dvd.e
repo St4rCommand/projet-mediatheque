@@ -101,6 +101,51 @@ feature {ANY}
         do
             Result := acteurs
         end
+        
+     
+    has_realisateur(p_realisateur: STRING):BOOLEAN is
+        local
+            i: INTEGER
+        do
+            Result := False
+            
+            from i:=1
+            until i = realisateurs.count
+            loop
+                if realisateurs.item(i).as_lower.has_substring(p_realisateur.as_lower) then
+                    Result := True
+                end
+                
+                i:=i+1
+            end
+        end
+        
+    has_acteur(p_acteur: STRING):BOOLEAN is
+        local
+            i: INTEGER
+        do
+            Result := False
+            
+            from i:=1
+            until i = acteurs.count
+            loop
+                if acteurs.item(i).as_lower.has_substring(p_acteur.as_lower) then
+                    Result := True
+                end
+                
+                i:=i+1
+            end
+            
+        end
+        
+    has_annee(p_annee: INTEGER):BOOLEAN is
+        do
+            if p_annee = -1 or p_annee /= annee then
+                Result := False
+            else
+                Result := True
+            end
+        end
 
     -- To string
     to_string: STRING is

@@ -85,7 +85,10 @@ feature {NONE}
     rechercher: ARRAY[MEDIA] is
         local
             choix_recherche: INTEGER
+            resultat_recherche: ARRAY[MEDIA]
         do
+            create resultat_recherche.make(0,0)
+        
             choix_recherche := -1
         
             affichage_medias.afficher_recherche_debut
@@ -95,14 +98,14 @@ feature {NONE}
             
             inspect choix_recherche
                 when 1 then
-                    Result := rechercher_livres
+                    resultat_recherche.copy(rechercher_dvd)
                 when 2 then
-                    Result := rechercher_dvd
+                    resultat_recherche.copy(rechercher_livres)
                 when 3 then
-                    Result := rechercher_medias
-                when 0 then
-                    Result := Void
+                    resultat_recherche.copy(rechercher_medias)
             end
+            
+            Result := resultat_recherche
             
             affichage_medias.afficher_recherche_fin
             
@@ -110,23 +113,36 @@ feature {NONE}
         
     rechercher_dvd: ARRAY[MEDIA] is
         local
+            titre: STRING
+            annee: INTEGER
+            realisateur: STRING
+            acteur: STRING
         do
-            io.put_string("Rechercher dvd : à faire !")
-            Result := liste_medias.rechercher_media
+            create titre.make_from_string(affichage_medias.saisir_titre)
+            annee := affichage_medias.saisir_annee
+            create realisateur.make_from_string(affichage_medias.saisir_realisateur)
+            create acteur.make_from_string(affichage_medias.saisir_acteur)
+            io.put_string("Fonctionnalité à terminer !")
+            Result := liste_medias.rechercher_dvd(titre, annee, realisateur, acteur)
         end
     
     rechercher_livres: ARRAY[MEDIA] is
         local
+            titre: STRING
+            auteur: STRING
         do
-            io.put_string("Rechercher dvd : à faire !")
-            Result := liste_medias.rechercher_media
+            create titre.make_from_string(affichage_medias.saisir_titre)
+            create auteur.make_from_string(affichage_medias.saisir_auteur)
+            io.put_string("Fonctionnalité à terminer !")
+            Result := liste_medias.rechercher_livre(titre, auteur)
         end
     
     rechercher_medias: ARRAY[MEDIA] is
         local
+            titre: STRING
         do
-            io.put_string("Rechercher dvd : à faire !")
-            Result := liste_medias.rechercher_media
+            create titre.make_from_string(affichage_medias.saisir_titre)
+            Result := liste_medias.rechercher(titre)
         end
 
     creer_dvd is

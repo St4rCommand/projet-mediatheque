@@ -37,7 +37,77 @@ feature {ANY}
         end
 
     -- Rechercher : retourne la liste des médias de la médiathèque
-    rechercher_media:ARRAY[MEDIA] is
+    rechercher(p_titre:STRING): ARRAY[MEDIA] is
+        local
+            medias_trouves: ARRAY[MEDIA]
+            i: INTEGER
+        do
+            create medias_trouves.make(0,0)
+            
+            from i:=1
+            until i = liste_medias.count
+            loop
+                if liste_medias.item(i).get_titre.as_lower.has_substring(p_titre.as_lower) then
+                    medias_trouves.add_last(liste_medias.item(i))
+                end
+                
+                i := i+1
+            end
+            
+            Result := medias_trouves
+        end
+        
+    rechercher_dvd(p_titre: STRING; p_annee: INTEGER; p_realisateur: STRING; p_acteur:STRING): ARRAY[MEDIA] is
+        local
+            dvd_trouves: ARRAY[MEDIA]
+            i: INTEGER
+        do
+            create dvd_trouves.make(0,0)
+            
+            from i:=1
+            until i = liste_medias.count
+            loop
+                if ({DVD} ?:= liste_medias.item(i))
+--                    and liste_medias.item(i).get_titre.as_lower.has_substring(p_titre.as_lower) 
+--                    and liste_medias.item(i).has_realisateur(p_realisateur)
+--                    and liste_medias.item(i).has_acteur(p_acteur)
+--                    and liste_medias.item(i).has_annee(p_annee)
+                then
+                    dvd_trouves.add_last(liste_medias.item(i))
+                end
+                
+                i := i+1
+            end
+            
+            Result := dvd_trouves
+        end
+        
+    rechercher_livre(p_titre: STRING; p_auteur: STRING): ARRAY[MEDIA] is
+        local
+            livres_trouves: ARRAY[MEDIA]
+            i: INTEGER
+        do
+            create livres_trouves.make(0,0)
+            
+            from i:=1
+            until i = liste_medias.count
+            loop
+                if ({LIVRE} ?:= liste_medias.item(i))
+--                    and liste_medias.item(i).get_titre.as_lower.has_substring(p_titre.as_lower) 
+--                    and liste_medias.item(i).has_realisateur(p_realisateur)
+--                    and liste_medias.item(i).has_acteur(p_acteur)
+--                    and liste_medias.item(i).has_annee(p_annee)
+                then
+                    livres_trouves.add_last(liste_medias.item(i))
+                end
+                
+                i := i+1
+            end
+            
+            Result := livres_trouves
+        end
+        
+    rechercher_media: ARRAY[MEDIA] is
         do
             Result := liste_medias
         end

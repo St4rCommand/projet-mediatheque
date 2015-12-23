@@ -42,7 +42,7 @@ feature {ANY}
         local
             titre: STRING
         do
-            titre.make_from_string("")
+            create titre.make_empty
             io.put_string(" Saisir le titre : ")
             titre.copy(saisir_string)
             
@@ -56,7 +56,7 @@ feature {ANY}
             from
             until nombre.is_integer
             loop
-                nombre.make_from_string("")
+                nombre.make_empty
                 io.put_string(" Saisir le nombre d'exemplaires : ")
                 nombre.copy(saisir_string)
             end
@@ -68,7 +68,7 @@ feature {ANY}
         local
             auteur: STRING
         do
-            auteur.make_from_string("")
+            create auteur.make_empty
             io.put_string(" Saisir l'auteur : ")
             auteur.copy(saisir_string)
             
@@ -79,22 +79,30 @@ feature {ANY}
         local
             annee: STRING
         do
+            create annee.make_empty
+            
+            io.put_string(" Saisir l'année : ")
+            annee.copy(saisir_string)
+        
             from
-            until annee.is_integer
+            until annee.is_integer or annee.is_empty
             loop
-                annee.make_from_string("")
                 io.put_string(" Saisir l'année : ")
                 annee.copy(saisir_string)
             end
             
-            Result := annee.to_integer
+            if annee.is_integer then           
+                Result := annee.to_integer
+            else
+                Result := -1
+            end
         end
         
     saisir_realisateur: STRING is
         local
             realisateur: STRING
         do
-            realisateur.make_from_string("")
+            create realisateur.make_empty
             io.put_string(" Saisir le prénom et le nom du realisateur : ")
             realisateur.copy(saisir_string)
             
@@ -105,7 +113,7 @@ feature {ANY}
         local
             acteur: STRING
         do
-            acteur.make_from_string("")
+            create acteur.make_empty
             io.put_string(" Saisir le prénom et le nom de l'acteur : ")
             acteur.copy(saisir_string)
             
@@ -116,7 +124,7 @@ feature {ANY}
         local
             type: STRING
         do
-            type.make_from_string("")
+            create type.make_empty
             io.put_string(" Saisir le type de DVD : ")
             type.copy(saisir_string)
             
@@ -135,6 +143,8 @@ feature {ANY}
                 io.put_string(" Choix : ")
                 choix.copy(saisir_string)
             end
+            
+            io.put_string("%N ****** %N%N")
             
             Result := choix.to_integer
         end
@@ -252,7 +262,7 @@ feature {ANY}
         
     afficher_recherche_menu_type is
         do
-            io.put_string(" *** Type de média à rechercher *** %N%N")
+            io.put_string(" Type de média à rechercher : %N%N")
             io.put_string(" 1 - DVD %N")
             io.put_string(" 2 - Livre%N")
             io.put_string(" 3 - Tout%N")
@@ -265,7 +275,9 @@ feature {ANY}
             i: INTEGER
             media_courant: MEDIA
         do
-            if medias.count = 0 then
+            io.put_string("Résultats de la recherche : %N%N")
+        
+            if medias.is_empty then
                 io.put_string(" | Aucun média ne correspond à votre recherche !%N")
             else
                 from i := 1
@@ -300,7 +312,7 @@ feature {ANY}
         
     afficher_recherche_fin is
         do
-            io.put_string(" ****** %N%N")
+            io.put_string("%N ****** %N%N")
         end
 
 end
