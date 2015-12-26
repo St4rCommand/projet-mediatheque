@@ -53,6 +53,8 @@ feature {ANY}
         local
             nombre: STRING
         do
+            create nombre.make_empty
+        
             from
             until nombre.is_integer
             loop
@@ -313,6 +315,41 @@ feature {ANY}
     afficher_recherche_fin is
         do
             io.put_string("%N ****** %N%N")
+        end
+        
+    afficher_creer_menu_type is
+        do
+            io.put_string(" Type de média à créer : %N%N")
+            io.put_string(" 1 - DVD %N")
+            io.put_string(" 2 - Livre%N")
+            io.put_string("%N 0 - Quitter%N")
+            io.put_string("%N --- %N")
+        end
+        
+    afficher_ajout_suivant is
+        do
+            io.put_string(" *** %N")
+            io.put_string(" 1 - Nouvel ajout %N")
+            io.put_string("%N 0 - Quitter%N")
+            io.put_string("%N --- %N")
+        end
+        
+    afficher_saisir_autre_realisateur is
+        do
+            io.put_string("%N *** %N")
+            io.put_string("Ajouter un autre réalisateur :%N%N")
+            io.put_string(" 1 - Oui %N")
+            io.put_string(" 0 - Non%N")
+            io.put_string("%N --- %N")
+        end
+    
+    afficher_saisir_autre_acteur is
+        do
+            io.put_string("%N *** %N")
+            io.put_string("Ajouter un autre acteur : %N%N")
+            io.put_string(" 1 - Oui %N")
+            io.put_string(" 0 - Non%N")
+            io.put_string("%N --- %N")
         end
 
 end

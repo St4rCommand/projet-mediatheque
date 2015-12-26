@@ -135,7 +135,7 @@ feature {ANY}
                         
                     -- Ajouter un media     
                     when 7 then
-                        io.put_string(" Fonctionnalité à implémenter %N ")
+                        gestionnaire_medias.ajouter
 						
 					-- Supprimer un media	
                     when 8 then

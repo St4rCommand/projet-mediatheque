@@ -31,7 +31,7 @@ feature {ANY}
     -- Ajouter un utilisateur avec en entrée l'utilisateur
     ajouter_utilisateur(p_utilisateur:UTILISATEUR) is
         do
-            liste_utilisateurs.ajouter_utilisateur(p_utilisateur)
+            liste_utilisateurs.ajouter(p_utilisateur)
 			affichage_utilisateurs.afficher_utilisateur(p_utilisateur)
 			
         end
@@ -39,7 +39,7 @@ feature {ANY}
     -- Ajouter des utilisateurs
     ajouter_utilisateurs(p_utilisateurs:ARRAY[UTILISATEUR]) is
         do
-            liste_utilisateurs.ajouter_utilisateurs(p_utilisateurs)
+            liste_utilisateurs.ajouter_liste(p_utilisateurs)
         end
 
 	-- Formulaire de saisi pour un utilisateur
@@ -108,7 +108,7 @@ feature {ANY}
 		    affichage_utilisateurs.afficher_nouvel_utilisateur
 		    
 			utilisateur := formulaire_utilisateur
-			liste_utilisateurs.ajouter_utilisateur(utilisateur)
+			liste_utilisateurs.ajouter(utilisateur)
 			
 			affichage_utilisateurs.afficher_nouvel_utilisateur_cree(utilisateur)
 			affichage_utilisateurs.afficher_fin_nouvel_utilisateur

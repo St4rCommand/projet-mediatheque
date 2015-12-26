@@ -22,15 +22,24 @@ feature {ANY}
     end
 
     -- Ajouter
-    ajouter_utilisateur(p_utilisateur: UTILISATEUR) is
+    ajouter(p_utilisateur: UTILISATEUR) is
         do
             liste_utilisateurs.add_last(p_utilisateur)
+
         end
         
     -- Ajouter une liste d'utilisateurs
-    ajouter_utilisateurs(p_utilisateurs: ARRAY[UTILISATEUR]) is
+    ajouter_liste(p_utilisateurs: ARRAY[UTILISATEUR]) is
+        local
+            i:INTEGER
         do
-            liste_utilisateurs.append_collection(p_utilisateurs)
+        
+            from i:= 1
+            until i = p_utilisateurs.count
+            loop
+                ajouter(p_utilisateurs.item(i))
+                i := i+1
+            end
         end
 
 	-- On recherche l'unicité de l'identifiant
@@ -48,7 +57,8 @@ feature {ANY}
 			i : INTEGER	
 			existe : BOOLEAN	
 		do
-			from i := 1
+		
+    		from i := 1
 			until existe or i = liste_utilisateurs.count
 			loop
 				existe := p_identifiant.is_equal((liste_utilisateurs.item(i)).get_identifiant)				
@@ -56,7 +66,7 @@ feature {ANY}
 			end
 			
 			if existe then
-				Result := liste_utilisateurs.item(i-1)			
+				Result := liste_utilisateurs.item(i-1)
 			else
     			Result := Void
 			end
