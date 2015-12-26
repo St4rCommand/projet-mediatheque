@@ -9,7 +9,8 @@ inherit
 
     redefine
         nouveau,
-        to_string
+        to_string,
+        standard_equal
     end 
 
 creation {ANY}
@@ -153,7 +154,24 @@ feature {ANY}
             Result := "DVD : " + titre + " réalisé par ____ en " + annee.to_string + " (" + nombre.to_string + " exemplaires)"
         end
         
-    compare_to(
+    -- Comparaison
+    standard_equal(p_media: MEDIA): BOOLEAN is
+        local
+            dvd: DVD
+        do
+            dvd ?= p_media
+            
+            if dvd /= Void
+            and then dvd.get_titre.as_lower.has_substring(titre.as_lower) 
+            and then dvd.get_realisateurs.is_equal(realisateurs)
+            and then dvd.get_acteurs.is_equal(acteurs)
+            and then dvd.get_annee = annee
+            then
+                Result := True
+            else
+                Result := False
+            end
+        end
 end
 
 

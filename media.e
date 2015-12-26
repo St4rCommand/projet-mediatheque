@@ -49,4 +49,21 @@ feature {ANY}
         do
             Result := titre + " (" + nombre.to_string + "exemplaires)"
         end
+        
+    -- Ajouter un exemplaire
+    ajouter_exemplaire is
+        do
+            nombre := nombre+1
+        end
+        
+    -- Comparaison
+    standard_equal(p_media: MEDIA): BOOLEAN is
+        do            
+            if  p_media.get_titre.as_lower.has_substring(titre.as_lower)
+            then
+                Result := True
+            else
+                Result := False
+            end
+        end
 end

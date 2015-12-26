@@ -18,9 +18,29 @@ feature {ANY}
 
     -- Ajouter un média dans la mémoire
     ajouter(p_media: MEDIA) is
+        local
+            i: INTEGER
+            exist: BOOLEAN
         do
+            exist := False
+        
+            from i:=1
+            until i = liste_medias.count
+            loop
+                
+                
+                if liste_medias.item(i).standard_equal(p_media) then
+                    liste_medias.item(i).ajouter_exemplaire
+                    exist := True
+                end
+                
+                i := i+1
+            end
+            
 			-- Ajout du média en fin de la liste des médias existante
-            liste_medias.add_last(p_media)
+			if not exist then
+                liste_medias.add_last(p_media)
+            end
         end
         
     -- Ajouter un ensemble de médias

@@ -9,7 +9,8 @@ inherit
 
     redefine
         nouveau,
-        to_string
+        to_string,
+        standard_equal
     end 
 
 creation {ANY}
@@ -65,6 +66,23 @@ feature {ANY}
     to_string: STRING is
         do
             Result := "Livre : " + titre + " de " + auteur + "(" + nombre.to_string + " exemplaires)"
+        end
+        
+    -- Comparaison
+    standard_equal(p_media: MEDIA): BOOLEAN is
+        local
+            livre: LIVRE
+        do
+            livre ?= p_media
+            
+            if livre /= Void
+            and then livre.get_titre.as_lower.has_substring(titre.as_lower)
+            and then livre.get_auteur.as_lower.has_substring(auteur.as_lower)
+            then
+                Result := True
+            else
+                Result := False
+            end
         end
 end
 
