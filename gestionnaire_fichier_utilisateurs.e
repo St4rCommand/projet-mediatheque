@@ -14,7 +14,7 @@ feature {ANY}
         do
 
             -- Création du tableau des utilisateurs lus
-            create utilisateurs.with_capacity(0,0)
+            create utilisateurs.make(0,0)
 	              
             -- Connexion au fichier
             create file_read.connect_to(fichier)
