@@ -122,7 +122,6 @@ feature {NONE}
             annee := affichage_medias.saisir_annee
             create realisateur.make_from_string(affichage_medias.saisir_realisateur)
             create acteur.make_from_string(affichage_medias.saisir_acteur)
-            io.put_string("Fonctionnalité à terminer !")
             Result := liste_medias.rechercher_dvd(titre, annee, realisateur, acteur)
         end
     
@@ -133,7 +132,6 @@ feature {NONE}
         do
             create titre.make_from_string(affichage_medias.saisir_titre)
             create auteur.make_from_string(affichage_medias.saisir_auteur)
-            io.put_string("Fonctionnalité à terminer !")
             Result := liste_medias.rechercher_livre(titre, auteur)
         end
     

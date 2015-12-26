@@ -140,10 +140,10 @@ feature {ANY}
         
     has_annee(p_annee: INTEGER):BOOLEAN is
         do
-            if p_annee = -1 or p_annee /= annee then
-                Result := False
-            else
+            if p_annee = -1 or p_annee = annee then
                 Result := True
+            else 
+                Result := False
             end
         end
 

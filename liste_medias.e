@@ -60,6 +60,7 @@ feature {ANY}
     rechercher_dvd(p_titre: STRING; p_annee: INTEGER; p_realisateur: STRING; p_acteur:STRING): ARRAY[MEDIA] is
         local
             dvd_trouves: ARRAY[MEDIA]
+            dvd_courant: DVD
             i: INTEGER
         do
             create dvd_trouves.make(0,0)
@@ -67,13 +68,15 @@ feature {ANY}
             from i:=1
             until i = liste_medias.count
             loop
-                if ({DVD} ?:= liste_medias.item(i))
---                    and liste_medias.item(i).get_titre.as_lower.has_substring(p_titre.as_lower) 
---                    and liste_medias.item(i).has_realisateur(p_realisateur)
---                    and liste_medias.item(i).has_acteur(p_acteur)
---                    and liste_medias.item(i).has_annee(p_annee)
+                dvd_courant ?= liste_medias.item(i)
+                
+                if dvd_courant /= Void
+                and then dvd_courant.get_titre.as_lower.has_substring(p_titre.as_lower) 
+                and then dvd_courant.has_realisateur(p_realisateur)
+                and then dvd_courant.has_acteur(p_acteur)
+                and then dvd_courant.has_annee(p_annee)
                 then
-                    dvd_trouves.add_last(liste_medias.item(i))
+                    dvd_trouves.add_last(dvd_courant)
                 end
                 
                 i := i+1
@@ -85,20 +88,21 @@ feature {ANY}
     rechercher_livre(p_titre: STRING; p_auteur: STRING): ARRAY[MEDIA] is
         local
             livres_trouves: ARRAY[MEDIA]
+            livre_courant: LIVRE
             i: INTEGER
         do
             create livres_trouves.make(0,0)
             
-            from i:=1
+            from i:=0
             until i = liste_medias.count
             loop
-                if ({LIVRE} ?:= liste_medias.item(i))
---                    and liste_medias.item(i).get_titre.as_lower.has_substring(p_titre.as_lower) 
---                    and liste_medias.item(i).has_realisateur(p_realisateur)
---                    and liste_medias.item(i).has_acteur(p_acteur)
---                    and liste_medias.item(i).has_annee(p_annee)
+                livre_courant ?= liste_medias.item(i)
+                
+                if livre_courant /= Void 
+                and then livre_courant.get_titre.as_lower.has_substring(p_titre.as_lower) 
+                and then livre_courant.get_auteur.as_lower.has_substring(p_auteur.as_lower)
                 then
-                    livres_trouves.add_last(liste_medias.item(i))
+                    livres_trouves.add_last(livre_courant)
                 end
                 
                 i := i+1
