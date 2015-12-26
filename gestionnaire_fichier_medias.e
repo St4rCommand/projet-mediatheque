@@ -13,7 +13,7 @@ feature {ANY}
         do
 
             -- Création du tableau des médias lus
-            create medias.with_capacity(0,0)
+            create medias.make(0,0)
             
             -- Connexion au fichier
             create file_read.connect_to(fichier)
