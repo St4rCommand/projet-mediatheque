@@ -39,7 +39,7 @@ feature {ANY}
             create realisateurs.make(0,0)
             create acteurs.make(0,0)         
             annee := 0
-            nombre := 0
+            nombre := 1
         end
 
 	--constructeur
@@ -152,6 +152,8 @@ feature {ANY}
         do
             Result := "DVD : " + titre + " réalisé par ____ en " + annee.to_string + " (" + nombre.to_string + " exemplaires)"
         end
+        
+    compare_to(
 end
 
 

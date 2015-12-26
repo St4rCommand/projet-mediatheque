@@ -29,7 +29,7 @@ feature {ANY}
         do
             create titre.make_empty
             create auteur.make_empty
-            nombre := 0
+            nombre := 1
         end
 
 	-- Constructeur
