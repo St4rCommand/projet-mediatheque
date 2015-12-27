@@ -70,7 +70,7 @@ feature {ANY}
                 autre_consultation := True
             
                 -- Rechercher un média                
-                medias.copy(rechercher)
+                medias := rechercher
                 
                 -- Consulter un média jusqu'à fin ou nouvelle recherche
                 from
