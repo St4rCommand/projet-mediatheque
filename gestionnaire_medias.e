@@ -73,31 +73,35 @@ feature {ANY}
                 medias := rechercher
                 
                 -- Consulter un média jusqu'à fin ou nouvelle recherche
-                from
-                until medias /= Void and not autre_consultation
-                loop
-                
-                    affichage_medias.afficher_recherche_resultats(medias)
-                    choix_menu := affichage_medias.saisir_media_selectionne(medias.count)
+                if medias /= Void then
+                    from
+                    until not autre_consultation
+                    loop
                     
-                    if choix_menu = 0 then
-                        autre_consultation := False
-                    else
-                        affichage_medias.afficher_media(medias.item(choix_menu))
-
-                        -- Séléctionner action suivante
-                        affichage_medias.afficher_consultation_suivante
-                        choix_menu := affichage_medias.saisir_choix_menu(2)
+                        affichage_medias.afficher_recherche_resultats(medias)
+                        choix_menu := affichage_medias.saisir_media_selectionne(medias.count)
                         
-                        inspect choix_menu
-                            when 1 then
-                                autre_consultation := False
-                            when 2 then
-                            when 0 then
-                                autre_consultation := False
-                                autre_recherche := False
+                        if choix_menu = 0 then
+                            autre_consultation := False
+                        else
+                            affichage_medias.afficher_media(medias.item(choix_menu))
+
+                            -- Séléctionner action suivante
+                            affichage_medias.afficher_consultation_suivante
+                            choix_menu := affichage_medias.saisir_choix_menu(2)
+                            
+                            inspect choix_menu
+                                when 1 then
+                                    autre_consultation := False
+                                when 2 then
+                                when 0 then
+                                    autre_consultation := False
+                                    autre_recherche := False
+                            end
                         end
                     end
+                else
+                    autre_recherche := False
                 end
             end
             
@@ -121,35 +125,39 @@ feature {ANY}
                 autre_modification := True
             
                 -- Rechercher un média                
-                medias_trouves.copy(rechercher)
+                medias_trouves := rechercher
                 
-                from 
-                until medias_trouves /= Void and not autre_modification
-                loop
-                
-                    affichage_medias.afficher_recherche_resultats(medias_trouves)
-                    choix_menu := affichage_medias.saisir_media_selectionne(medias_trouves.count)
-                
-                    if choix_menu = 0 then
-                        autre_modification := False
-                    else
-                        modifier(medias_trouves.item(choix_menu))
-                        
-                        -- Séléctionner action suivante
-                        affichage_medias.afficher_consultation_suivante
-                        choix_menu := affichage_medias.saisir_choix_menu(2)
-                        
-                        inspect choix_menu
-                            when 1 then
-                                autre_modification := False
-                            when 2 then
-                            when 0 then
-                                autre_modification := False
-                                autre_recherche := False
-                        end
-                                
-                    end    
-                
+                if medias_trouves /= Void then
+                    from 
+                    until not autre_modification
+                    loop
+                    
+                        affichage_medias.afficher_recherche_resultats(medias_trouves)
+                        choix_menu := affichage_medias.saisir_media_selectionne(medias_trouves.count)
+                    
+                        if choix_menu = 0 then
+                            autre_modification := False
+                        else
+                            modifier(medias_trouves.item(choix_menu))
+                            
+                            -- Séléctionner action suivante
+                            affichage_medias.afficher_consultation_suivante
+                            choix_menu := affichage_medias.saisir_choix_menu(2)
+                            
+                            inspect choix_menu
+                                when 1 then
+                                    autre_modification := False
+                                when 2 then
+                                when 0 then
+                                    autre_modification := False
+                                    autre_recherche := False
+                            end
+                                    
+                        end    
+                    
+                    end
+                else
+                     autre_recherche := False
                 end
                 
             end
@@ -179,6 +187,8 @@ feature {NONE}
                     resultat_recherche.copy(rechercher_livres)
                 when 3 then
                     resultat_recherche.copy(rechercher_medias)
+                else
+                    resultat_recherche := Void
             end
             
             Result := resultat_recherche
