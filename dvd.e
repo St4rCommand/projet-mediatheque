@@ -78,6 +78,16 @@ feature {ANY}
         do
             acteurs.append_collection(p_acteurs)
         end
+        
+    add_realisateur (p_realisateur: STRING) is
+        do
+            realisateurs.add_last(p_realisateur)
+        end
+    
+    add_acteur (p_acteur: STRING) is
+        do
+            acteurs.add_last(p_acteur)
+        end
 
     -- Get annee
     get_annee: INTEGER is

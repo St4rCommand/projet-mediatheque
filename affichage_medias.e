@@ -336,8 +336,7 @@ feature {ANY}
         
     afficher_saisir_autre_realisateur is
         do
-            io.put_string("%N *** %N")
-            io.put_string("Ajouter un autre réalisateur :%N%N")
+            io.put_string(" Ajouter un autre réalisateur :%N%N")
             io.put_string(" 1 - Oui %N")
             io.put_string(" 0 - Non%N")
             io.put_string("%N --- %N")
@@ -345,10 +344,27 @@ feature {ANY}
     
     afficher_saisir_autre_acteur is
         do
-            io.put_string("%N *** %N")
-            io.put_string("Ajouter un autre acteur : %N%N")
+            io.put_string(" Ajouter un autre acteur : %N%N")
             io.put_string(" 1 - Oui %N")
             io.put_string(" 0 - Non%N")
+            io.put_string("%N --- %N")
+        end
+        
+    afficher_modifier_dvd_menu_realisateur(p_realisateur: STRING) is
+        do
+            io.put_string(" Réalisateur "+p_realisateur+" : %N%N")
+            io.put_string(" 0 - Continuer%N")
+            io.put_string(" 1 - Modifier %N")
+            io.put_string(" 2 - Supprimer%N")
+            io.put_string("%N --- %N")
+        end
+        
+    afficher_modifier_dvd_menu_acteur(p_acteur: STRING) is
+        do
+            io.put_string(" Acteur "+p_acteur+" : %N%N")
+            io.put_string(" 0 - Continuer%N")
+            io.put_string(" 1 - Modifier %N")
+            io.put_string(" 2 - Supprimer%N")
             io.put_string("%N --- %N")
         end
 

@@ -143,7 +143,7 @@ feature {ANY}
                         
                     -- Modifier un média    
                     when 9 then
-                        io.put_string(" Fonctionnalité à implémenter %N ")
+                        gestionnaire_medias.mettre_a_jour
                         
                     -- Emprunter    
                     when 10 then
