@@ -55,38 +55,48 @@ feature {ANY}
     consulter is 
         local
             medias: ARRAY[MEDIA]
-            choix_consultation: INTEGER
-            choix_continuer: INTEGER
+            autre_recherche: BOOLEAN
+            autre_consultation: BOOLEAN
+            choix_menu: INTEGER
         do
-            choix_consultation := -1
-            choix_continuer := -1
             create medias.make(0,0)
+            autre_recherche := True
+            autre_consultation := True
         
             -- Rechercher jusqu'à fin
             from
-            until choix_continuer = 0
+            until not autre_recherche
             loop
-                choix_continuer := -1
+                autre_consultation := True
             
                 -- Rechercher un média                
                 medias.copy(rechercher)
                 
                 -- Consulter un média jusqu'à fin ou nouvelle recherche
                 from
-                until medias /= Void and (choix_continuer = 0 or choix_continuer = 1)
+                until medias /= Void and not autre_consultation
                 loop
                 
                     affichage_medias.afficher_recherche_resultats(medias)
-                    choix_consultation := affichage_medias.saisir_media_selectionne(medias.count)
+                    choix_menu := affichage_medias.saisir_media_selectionne(medias.count)
                     
-                    if choix_consultation = 0 then
-                        choix_continuer := 1 
+                    if choix_menu = 0 then
+                        autre_consultation := False
                     else
-                        affichage_medias.afficher_media(medias.item(choix_consultation))
+                        affichage_medias.afficher_media(medias.item(choix_menu))
 
                         -- Séléctionner action suivante
                         affichage_medias.afficher_consultation_suivante
-                        choix_continuer := affichage_medias.saisir_choix_menu(2)
+                        choix_menu := affichage_medias.saisir_choix_menu(2)
+                        
+                        inspect choix_menu
+                            when 1 then
+                                autre_consultation := False
+                            when 2 then
+                            when 0 then
+                                autre_consultation := False
+                                autre_recherche := False
+                        end
                     end
                 end
             end
