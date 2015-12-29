@@ -83,9 +83,9 @@ feature {ANY}
 			prenom.copy(affichage_utilisateurs.saisir_prenom)
 			
 			-- saisir le type de l'utilisateur
-			rep := "O"
+			create rep.make_from_string("")
 			from
-			until rep.is_equal("O") or rep.is_equal("N")
+			until rep.is_equal("o") or rep.is_equal("n")
 			loop
 			    rep.copy(affichage_utilisateurs.saisir_admin)			
 			end
