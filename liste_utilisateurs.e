@@ -71,17 +71,61 @@ feature {ANY}
     			Result := Void
 			end
 		end
-		
-	--valid_identifiant(p_string: STRING): STRING is
-	 --   do
-	 --       p_string.left_adjust
-	 --       p_string.right_adjust
-	        
-	  --      if p_string.first_substring_index(" ") = 0 else
-	 --           Result := p_string
-     --       else
-      --          Result := Void
-      --      end
-	  --  end
+
+	rechercher_admin(p_identifiant: STRING; p_nom:STRING; p_prenom:STRING; p_admin:BOOLEAN):ARRAY[UTILISATEUR] is
+		local
+			admin_courant: UTILISATEUR
+			admin_trouves: ARRAY[UTILISATEUR]
+			i:INTEGER
+		do
+			create admin_trouves.make(0,0)
+            
+            from i:=1
+            until i = liste_utilisateurs.count
+            loop
+                admin_courant := liste_utilisateurs.item(i)
+                
+                if admin_courant /= Void
+                and then admin_courant.get_identifiant.has_substring(p_identifiant) 
+                and then admin_courant.get_nom.has_substring(p_nom)
+                and then admin_courant.get_prenom.has_substring(p_prenom)
+                and then admin_courant.is_admin
+                then
+                    admin_trouves.add_last(admin_courant)
+                end
+                
+                i := i+1
+            end
+            
+            Result := admin_trouves
+		end
+
+	rechercher_client(p_identifiant: STRING; p_nom:STRING; p_prenom:STRING; p_admin:BOOLEAN):ARRAY[UTILISATEUR] is
+		local
+			client_courant: UTILISATEUR
+			client_trouves: ARRAY[UTILISATEUR]
+			i:INTEGER
+		do
+			create client_trouves.make(0,0)
+            
+            from i:=1
+            until i = liste_utilisateurs.count
+            loop
+                client_courant := liste_utilisateurs.item(i)
+                
+                if client_courant /= Void
+                and then client_courant.get_identifiant.has_substring(p_identifiant) 
+                and then client_courant.get_nom.has_substring(p_nom)
+                and then client_courant.get_prenom.has_substring(p_prenom)
+                and then not (client_courant.is_admin)
+                then
+                    client_trouves.add_last(client_courant)
+                end
+                
+                i := i+1
+            end
+            
+            Result := client_trouves
+		end
         
 end

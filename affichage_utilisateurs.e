@@ -3,6 +3,10 @@ class AFFICHAGE_UTILISATEURS
 feature {NONE}
     
 feature {ANY}
+
+----
+-- Afficher
+----
         
     afficher_utilisateurs(p_utilisateurs: ARRAY[UTILISATEUR]) is
         local
@@ -42,11 +46,100 @@ feature {ANY}
         do
             io.put_string(" *** Nouvel Utilisateur *** %N%N")
         end
+
+    afficher_consultation is
+        do
+            io.put_string(" *** Consulter utilisateur *** %N%N")
+        end
         
     afficher_fin_nouvel_utilisateur is
         do
 			io.put_string(" ****** %N%N")
         end
+        
+    afficher_identifiant_existe is
+        do
+            io.put_string(" ***%N")
+            io.put_string(" *** Identifiant déjà connu%N")
+            io.put_string(" ***%N%N")
+        end
+        
+    afficher_identifiant_incorrect is
+        do
+            io.put_string(" ***%N")
+            io.put_string(" *** Identifiant a un espace%N")
+            io.put_string(" ***%N%N")
+        end
+
+    champ_vide is
+        do
+            io.put_string(" ***%N")
+            io.put_string(" *** Le champs est à vide%N")
+            io.put_string(" ***%N%N")
+        end
+
+ 	afficher_recherche_debut is
+        do
+            io.put_string(" *** Rechercher des utilisateurs *** %N%N")
+        end
+
+ 	afficher_recherche_admin is
+        do
+            io.put_string(" *** Rechercher des administrateurs *** %N%N")
+        end
+
+ 	afficher_recherche_client is
+        do
+            io.put_string(" *** Rechercher des clients *** %N%N")
+        end
+ 
+    afficher_recherche_fin is
+        do
+            io.put_string("%N ****** %N%N")
+        end   
+        
+    afficher_recherche_menu_type : INTEGER is
+		local
+			choix : STRING
+        do
+            io.put_string(" Type d'utilisateurs à rechercher : %N%N")
+            io.put_string(" 1 - Admin %N")
+            io.put_string(" 2 - Client%N")
+            io.put_string("%N 0 - Quitter%N")
+            io.put_string("%N Choix : ")
+			io.read_line
+            choix := io.last_string
+
+			Result := choix.to_integer
+        end
+        
+    afficher_recherche_resultats(utilisateurs: ARRAY[UTILISATEUR]) is
+        local
+            i: INTEGER
+            user_courant: UTILISATEUR
+        do
+            io.put_string("Résultats de la recherche : %N%N")
+            if utilisateurs.is_empty then
+                io.put_string(" | Aucun utilisateur ne correspond à votre recherche !%N")
+            else
+                from i := 1
+                until i = utilisateurs.count
+                loop
+                    user_courant := utilisateurs.item(i)
+                    io.put_string(i.to_string+"| ")
+                                        
+                    io.put_string(user_courant.get_identifiant+"%N")
+                    
+                    i := i+1
+                end
+            end
+            
+            io.put_string("%N --- %N")
+        end
+
+----
+-- Saisie
+----
 
 	saisir_identifiant: STRING is
         local
@@ -99,19 +192,38 @@ feature {ANY}
             
             Result := rep
         end
-        
-    afficher_identifiant_existe is
+
+    saisir_utilisateur_selectionne(choix_max: INTEGER): INTEGER is
+        local
+            choix: STRING
         do
-            io.put_string(" ***%N")
-            io.put_string(" *** Identifiant déjà connu%N")
-            io.put_string(" ***%N%N")
+            create choix.make_empty
+        
+            from
+            until choix_correct(choix, choix_max)
+            loop
+                io.put_string(" Choix (0 - Nouvelle recherche) : ")
+				io.read_line
+                choix := io.last_string
+            end
+            
+            Result := choix.to_integer
+            
+            io.put_string(" --- %N%N")
         end
         
-    afficher_identifiant_incorrect is
+    choix_correct(choix: STRING; choix_max: INTEGER):BOOLEAN is
         do
-            io.put_string(" ***%N")
-            io.put_string(" *** Identifiant a un espace%N")
-            io.put_string(" ***%N%N")
+            if choix.is_integer then
+                if choix.to_integer >= 0  and choix.to_integer <= choix_max then
+                    Result := True
+                else
+                    Result := False
+                end
+            else
+                Result := False
+            end
+        
         end
 
 end

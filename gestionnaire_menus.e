@@ -115,7 +115,7 @@ feature {ANY}
 						
                     -- Consulter un utilisateur						
                     when 2 then
-                        io.put_string(" Fonctionnalité à implémenter %N ")
+                        gestionnaire_utilisateurs.consulter
                      
                     -- Ajouter un utilisateur    
                     when 3 then
