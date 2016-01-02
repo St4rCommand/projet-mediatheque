@@ -137,6 +137,16 @@ feature {ANY}
             io.put_string("%N --- %N")
         end
 
+    info_debut is
+        do
+            io.put_string(" *** Mon compte client *** %N%N")
+        end
+
+    emprunt_debut is
+        do
+           io.put_string(" *** Mes emprunts *** %N%N") 
+        end
+
 ----
 -- Saisie
 ----

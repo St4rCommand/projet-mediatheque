@@ -172,6 +172,18 @@ feature {ANY}
 
 		end
 
+	-- Informations du client connecté
+	info_compte(p_utilisateur:UTILISATEUR) is
+		local
+
+		do
+			affichage_utilisateurs.info_debut
+			-- Informations du compte
+			affichage_utilisateurs.afficher_utilisateur(p_utilisateur)
+			-- Les emprunts de l'utilisateur
+			affichage_utilisateurs.emprunt_debut
+			-- affichage_utilisateurs.details_emprunt
+		end
 
 feature {NONE}
 

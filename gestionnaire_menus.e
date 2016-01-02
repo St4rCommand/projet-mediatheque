@@ -175,7 +175,7 @@ feature {ANY}
                 
                 	-- Consulter les informations de son compte
                     when 1 then
-						io.put_string(" Fonctionnalité à implémenter %N ")
+						gestionnaire_utilisateurs.info_compte(utilisateur_connecte)
                         
                     -- lister les medias    
                     when 2 then
