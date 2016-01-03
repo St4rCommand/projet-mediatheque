@@ -128,25 +128,21 @@ feature {ANY}
                     -- lister les medias    
                     when 5 then
                         gestionnaire_medias.consulter
-                    
-                    -- Consulter un média    
-                    when 6 then
-                        io.put_string(" Fonctionnalité à implémenter %N ")
                         
                     -- Ajouter un media     
-                    when 7 then
+                    when 6 then
                         gestionnaire_medias.ajouter
-						
-					-- Supprimer un media	
-                    when 8 then
-                        io.put_string(" Fonctionnalité à implémenter %N ")
                         
                     -- Modifier un média    
-                    when 9 then
+                    when 7 then
                         gestionnaire_medias.mettre_a_jour
                         
                     -- Emprunter    
-                    when 10 then
+                    when 8 then
+                        io.put_string(" Fonctionnalité à implémenter %N ")
+                        
+                    -- Retour d'emprunt    
+                    when 8 then
                         io.put_string(" Fonctionnalité à implémenter %N ")
                         
                     -- deconnecter
