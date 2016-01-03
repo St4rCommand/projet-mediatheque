@@ -1,7 +1,7 @@
 class UTILISATEUR
+
 --
 -- Utilisateur de la médiatèque
---
 --
 
 creation {ANY}

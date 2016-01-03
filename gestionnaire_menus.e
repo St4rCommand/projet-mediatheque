@@ -142,7 +142,7 @@ feature {ANY}
                         io.put_string(" Fonctionnalité à implémenter %N ")
                         
                     -- Retour d'emprunt    
-                    when 8 then
+                    when 9 then
                         io.put_string(" Fonctionnalité à implémenter %N ")
                         
                     -- deconnecter
