@@ -51,9 +51,9 @@ feature {ANY}
         end
         
     -- Ajouter un exemplaire
-    ajouter_exemplaire is
+    ajouter_exemplaire(p_nombre: INTEGER) is
         do
-            nombre := nombre+1
+            nombre := p_nombre + nombre
         end
         
     -- Comparaison

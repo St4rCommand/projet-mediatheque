@@ -1,5 +1,8 @@
 class AFFICHAGE_MEDIAS
 
+inherit 
+	AFFICHAGE
+	
 feature {NONE}
 
     tableau_to_string(tab: ARRAY[STRING]): STRING is
@@ -29,14 +32,6 @@ feature {ANY}
     --
     -- Fonction de saisie
     --
-    
-    saisir_string: STRING is
-        local
-        do
-            io.flush
-            io.read_line
-            Result := io.last_string
-        end
         
     saisir_titre: STRING is
         local
@@ -133,24 +128,6 @@ feature {ANY}
             Result := type
         end
         
-    saisir_choix_menu(choix_max: INTEGER): INTEGER is
-        local
-            choix: STRING
-        do
-            create choix.make_empty
-        
-            from
-            until choix_correct(choix, choix_max)
-            loop
-                io.put_string(" Choix : ")
-                choix.copy(saisir_string)
-            end
-            
-            io.put_string("%N ****** %N%N")
-            
-            Result := choix.to_integer
-        end
-        
     saisir_media_selectionne(choix_max: INTEGER): INTEGER is
         local
             choix: STRING
@@ -167,20 +144,6 @@ feature {ANY}
             Result := choix.to_integer
             
             io.put_string(" --- %N%N")
-        end
-        
-    choix_correct(choix: STRING; choix_max: INTEGER):BOOLEAN is
-        do
-            if choix.is_integer then
-                if choix.to_integer >= 0  and choix.to_integer <= choix_max then
-                    Result := True
-                else
-                    Result := False
-                end
-            else
-                Result := False
-            end
-        
         end
         
         
@@ -278,37 +241,24 @@ feature {ANY}
             media_courant: MEDIA
         do
             io.put_string("Résultats de la recherche : %N%N")
-        
-            if medias.is_empty then
-                io.put_string(" | Aucun média ne correspond à votre recherche !%N")
-            else
-                from i := 1
-                until i = medias.count
-                loop
-                    media_courant := medias.item(i)
-                    io.put_string(i.to_string+"| ")
-                    
-                    if {LIVRE} ?:= media_courant then
-                        io.put_string("Livre : ")
-                    elseif {DVD} ?:= media_courant then
-                        io.put_string("DVD : ")
-                    end
-                    
-                    io.put_string(media_courant.get_titre+"%N")
-                    
-                    i := i+1
+            
+            from i := 1
+            until i = medias.count
+            loop
+                media_courant := medias.item(i)
+                io.put_string(i.to_string+"| ")
+                
+                if {LIVRE} ?:= media_courant then
+                    io.put_string("Livre : ")
+                elseif {DVD} ?:= media_courant then
+                    io.put_string("DVD : ")
                 end
+                
+                io.put_string(media_courant.get_titre+"%N")
+                
+                i := i+1
             end
             
-            io.put_string("%N --- %N")
-        end
-        
-    afficher_consultation_suivante is
-        do
-            io.put_string(" *** %N")
-            io.put_string(" 1 - Nouvelle recherche %N")
-            io.put_string(" 2 - Sélectionner un autre média%N")
-            io.put_string("%N 0 - Quitter%N")
             io.put_string("%N --- %N")
         end
         

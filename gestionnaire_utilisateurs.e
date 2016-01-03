@@ -156,19 +156,63 @@ feature {ANY}
 	consulter is
 		local
 			utilisateurs: ARRAY[UTILISATEUR]
+			autre_recherche: BOOLEAN
+			autre_consultation: BOOLEAN
 			choix_menu: INTEGER
 		do
 			create utilisateurs.make(0,0)
+            autre_recherche := True
+            autre_consultation := True
+            
+            from
+            until not autre_recherche
+            loop
+            
+                autre_consultation := True
 
-			-- Choix du type d'utilisateur
-			utilisateurs := rechercher
+			    -- Choix du type d'utilisateur
+			    utilisateurs := rechercher
+			    
+			    if utilisateurs /= Void and utilisateurs.count > 1 then
+			        from 
+			        until not autre_consultation
+			        loop
 
-			-- Afficher résultat
-			affichage_utilisateurs.afficher_recherche_resultats(utilisateurs)
+			            -- Afficher résultat
+			            affichage_utilisateurs.afficher_recherche_resultats(utilisateurs)
 			
-			-- Choix de l'utilisateur a consulter
-			choix_menu := affichage_utilisateurs.saisir_utilisateur_selectionne(utilisateurs.count)
-			affichage_utilisateurs.afficher_utilisateur(utilisateurs.item(choix_menu))
+			            -- Choix de l'utilisateur a consulter
+			            choix_menu := affichage_utilisateurs.saisir_utilisateur_selectionne(utilisateurs.count-1)
+			            
+			            if choix_menu = 0 then
+			                autre_consultation := False
+		                else
+		                     affichage_utilisateurs.afficher_utilisateur(utilisateurs.item(choix_menu))
+		                     
+		                     affichage_utilisateurs.afficher_consultation_suivante
+		                     choix_menu := affichage_utilisateurs.saisir_choix_menu(2)
+		                     
+		                     inspect choix_menu
+                                when 1 then
+                                    autre_consultation := False
+                                when 2 then
+                                when 0 then
+                                    autre_consultation := False
+                                    autre_recherche := False
+                            end
+                        end
+			        
+			        end
+                else
+                    
+                    if utilisateurs /= Void then
+                        affichage_utilisateurs.afficher_recherche_incorrecte
+                    else
+                        autre_recherche := False
+                    end
+                end 
+            
+            end
 
 		end
 

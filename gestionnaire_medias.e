@@ -73,13 +73,13 @@ feature {ANY}
                 medias := rechercher
                 
                 -- Consulter un média jusqu'à fin ou nouvelle recherche
-                if medias /= Void then
+                if medias /= Void and then medias.count > 1 then
                     from
                     until not autre_consultation
                     loop
                     
                         affichage_medias.afficher_recherche_resultats(medias)
-                        choix_menu := affichage_medias.saisir_media_selectionne(medias.count)
+                        choix_menu := affichage_medias.saisir_media_selectionne(medias.count-1)
                         
                         if choix_menu = 0 then
                             autre_consultation := False
@@ -101,7 +101,13 @@ feature {ANY}
                         end
                     end
                 else
-                    autre_recherche := False
+                    
+                    if medias /= Void then
+                        affichage_medias.afficher_recherche_incorrecte
+                    else
+                        autre_recherche := False
+                    end
+                    
                 end
             end
             
@@ -239,29 +245,60 @@ feature {NONE}
             continuer: INTEGER
             nombre: INTEGER
             dvd: DVD
-            
+            realisateur: STRING
+            acteur: STRING
         do
-            create titre.make_from_string(affichage_medias.saisir_titre)
-            annee := affichage_medias.saisir_annee
-            create type.make_from_string(affichage_medias.saisir_type_dvd)
-            nombre := affichage_medias.saisir_nombre
-            create realisateurs.make(0,0)
-            create acteurs.make(0,0)
+            create titre.make_empty
+            create type.make_empty
+            annee := -1
             
+            from
+            until not titre.is_empty
+            loop
+                titre := affichage_medias.saisir_titre
+            end            
+            
+            from
+            until annee /= -1
+            loop
+                annee := affichage_medias.saisir_annee
+            end
+            
+
+            type := affichage_medias.saisir_type_dvd
+
+
+            nombre := affichage_medias.saisir_nombre
+            
+            create realisateurs.make(0,0)
             continuer:=1
             from
             until continuer = 0
             loop
-                realisateurs.add_last(affichage_medias.saisir_realisateur)
+                create realisateur.make_empty
+                from
+                until not realisateur.is_empty
+                loop
+                    realisateur := affichage_medias.saisir_realisateur
+                end
+                realisateurs.add_last(realisateur)
                 affichage_medias.afficher_saisir_autre_realisateur
                 continuer := affichage_medias.saisir_choix_menu(1)
             end
             
+            create acteurs.make(0,0)
             continuer:=1
             from
             until continuer = 0
             loop
-                acteurs.add_last(affichage_medias.saisir_acteur)
+                create acteur.make_empty
+                from
+                until not acteur.is_empty
+                loop
+                    acteur := affichage_medias.saisir_acteur
+                end
+                
+                acteurs.add_last(acteur)
                 affichage_medias.afficher_saisir_autre_acteur
                 continuer := affichage_medias.saisir_choix_menu(1)
             end
@@ -278,9 +315,24 @@ feature {NONE}
             nombre: INTEGER
             livre: LIVRE
         do
-            create titre.make_from_string(affichage_medias.saisir_titre)
-            create auteur.make_from_string(affichage_medias.saisir_auteur)
+            create titre.make_empty
+            create auteur.make_empty
+            
+        
+            from
+            until not titre.is_empty
+            loop
+                titre := affichage_medias.saisir_titre
+            end
+            
+            from
+            until not auteur.is_empty
+            loop
+                auteur := affichage_medias.saisir_auteur
+            end
+            
             nombre := affichage_medias.saisir_nombre
+
             create livre.nouveau_livre(titre,auteur,nombre)
             liste_medias.ajouter(livre)
         end

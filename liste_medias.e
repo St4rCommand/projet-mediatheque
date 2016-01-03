@@ -30,7 +30,7 @@ feature {ANY}
                 
                 
                 if liste_medias.item(i).standard_equal(p_media) then
-                    liste_medias.item(i).ajouter_exemplaire
+                    liste_medias.item(i).ajouter_exemplaire(p_media.get_nombre)
                     exist := True
                 end
                 

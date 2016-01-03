@@ -1,5 +1,8 @@
 class AFFICHAGE_UTILISATEURS
 
+inherit 
+	AFFICHAGE
+	
 feature {NONE}
     
 feature {ANY}
@@ -119,19 +122,16 @@ feature {ANY}
             user_courant: UTILISATEUR
         do
             io.put_string("Résultats de la recherche : %N%N")
-            if utilisateurs.is_empty then
-                io.put_string(" | Aucun utilisateur ne correspond à votre recherche !%N")
-            else
-                from i := 1
-                until i = utilisateurs.count
-                loop
-                    user_courant := utilisateurs.item(i)
-                    io.put_string(i.to_string+"| ")
-                                        
-                    io.put_string(user_courant.get_identifiant+"%N")
-                    
-                    i := i+1
-                end
+
+            from i := 1
+            until i = utilisateurs.count
+            loop
+                user_courant := utilisateurs.item(i)
+                io.put_string(i.to_string+"| ")
+                                    
+                io.put_string(user_courant.get_identifiant+"%N")
+                
+                i := i+1
             end
             
             io.put_string("%N --- %N")
@@ -221,19 +221,4 @@ feature {ANY}
             
             io.put_string(" --- %N%N")
         end
-        
-    choix_correct(choix: STRING; choix_max: INTEGER):BOOLEAN is
-        do
-            if choix.is_integer then
-                if choix.to_integer >= 0  and choix.to_integer <= choix_max then
-                    Result := True
-                else
-                    Result := False
-                end
-            else
-                Result := False
-            end
-        
-        end
-
 end
