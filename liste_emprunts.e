@@ -52,16 +52,19 @@ feature {ANY}
         do
             liste_emprunts.add_last(p_emprunt)
         end
+
 	-- Le type du media emprunté
 	type_media (p_media:MEDIA):STRING is
 		local
 			type : STRING
 		do
 			if {LIVRE} ?:= p_media
-				Type := "livre"
+				type := "livre"
 			elseif {DVD} ?:= p_media
-				Type := "dvd"
-			end	
+				type := "dvd"
+			end
+
+		Result:= type	
 		end
 
     -- Le nombre d'exemplaire emprunté pour un media
