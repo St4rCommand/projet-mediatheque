@@ -8,6 +8,7 @@ feature {}
        gestionnaire_fichier_medias:GESTIONNAIRE_FICHIER_MEDIAS
        gestionnaire_medias:GESTIONNAIRE_MEDIAS
        gestionnaire_utilisateurs:GESTIONNAIRE_UTILISATEURS
+       gestionnaire_emprunts:GESTIONNAIRE_EMPRUNTS
        affichage_menus:AFFICHAGE_MENUS
        utilisateur_connecte: UTILISATEUR
 
@@ -24,6 +25,7 @@ feature {ANY}
             create gestionnaire_fichier_medias
             create gestionnaire_medias.nouveau
             create gestionnaire_utilisateurs.nouveau
+            create gestionnaire_emprunts.nouveau
             create affichage_menus
             
             -- Chargement des médias depuis le fichier de données

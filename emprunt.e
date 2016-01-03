@@ -20,7 +20,7 @@ feature {NONE}
 feature {ANY}
 
 	 -- Set utilisateur
-    set_utilisateur (p_utlisateur: UTILISATEUR) is
+    set_utilisateur (p_utilisateur: UTILISATEUR) is
         do
             utilisateur := p_utilisateur
         end
@@ -81,6 +81,6 @@ feature {ANY}
 		
 	to_string: STRING is
         do 
-            Result := "emprunt ("+utilisateur+ " "+media+" "+jour+"-"+mois+"-"+annee+")"
+            Result := "emprunt ("+utilisateur.to_string+ " "+media.to_string+" "+jour.to_string+"-"+mois.to_string+"-"+annee.to_string+")"
         end
 end

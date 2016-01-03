@@ -35,8 +35,10 @@ feature {ANY}
             loop
                 emprunt_courant := liste_emprunts.item(i)
                 
-                if emprunt_courant /= Void
-                and then emprunt_courant.get_utilisateur.has_substring(p_utilisateur)
+                --if emprunt_courant /= Void
+                --and then emprunt_courant.get_utilisateur.has_substring(p_utilisateur)
+                --and then emprunt_courant.get_utilisateur = p_utilisateur
+                if emprunt_courant.get_utilisateur = p_utilisateur
                 then
                     emprunt_trouves.add_last(emprunt_courant)
                 end
@@ -57,10 +59,10 @@ feature {ANY}
 		local
 			type : STRING
 		do
-			if {LIVRE} ?:= p_media
-				Type := "livre"
-			elseif {DVD} ?:= p_media
-				Type := "dvd"
+			if {LIVRE} ?:= p_media then
+				type := "livre"
+			elseif {DVD} ?:= p_media then
+				type := "dvd"
 			end	
 		end
 
@@ -91,9 +93,10 @@ feature {ANY}
 				-- Recherche du type du media de l'emprunt consulté
                 type_courant := type_media(emprunt_courant.get_media)
 
-                if emprunt_courant /= Void
-				and then type_recherche.is_equal(type_courant)
-                and then emprunt_courant.get_media.has_substring(p_media)
+--                if emprunt_courant /= Void
+--				and then type_recherche.is_equal(type_courant)
+--                and then emprunt_courant.get_media.has_substring(p_media)
+                if emprunt_courant.get_media = p_media
                 then
 					-- Le média a été emprunté
                     exemplaire_emprunte := exemplaire_emprunte + 1
