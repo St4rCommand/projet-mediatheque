@@ -147,7 +147,7 @@ feature {ANY}
 		end	
 
 	-- Supprimer un utilisateur
-	supprimer is
+	supprimer(p_gestionnaire_emprunts: GESTIONNAIRE_EMPRUNTS) is
 		local
 			utilisateur:UTILISATEUR
 			nombre_emprunts:INTEGER
@@ -155,14 +155,17 @@ feature {ANY}
 			identifiant:STRING
 			position : INTEGER
 			utilisateurs:ARRAY[UTILISATEUR]
+			gestionnaire_emprunts: GESTIONNAIRE_EMPRUNTS
 		do
+		    gestionnaire_emprunts := p_gestionnaire_emprunts
+		
 			rep := ""
 			affichage_utilisateurs.afficher_suppression_debut
 
 			-- Rechercher l'utilisateur a supprimé
 			utilisateur:= rechercher_utilisateur
 			-- Rechercher si emprunt en cours
-			nombre_emprunts := liste_emprunts.nombre_emprunts(utilisateur)
+			nombre_emprunts := gestionnaire_emprunts.get_nombre_emprunts(utilisateur)
 			-- Demande de suppression définitive
 			if nombre_emprunts = 0 then
 				-- affichage de la demande définitive
@@ -266,7 +269,6 @@ feature {ANY}
 	-- Informations du client connecté
 	info_compte(p_utilisateur:UTILISATEUR; gestionnaire_emprunts : GESTIONNAIRE_EMPRUNTS) is
 		do
-			create emprunts.make(0,0)
 
 			affichage_utilisateurs.info_debut
 			-- Informations personnelles du client

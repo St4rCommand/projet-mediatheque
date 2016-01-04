@@ -111,6 +111,11 @@ feature {ANY}
 			-- affichage des emprunts
 			affichage_emprunts.afficher_details_emprunts(liste_emprunts.rechercher_emprunt(p_utilisateur))
         end
+        
+    get_nombre_emprunts(p_utilisateur : UTILISATEUR): INTEGER is
+        do
+            Result := liste_emprunts.nombre_emprunts(p_utilisateur)
+        end
          
 feature {NONE}
 

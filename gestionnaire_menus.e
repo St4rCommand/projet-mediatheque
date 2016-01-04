@@ -129,7 +129,7 @@ feature {ANY}
                     
                     -- Supprimer un utilisateur    
                     when 4 then
-                        gestionnaire_utilisateurs.supprimer
+                        gestionnaire_utilisateurs.supprimer(gestionnaire_emprunts)
                         
                     -- lister les medias    
                     when 5 then
