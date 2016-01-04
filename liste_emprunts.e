@@ -36,7 +36,7 @@ feature {ANY}
                 emprunt_courant := liste_emprunts.item(i)
                 
                 --if emprunt_courant /= Void
-                --and then emprunt_courant.get_utilisateur.has_substring(p_utilisateur)
+               -- and then emprunt_courant.get_utilisateur.has_substring(p_utilisateur)
                 --and then emprunt_courant.get_utilisateur = p_utilisateur
                 if emprunt_courant.get_utilisateur = p_utilisateur
                 then

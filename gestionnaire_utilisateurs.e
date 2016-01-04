@@ -146,6 +146,53 @@ feature {ANY}
 			affichage_utilisateurs.afficher_fin_nouvel_utilisateur
 		end	
 
+	-- Supprimer un utilisateur
+	supprimer is
+		local
+			utilisateur:UTILISATEUR
+			nombre_emprunts:INTEGER
+			rep : STRING
+			identifiant:STRING
+			position : INTEGER
+			utilisateurs:ARRAY[UTILISATEUR]
+		do
+			rep := ""
+			affichage_utilisateurs.afficher_suppression_debut
+
+			-- Rechercher l'utilisateur a supprimé
+			utilisateur:= rechercher_utilisateur
+			-- Rechercher si emprunt en cours
+			nombre_emprunts := liste_emprunts.nombre_emprunts(utilisateur)
+			-- Demande de suppression définitive
+			if nombre_emprunts = 0 then
+				-- affichage de la demande définitive
+				from
+				until not (rep.is_equal("O")) or not (rep.is_equal("N"))
+				loop
+					rep:= affichage_utilisateurs.afficher_demande_suppresion
+				end
+
+				if rep.is_equal("O") then
+					identifiant := utilisateur.get_identifiant
+					-- Recherche de la position dans le tableau des utilisateurs
+					position := liste_utilisateurs.position_utilisateur(utilisateur)
+
+					if position /= 0 then
+						utilisateurs := liste_utilisateurs.lister_utilisateurs
+						utilisateurs.remove(position)
+						-- Affichage du message de suppression
+						affichage_utilisateurs.afficher_suppression(identifiant)
+					end
+				else
+					-- Affichage suppression annulée
+					affichage_utilisateurs.afficher_suppression_annulee
+				end
+			else
+				--affichage erreur : emprunt en cours
+				affichage_utilisateurs.afficher_erreur_suppression
+			end
+		end
+
 	-- Récupérer un utilisateur par son identifiant	
     get_utilisateur(p_identifiant:STRING): UTILISATEUR is
         do
@@ -219,6 +266,8 @@ feature {ANY}
 	-- Informations du client connecté
 	info_compte(p_utilisateur:UTILISATEUR; gestionnaire_emprunts : GESTIONNAIRE_EMPRUNTS) is
 		do
+			create emprunts.make(0,0)
+
 			affichage_utilisateurs.info_debut
 			-- Informations personnelles du client
 			affichage_utilisateurs.afficher_utilisateur(p_utilisateur)
@@ -229,8 +278,6 @@ feature {ANY}
             gestionnaire_emprunts.emprunts_utilisateur(p_utilisateur)
 
 		end
-
-
 
  	-- rechercher           
     rechercher: ARRAY[UTILISATEUR] is
@@ -274,12 +321,10 @@ feature {ANY}
             until not autre_recherche
             loop
             
-
 			    -- Choix du type d'utilisateur
 			    utilisateurs := rechercher
 			    
 			    if utilisateurs /= Void and then utilisateurs.count > 1 then
-
 
 		            -- Afficher résultat
 		            affichage_utilisateurs.afficher_recherche_resultats(utilisateurs)
@@ -292,7 +337,6 @@ feature {ANY}
                         autre_recherche := False
                     end
 			        
-
                 else
                     
                     if utilisateurs /= Void then

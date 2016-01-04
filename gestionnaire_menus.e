@@ -129,7 +129,7 @@ feature {ANY}
                     
                     -- Supprimer un utilisateur    
                     when 4 then
-                        io.put_string(" Fonctionnalité à implémenter %N ")
+                        gestionnaire_utilisateurs.supprimer
                         
                     -- lister les medias    
                     when 5 then
