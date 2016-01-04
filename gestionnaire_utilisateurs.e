@@ -4,11 +4,17 @@ creation {ANY}
     nouveau
 
 feature {NONE}
-    -- Liste des médias
+    -- Liste des utilisateurs
     liste_utilisateurs: LISTE_UTILISATEURS
 
-    -- Affichage des médias
+    -- Affichage des utilisateurs
     affichage_utilisateurs: AFFICHAGE_UTILISATEURS
+
+	-- Liste des emprunts
+	liste_emprunts:LISTE_EMPRUNTS
+
+	-- Affichage des emprunts
+	affichage_emprunts:AFFICHAGE_EMPRUNTS
     
 feature {ANY}
 
@@ -219,14 +225,19 @@ feature {ANY}
 	-- Informations du client connecté
 	info_compte(p_utilisateur:UTILISATEUR) is
 		local
-
+			emprunts :ARRAY[EMPRUNT]
 		do
 			affichage_utilisateurs.info_debut
-			-- Informations du compte
+			-- Informations personnelles du client
 			affichage_utilisateurs.afficher_utilisateur(p_utilisateur)
+
 			-- Les emprunts de l'utilisateur
 			affichage_utilisateurs.emprunt_debut
 			-- affichage_utilisateurs.details_emprunt
+			emprunts:= liste_emprunts.rechercher_emprunt(p_utilisateur)
+			-- affichage des emprunts
+			affichage_emprunts.afficher_details_emprunts(emprunts)
+
 		end
 
 

@@ -35,4 +35,23 @@ feature {ANY}
             io.put_string("| "+p_emprunt.get_utilisateur.get_identifiant+" emprunte"+p_emprunt.get_media.get_titre+"%N")
         end
 
+	-- les emprunts pour un utilisateur
+    afficher_details_emprunts(p_emprunts: ARRAY[EMPRUNT]) is
+        local
+            i:INTEGER
+        do
+            from i := 1
+            until i = p_emprunts.count
+            loop
+                afficher_detail_emprunt(p_emprunts.item(i))
+                i := i+1 
+            end
+        end
+
+    -- Un seul utilisateur : afficher tous ses emprunts   
+    afficher_detail_emprunt(p_emprunt: EMPRUNT) is
+        do
+            io.put_string("| "+p_emprunt.get_media.get_titre+" emprunté le "+p_emprunt.get_date_debut+"%N")
+        end
+
 end

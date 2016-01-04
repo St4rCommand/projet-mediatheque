@@ -21,7 +21,7 @@ feature {ANY}
         Result := liste_emprunts
     end
 
-	-- Lister tous les emprunts pour un utilisateur
+	-- Rechercher tous les emprunts pour un utilisateur
 	rechercher_emprunt(p_utilisateur: UTILISATEUR):ARRAY[EMPRUNT] is
 		local
 			emprunt_courant: EMPRUNT
@@ -123,6 +123,30 @@ feature {ANY}
 			end
 		Result := exemplaire_emprunte
 			
+		end
+
+	-- Le nombre d'emprunts pour un utilisateur
+	nombre_emprunts(p_utilisateur: UTILISATEUR):INTEGER is
+		local
+			emprunt_courant: EMPRUNT
+			nombre_emprunt:INTEGER
+			i:INTEGER
+		do
+			nombre_emprunt := 0
+            
+            from i:=1
+            until i = liste_emprunts.count
+            loop
+                emprunt_courant := liste_emprunts.item(i)
+                if emprunt_courant.get_utilisateur = p_utilisateur
+                then
+                    nombre_emprunt := nombre_emprunt + 1
+                end
+                
+                i := i+1
+            end
+            
+            Result := nombre_emprunt
 		end
 
 end
