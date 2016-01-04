@@ -61,15 +61,8 @@ feature {ANY}
 
     -- Un seul utilisateur : afficher tous ses emprunts   
     afficher_detail_emprunt(p_emprunt: EMPRUNT) is
-		local
-			jour : INTEGER
-			mois : INTEGER
-			annee: INTEGER
         do
-			jour := p_emprunt.get_date_debut.day
-			mois := p_emprunt.get_date_debut.month
-		  	annee := p_emprunt.get_date_debut.year
-            io.put_string("| "+p_emprunt.get_media.get_titre+" emprunté le "+jour.to_string+"-"+mois.to_string+"-"+annee.to_string+"%N")
+            io.put_string("| "+p_emprunt.get_media.get_titre+" emprunté le "+p_emprunt.get_date_debut.to_string+"%N")
         end
         
     afficher_limite_emprunts_atteinte is

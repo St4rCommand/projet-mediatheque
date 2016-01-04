@@ -177,7 +177,7 @@ feature {ANY}
                 
                 	-- Consulter les informations de son compte
                     when 1 then
-						gestionnaire_utilisateurs.info_compte(utilisateur_connecte)
+						gestionnaire_utilisateurs.info_compte(utilisateur_connecte, gestionnaire_emprunts)
                         
                     -- lister les medias    
                     when 2 then

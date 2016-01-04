@@ -38,8 +38,11 @@ feature {ANY}
             autre_media: BOOLEAN
             choix_menu: INTEGER
             nombre_emprunts: INTEGER
+            date_emprunt : TIME
         do
             create emprunts.make(0,0)
+            create date_emprunt
+            date_emprunt.update
             autre_emprunt := True
                  
             from
@@ -57,11 +60,11 @@ feature {ANY}
                     from
                     until not autre_media and nombre_emprunts /= nombre_emprunts_par_utilisateur
                     loop
-                        io.put_string(nombre_emprunts.to_string+"%N")
                         media := gestionnaire_medias.rechercher_media
                         
                         if media /= Void then
-                            create emprunt.nouveau(utilisateur,media)
+                            create emprunt.nouveau(utilisateur,media,date_emprunt)
+                            
                             emprunts.add_last(emprunt)
                         
                             nombre_emprunts := nombre_emprunts + 1
@@ -103,6 +106,11 @@ feature {ANY}
         
         end
         
+    emprunts_utilisateur(p_utilisateur:UTILISATEUR) is 
+        do
+			-- affichage des emprunts
+			affichage_emprunts.afficher_details_emprunts(liste_emprunts.rechercher_emprunt(p_utilisateur))
+        end
          
 feature {NONE}
 

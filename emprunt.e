@@ -15,14 +15,17 @@ feature {NONE}
 	media: MEDIA
        
 	-- Date de début
-	date_debut:TIME
+	date_debut:TIME_IN_FRENCH
 
 feature {ANY}
 
-    nouveau(p_utilisateur: UTILISATEUR ; p_media:MEDIA) is
+    nouveau(p_utilisateur: UTILISATEUR ; p_media:MEDIA ; p_date_debut: TIME) is
         do
             utilisateur := p_utilisateur
             media := p_media
+            create date_debut
+            date_debut.set_short_mode(True)
+            date_debut.set_time(p_date_debut)
         end
 
 	 -- Set utilisateur
@@ -38,9 +41,9 @@ feature {ANY}
         end
 
     -- Set date_debut
-    set_jour (p_date_debut:TIME) is
+    set_date_debut (p_date_debut:TIME) is
         do
-            date_debut := p_date_debut
+            date_debut.set_time(p_date_debut)
         end
         
        -- Get utilisateur
@@ -56,7 +59,7 @@ feature {ANY}
         end
 
     -- Get date début d'emprunt
-    get_date_debut: TIME is
+    get_date_debut: TIME_IN_FRENCH is
         do
             Result := date_debut
         end
