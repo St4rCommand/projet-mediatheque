@@ -274,7 +274,7 @@ feature {ANY}
         local
 			utilisateurs: ARRAY[UTILISATEUR]
 			autre_recherche: BOOLEAN
-			autre_consultation: BOOLEAN
+			--autre_consultation: BOOLEAN
 			choix_menu: INTEGER
         do
             create utilisateurs.make(0,0)
