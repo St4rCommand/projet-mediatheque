@@ -9,6 +9,11 @@ feature {ANY}
         do
             io.put_string(" *** Ajouter un nouvel emprunt *** %N%N")
         end
+        
+    afficher_nouveau_rendu is
+        do
+            io.put_string(" *** Effectuer un rendu *** %N%N")
+        end
     
     afficher_ajouter_autre_media is
         do
@@ -29,11 +34,14 @@ feature {ANY}
     afficher_emprunts(p_emprunts: ARRAY[EMPRUNT]) is
         local
             i:INTEGER
+            emprunt_courant: EMPRUNT
         do
             from i := 1
             until i = p_emprunts.count
             loop
-                afficher_emprunt(p_emprunts.item(i))
+                emprunt_courant := p_emprunts.item(i)
+                io.put_string(i.to_string+"| ")
+                afficher_emprunt(emprunt_courant)
                 i := i+1 
             end
             io.put_string("%N ****** %N%N")
@@ -41,7 +49,7 @@ feature {ANY}
         
     afficher_emprunt(p_emprunt: EMPRUNT) is
         do
-            io.put_string("| "+p_emprunt.get_utilisateur.get_identifiant+" emprunte "+p_emprunt.get_media.get_titre+"%N")
+            io.put_string(p_emprunt.get_utilisateur.get_identifiant+" emprunte "+p_emprunt.get_media.get_titre+"%N")
         end
 
 	-- les emprunts pour un utilisateur
@@ -69,6 +77,45 @@ feature {ANY}
     afficher_limite_emprunts_atteinte is
         do
             afficher_message_erreur("Vous avez atteint le nombre maximum d'emprunts pour cet utilisateur !")
+        end
+        
+    afficher_autre_rendu is
+        do
+            io.put_string(" *** %N")
+            io.put_string(" 1 - Supprimer d'autres emprunts %N")
+            io.put_string(" 0 - Quitter%N")
+            io.put_string("%N --- %N%N")
+        end
+        
+    afficher_supprimer_autre_emprunt is
+        do
+            io.put_string(" *** %N")
+            io.put_string(" 1 - Supprimer un autre emprunt pour cet utilisateur %N")
+            io.put_string(" 0 - Quitter%N")
+            io.put_string("%N --- %N%N")
+        end
+        
+    afficher_aucun_emprunt is
+        do
+            afficher_message_erreur("Aucun emprunt à supprimer pour cet utilisateur")
+        end
+        
+    saisir_emprunt_selectionne(choix_max: INTEGER): INTEGER is
+        local
+            choix: STRING
+        do
+            create choix.make_empty
+        
+            from
+            until choix_correct(choix, choix_max)
+            loop
+                io.put_string(" Choix (0 - Nouvelle recherche) : ")
+                choix.copy(saisir_string)
+            end
+            
+            Result := choix.to_integer
+            
+            io.put_string(" --- %N%N")
         end
 
 end

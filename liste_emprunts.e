@@ -148,5 +148,10 @@ feature {ANY}
             
             Result := nombre_emprunt
 		end
+		
+	supprimer(p_emprunt : EMPRUNT) is
+	    do
+	        liste_emprunts.remove(liste_emprunts.index_of(p_emprunt, 0)-1)
+	    end
 
 end

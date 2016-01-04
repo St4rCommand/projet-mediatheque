@@ -149,7 +149,7 @@ feature {ANY}
                         
                     -- Retour d'emprunt    
                     when 9 then
-                        io.put_string(" Fonctionnalité à implémenter %N ")
+                        gestionnaire_emprunts.rendre
                         
                     -- deconnecter
                     when 0 then

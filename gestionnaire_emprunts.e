@@ -28,6 +28,7 @@ feature {ANY}
             nombre_emprunts_par_utilisateur := p_nombre_emprunts_par_utilisateur
         end
    
+   -- vérifier que le média peut encore être emprunté
     ajouter is
         local
             emprunts: ARRAY[EMPRUNT]
@@ -58,7 +59,7 @@ feature {ANY}
                     nombre_emprunts := liste_emprunts.nombre_emprunts(utilisateur)
                     
                     from
-                    until not autre_media and nombre_emprunts /= nombre_emprunts_par_utilisateur
+                    until not autre_media or nombre_emprunts = nombre_emprunts_par_utilisateur
                     loop
                         media := gestionnaire_medias.rechercher_media
                         
@@ -102,7 +103,67 @@ feature {ANY}
         end
         
     rendre is
+        local
+            emprunts: ARRAY[EMPRUNT]
+            utilisateur: UTILISATEUR
+            autre_rendu: BOOLEAN
+            autre_emprunt: BOOLEAN
+            choix_menu: INTEGER
         do
+            create emprunts.make(0,0)
+            autre_rendu := True
+                 
+            from
+            until not autre_rendu
+            loop
+                autre_emprunt := True
+                
+                affichage_emprunts.afficher_nouveau_rendu
+                
+                utilisateur := gestionnaire_utilisateurs.rechercher_utilisateur
+                
+                if utilisateur /= Void then
+                
+                    emprunts := liste_emprunts.rechercher_emprunt(utilisateur)
+                    
+                    from
+                    until not autre_emprunt
+                    loop
+                    
+                        affichage_emprunts.afficher_emprunts(emprunts)
+                        choix_menu := affichage_emprunts.saisir_emprunt_selectionne(emprunts.count-1)
+                        
+                        if choix_menu = 0 then
+                            autre_emprunt := False
+                        else
+                            emprunts.remove(choix_menu)
+                            liste_emprunts.supprimer(emprunts.item(choix_menu))
+                        end
+                        
+                        if emprunts.count = 1 then
+                            affichage_emprunts.afficher_aucun_emprunt
+                            autre_emprunt := False
+                        else
+                            affichage_emprunts.afficher_supprimer_autre_emprunt
+                            choix_menu := affichage_emprunts.saisir_choix_menu(2)
+                            
+                            if choix_menu = 0 then
+                                autre_emprunt := False
+                            end
+                        end
+                        
+                    end
+                    
+                end
+                
+                
+                affichage_emprunts.afficher_autre_rendu
+                choix_menu := affichage_emprunts.saisir_choix_menu(2)
+                
+                if choix_menu = 0 then
+                    autre_rendu := False
+                end
+            end
         
         end
         
