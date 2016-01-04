@@ -170,7 +170,7 @@ feature {ANY}
 			if nombre_emprunts = 0 then
 				-- affichage de la demande définitive
 				from
-				until not (rep.is_equal("O")) or not (rep.is_equal("N"))
+				until rep.is_equal("O") or rep.is_equal("N")
 				loop
 					rep:= affichage_utilisateurs.afficher_demande_suppresion
 				end
