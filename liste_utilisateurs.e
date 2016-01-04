@@ -72,6 +72,28 @@ feature {ANY}
 			end
 		end
 
+	position_utilisateur(p_utilisateur:UTILISATEUR):INTEGER is
+		local
+			i:INTEGER
+			existe:BOOLEAN
+		do
+		
+    		from i := 1
+			until existe or i = liste_utilisateurs.count
+			loop
+				existe := p_utilisateur.get_identifiant.is_equal((liste_utilisateurs.item(i)).get_identifiant)				
+				i := i+1
+			end
+			
+			if existe then
+				Result := i-1
+			else
+    			Result := 0
+			end
+
+		end
+
+
 	rechercher_admin(p_identifiant: STRING; p_nom:STRING; p_prenom:STRING; p_admin:BOOLEAN):ARRAY[UTILISATEUR] is
 		local
 			admin_courant: UTILISATEUR

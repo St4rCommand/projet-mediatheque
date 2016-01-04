@@ -50,6 +50,38 @@ feature {ANY}
             io.put_string(" *** Nouvel Utilisateur *** %N%N")
         end
 
+	afficher_suppression_debut is
+		do
+			io.put_string(" *** Suppression d'un utilisateur *** %N%N")
+		end
+
+	afficher_demande_suppresion : STRING is
+		local
+			choix : STRING
+        do
+            io.put_string(" Confirmez-vous la suppression ?(O/N) : ")
+			io.read_line
+            choix := io.last_string
+
+			Result := choix
+			
+		end
+
+	afficher_suppression(p_identifiant:STRING) is
+		do
+			io.put_string(" *** L'utilisateur : " +p_identifiant+ "a été supprimé *** %N%N")
+		end
+
+	afficher_suppression_annulee is
+        do
+            io.put_string(" *** Suppression annulée *** %N%N")
+        end
+	
+	afficher_erreur_suppression is
+        do
+            io.put_string(" *** Suppression impossible : emprunts en cours *** %N%N")
+        end
+
     afficher_consultation is
         do
             io.put_string(" *** Consulter utilisateur *** %N%N")
