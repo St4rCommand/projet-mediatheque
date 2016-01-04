@@ -36,6 +36,7 @@ feature {ANY}
                 afficher_emprunt(p_emprunts.item(i))
                 i := i+1 
             end
+            io.put_string("%N ****** %N%N")
         end
         
     afficher_emprunt(p_emprunt: EMPRUNT) is
