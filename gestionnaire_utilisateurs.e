@@ -229,7 +229,7 @@ feature {ANY}
 			-- affichage_utilisateurs.details_emprunt
 		end
 
-feature {NONE}
+
 
  	-- rechercher           
     rechercher: ARRAY[UTILISATEUR] is
@@ -258,6 +258,53 @@ feature {NONE}
 			Result := resultat_recherche
 
         end
+        
+    rechercher_utilisateur: UTILISATEUR is
+        local
+			utilisateurs: ARRAY[UTILISATEUR]
+			autre_recherche: BOOLEAN
+			autre_consultation: BOOLEAN
+			choix_menu: INTEGER
+        do
+            create utilisateurs.make(0,0)
+            autre_recherche := True
+            
+            from
+            until not autre_recherche
+            loop
+            
+
+			    -- Choix du type d'utilisateur
+			    utilisateurs := rechercher
+			    
+			    if utilisateurs /= Void and utilisateurs.count > 1 then
+
+
+		            -- Afficher résultat
+		            affichage_utilisateurs.afficher_recherche_resultats(utilisateurs)
+		
+		            -- Choix de l'utilisateur a consulter
+		            choix_menu := affichage_utilisateurs.saisir_utilisateur_selectionne(utilisateurs.count-1)
+		            
+		            if choix_menu /= 0 then
+                        Result := utilisateurs.item(choix_menu)
+                        autre_recherche := False
+                    end
+			        
+
+                else
+                    
+                    if utilisateurs /= Void then
+                        affichage_utilisateurs.afficher_recherche_incorrecte
+                    else
+                        autre_recherche := False
+                    end
+                end 
+            
+            end
+        end
+
+feature {NONE}
 
     -- rechercher un administrateur    
     rechercher_admin: ARRAY[UTILISATEUR] is

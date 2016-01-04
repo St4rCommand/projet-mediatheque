@@ -168,8 +168,6 @@ feature {ANY}
                 
             end
         end
-        
-feature {NONE}
 
             
     rechercher: ARRAY[MEDIA] is
@@ -203,6 +201,47 @@ feature {NONE}
             
         end
         
+    rechercher_media: MEDIA is
+        local
+            medias: ARRAY[MEDIA]
+            autre_recherche: BOOLEAN
+            choix_menu: INTEGER
+        do
+            create medias.make(0,0)
+            autre_recherche := True
+        
+            -- Rechercher jusqu'à fin
+            from
+            until not autre_recherche
+            loop
+            
+                -- Rechercher un média                
+                medias := rechercher
+                
+                -- Consulter un média jusqu'à fin ou nouvelle recherche
+                if medias /= Void and then medias.count > 1 then
+                    
+                    affichage_medias.afficher_recherche_resultats(medias)
+                    choix_menu := affichage_medias.saisir_media_selectionne(medias.count-1)
+                    
+                    if choix_menu /= 0 then
+                        Result := medias.item(choix_menu)
+                        autre_recherche := False
+                    end
+                else
+                    
+                    if medias /= Void then
+                        affichage_medias.afficher_recherche_incorrecte
+                    else
+                        autre_recherche := False
+                    end
+                    
+                end
+            end
+        end
+
+feature {NONE}
+       
     rechercher_dvd: ARRAY[MEDIA] is
         local
             titre: STRING

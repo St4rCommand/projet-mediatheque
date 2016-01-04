@@ -25,7 +25,7 @@ feature {ANY}
             create gestionnaire_fichier_medias
             create gestionnaire_medias.nouveau
             create gestionnaire_utilisateurs.nouveau
-            create gestionnaire_emprunts.nouveau
+            create gestionnaire_emprunts.nouveau(gestionnaire_utilisateurs,gestionnaire_medias)
             create affichage_menus
             
             -- Chargement des médias depuis le fichier de données
@@ -141,7 +141,7 @@ feature {ANY}
                         
                     -- Emprunter    
                     when 8 then
-                        io.put_string(" Fonctionnalité à implémenter %N ")
+                        gestionnaire_emprunts.ajouter
                         
                     -- Retour d'emprunt    
                     when 9 then

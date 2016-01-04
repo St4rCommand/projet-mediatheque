@@ -54,15 +54,29 @@ feature {ANY}
         do
             liste_emprunts.add_last(p_emprunt)
         end
+        
+    -- Ajouter une liste d'emprunts
+    ajouter_liste(p_emprunts: ARRAY[EMPRUNT]) is
+        local
+            i:INTEGER
+        do
+            from i := 1
+            until i = p_emprunts.count
+            loop
+                ajouter(p_emprunts.item(i))
+                i := i+1 
+            end
+            
+        end
 
 	-- Le type du media emprunté
 	type_media (p_media:MEDIA):STRING is
 		local
 			type : STRING
 		do
-			if {LIVRE} ?:= p_media
+			if {LIVRE} ?:= p_media then
 				type := "livre"
-			elseif {DVD} ?:= p_media
+			elseif {DVD} ?:= p_media then
 				type := "dvd"
 			end
 

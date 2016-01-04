@@ -11,66 +11,71 @@ feature {NONE}
     -- Affichage des médias
     affichage_emprunts: AFFICHAGE_EMPRUNTS
     
+    gestionnaire_utilisateurs: GESTIONNAIRE_UTILISATEURS
+    
+    gestionnaire_medias: GESTIONNAIRE_MEDIAS
+    
 feature {ANY}
 
-    nouveau is
+    nouveau(p_gestionnaire_utilisateurs: GESTIONNAIRE_UTILISATEURS ; p_gestionnaire_medias: GESTIONNAIRE_MEDIAS) is
         do
             create liste_emprunts.nouveau
             create affichage_emprunts
+            gestionnaire_utilisateurs := p_gestionnaire_utilisateurs
+            gestionnaire_medias := p_gestionnaire_medias
         end
    
     ajouter is
         local
             emprunts: ARRAY[EMPRUNT]
             emprunt: EMPRUNT
+            utilisateur: UTILISATEUR
+            media: MEDIA
+            autre_emprunt: BOOLEAN
+            autre_media: BOOLEAN
+            choix_menu: INTEGER
         do
             create emprunts.make(0,0)
             autre_emprunt := True
             
+            -- vérifier le nombre de nouveaux emprunts que l'utilisateur peut faire
+                 
             from
             until not autre_emprunt
             loop
                 autre_media := True
                 
-                utilisateur := gestionnaire_utilisateurs.rechercher
+                affichage_emprunts.afficher_nouvel_emprunt
                 
-                if utilisateurs /= Void and utilisateurs.count > 1 then
-			        from 
-			        until not autre_consultation
-			        loop
-
-			            -- Afficher résultat
-			            affichage_utilisateurs.afficher_recherche_resultats(utilisateurs)
-			
-			            -- Choix de l'utilisateur a consulter
-			            choix_menu := affichage_utilisateurs.saisir_utilisateur_selectionne(utilisateurs.count-1)
-			            
-			            if choix_menu = 0 then
-			                autre_consultation := False
-		                else
-		                     affichage_utilisateurs.afficher_utilisateur(utilisateurs.item(choix_menu))
-		                     
-		                     affichage_utilisateurs.afficher_consultation_suivante
-		                     choix_menu := affichage_utilisateurs.saisir_choix_menu(2)
-		                     
-		                     inspect choix_menu
-                                when 1 then
-                                    autre_media := False
-                                when 2 then
-                                when 0 then
-                                    autre_media := False
-                                    autre_emprunt := False
-                            end
-                        end
-			        
-			        end
-                else
+                utilisateur := gestionnaire_utilisateurs.rechercher_utilisateur
+                
+                from
+                until not autre_media 
+                loop
+                    media := gestionnaire_medias.rechercher_media
                     
-                    if utilisateurs /= Void then
-                        affichage_utilisateurs.afficher_recherche_incorrecte
-                    else
-                        autre_recherche := False
+                    create emprunt.nouveau(utilisateur,media)
+                    emprunts.add_last(emprunt)
+                    
+                    affichage_emprunts.afficher_continuer
+                    choix_menu := affichage_emprunts.saisir_choix_menu(2)
+                    
+                    if choix_menu = 0 then
+                        autre_media := False
                     end
+                    
+                end
+                
+                affichage_emprunts.afficher_emprunts(emprunts)
+                
+                liste_emprunts.ajouter_liste(emprunts)
+                
+                
+                affichage_emprunts.afficher_continuer
+                choix_menu := affichage_emprunts.saisir_choix_menu(2)
+                
+                if choix_menu = 0 then
+                    autre_emprunt := False
                 end
             end
         
@@ -79,13 +84,12 @@ feature {ANY}
     rendre is
         do
         
-        end   
+        end
+        
+         
 feature {NONE}
 
-    rechercher_utilisateur: UTILISATEUR is
-        local
-        do
-        end
+    
         
     rechercher_media: MEDIA is
         local

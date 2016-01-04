@@ -1,5 +1,7 @@
 class EMPRUNT
 
+creation {ANY}
+    nouveau
 --
 -- Emprunt
 --
@@ -18,6 +20,12 @@ feature {NONE}
 	annee: INTEGER
 
 feature {ANY}
+
+    nouveau(p_utilisateur: UTILISATEUR ; p_media:MEDIA) is
+        do
+            utilisateur := p_utilisateur
+            media := p_media
+        end
 
 	 -- Set utilisateur
     set_utilisateur (p_utilisateur: UTILISATEUR) is
