@@ -19,13 +19,17 @@ feature {ANY}
         local
             utilisateurs_lus: ARRAY[UTILISATEUR]
             medias_lus: ARRAY[MEDIA]
+            nombre_emprunts_par_utilisateur: INTEGER
         do
-            -- Chargement des gestionnaires
+            -- Paramètre de l'application
+            nombre_emprunts_par_utilisateur := 3
+            
+            -- Chargement des modules
             create gestionnaire_fichier_utilisateurs
             create gestionnaire_fichier_medias
             create gestionnaire_medias.nouveau
             create gestionnaire_utilisateurs.nouveau
-            create gestionnaire_emprunts.nouveau(gestionnaire_utilisateurs,gestionnaire_medias)
+            create gestionnaire_emprunts.nouveau(gestionnaire_utilisateurs,gestionnaire_medias, nombre_emprunts_par_utilisateur)
             create affichage_menus
             
             -- Chargement des médias depuis le fichier de données

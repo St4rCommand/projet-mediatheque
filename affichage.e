@@ -57,4 +57,11 @@ feature {ANY}
         io.put_string(" | Aucun résultat pour votre recherche !%N")
         io.put_string("%N --- %N%N")
     end
+
+    afficher_message_erreur(p_string: STRING) is
+        do
+            io.put_string(" ***%N")
+            io.put_string(" *** "+p_string+"%N")
+            io.put_string(" ***%N%N")
+        end
 end

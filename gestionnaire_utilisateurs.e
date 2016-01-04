@@ -288,7 +288,7 @@ feature {ANY}
 			    -- Choix du type d'utilisateur
 			    utilisateurs := rechercher
 			    
-			    if utilisateurs /= Void and utilisateurs.count > 1 then
+			    if utilisateurs /= Void and then utilisateurs.count > 1 then
 
 
 		            -- Afficher résultat
