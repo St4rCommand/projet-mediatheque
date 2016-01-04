@@ -69,7 +69,7 @@ feature {ANY}
 
 	afficher_suppression(p_identifiant:STRING) is
 		do
-			io.put_string(" *** L'utilisateur : " +p_identifiant+ "a été supprimé *** %N%N")
+			io.put_string(" *** L'utilisateur : " +p_identifiant+ " a été supprimé *** %N%N")
 		end
 
 	afficher_suppression_annulee is
@@ -228,7 +228,7 @@ feature {ANY}
             rep:STRING
         do
             rep := ""
-            io.put_string(" administrateur (O/N)? ")
+            io.put_string(" administrateur (o/n)? ")
             io.read_line
             rep := io.last_string
             

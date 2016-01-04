@@ -6,7 +6,7 @@ feature {ANY}
     do
         io.put_string(" *** %N")
         io.put_string(" 1 - Nouvelle recherche %N")
-        io.put_string(" 2 - Sélectionner un autre média%N")
+        io.put_string(" 2 - Sélectionnez en un autre %N")
         io.put_string("%N 0 - Quitter%N")
         io.put_string("%N --- %N")
     end
