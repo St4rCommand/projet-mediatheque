@@ -334,7 +334,7 @@ feature {ANY}
 			    -- Choix du type d'utilisateur
 			    utilisateurs := rechercher
 			    
-			    if utilisateurs /= Void and utilisateurs.count > 1 then
+			    if utilisateurs /= Void and then utilisateurs.count > 1 then
 
 		            -- Afficher résultat
 		            affichage_utilisateurs.afficher_recherche_resultats(utilisateurs)

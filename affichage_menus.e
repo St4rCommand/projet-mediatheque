@@ -1,4 +1,6 @@
 class AFFICHAGE_MENUS
+
+inherit AFFICHAGE
 	
 feature {ANY}
     
@@ -164,13 +166,5 @@ feature {ANY}
             
             Result := choix_menu.to_integer
         end
-        
-feature {NONE}
-
-    afficher_message_erreur(p_string: STRING) is
-        do
-            io.put_string(" ***%N")
-            io.put_string(" *** "+p_string+"%N")
-            io.put_string(" ***%N%N")
-        end
+       
 end

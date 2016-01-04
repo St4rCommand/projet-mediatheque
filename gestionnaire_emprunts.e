@@ -15,14 +15,17 @@ feature {NONE}
     
     gestionnaire_medias: GESTIONNAIRE_MEDIAS
     
+    nombre_emprunts_par_utilisateur: INTEGER
+    
 feature {ANY}
 
-    nouveau(p_gestionnaire_utilisateurs: GESTIONNAIRE_UTILISATEURS ; p_gestionnaire_medias: GESTIONNAIRE_MEDIAS) is
+    nouveau(p_gestionnaire_utilisateurs: GESTIONNAIRE_UTILISATEURS ; p_gestionnaire_medias: GESTIONNAIRE_MEDIAS ; p_nombre_emprunts_par_utilisateur: INTEGER) is
         do
             create liste_emprunts.nouveau
             create affichage_emprunts
             gestionnaire_utilisateurs := p_gestionnaire_utilisateurs
             gestionnaire_medias := p_gestionnaire_medias
+            nombre_emprunts_par_utilisateur := p_nombre_emprunts_par_utilisateur
         end
    
     ajouter is
@@ -34,11 +37,10 @@ feature {ANY}
             autre_emprunt: BOOLEAN
             autre_media: BOOLEAN
             choix_menu: INTEGER
+            nombre_emprunts: INTEGER
         do
             create emprunts.make(0,0)
             autre_emprunt := True
-            
-            -- vérifier le nombre de nouveaux emprunts que l'utilisateur peut faire
                  
             from
             until not autre_emprunt
@@ -49,29 +51,44 @@ feature {ANY}
                 
                 utilisateur := gestionnaire_utilisateurs.rechercher_utilisateur
                 
-                from
-                until not autre_media 
-                loop
-                    media := gestionnaire_medias.rechercher_media
+                if utilisateur /= Void then
+                    nombre_emprunts := liste_emprunts.nombre_emprunts(utilisateur)
                     
-                    create emprunt.nouveau(utilisateur,media)
-                    emprunts.add_last(emprunt)
+                    from
+                    until not autre_media and nombre_emprunts /= nombre_emprunts_par_utilisateur
+                    loop
+                        io.put_string(nombre_emprunts.to_string+"%N")
+                        media := gestionnaire_medias.rechercher_media
+                        
+                        if media /= Void then
+                            create emprunt.nouveau(utilisateur,media)
+                            emprunts.add_last(emprunt)
+                        
+                            nombre_emprunts := nombre_emprunts + 1
+                        end
+                        
+                        affichage_emprunts.afficher_ajouter_autre_media
+                        choix_menu := affichage_emprunts.saisir_choix_menu(2)
+                        
+                        if choix_menu = 0 then
+                            autre_media := False
+                        end
+                        
+                    end
                     
-                    affichage_emprunts.afficher_continuer
-                    choix_menu := affichage_emprunts.saisir_choix_menu(2)
+                    if nombre_emprunts = nombre_emprunts_par_utilisateur then
+                        affichage_emprunts.afficher_limite_emprunts_atteinte
+                    end
                     
-                    if choix_menu = 0 then
-                        autre_media := False
+                    if emprunts.count > 1 then
+                        affichage_emprunts.afficher_emprunts(emprunts)
+                        liste_emprunts.ajouter_liste(emprunts)
                     end
                     
                 end
                 
-                affichage_emprunts.afficher_emprunts(emprunts)
                 
-                liste_emprunts.ajouter_liste(emprunts)
-                
-                
-                affichage_emprunts.afficher_continuer
+                affichage_emprunts.afficher_ajouter_autre_emprunt
                 choix_menu := affichage_emprunts.saisir_choix_menu(2)
                 
                 if choix_menu = 0 then
