@@ -180,6 +180,17 @@ feature {ANY}
         do
             Result := liste_emprunts.nombre_emprunts(p_utilisateur)
         end
+
+	delais_depasse is
+		local
+			emprunts_depasses : ARRAY[EMPRUNT]
+		do
+			create emprunts_depasses.make(0,0)
+			affichage_emprunts.afficher_retard_debut
+			emprunts_depasses := liste_emprunts.delais_depasse
+			affichage_emprunts.afficher_emprunts(emprunts_depasses)
+			
+		end
          
 feature {NONE}
 

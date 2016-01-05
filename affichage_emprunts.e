@@ -25,7 +25,10 @@ feature {ANY}
         do
             io.put_string(" *** Effectuer un rendu *** %N%N")
         end
-    
+    afficher_retard_debut is
+		do
+            io.put_string(" *** Emprunts non rendu à la date du retour fixée *** %N%N")
+		end
     afficher_ajouter_autre_media is
         do
             io.put_string(" *** %N")

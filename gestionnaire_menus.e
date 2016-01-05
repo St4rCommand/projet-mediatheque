@@ -116,42 +116,50 @@ feature {ANY}
                 choix_menu := affichage_menus.afficher_menu_principal_admin
                 
                 inspect choix_menu
+
+					-- Consulter son compte
+					when 1 then
+						gestionnaire_utilisateurs.info_compte(utilisateur_connecte, gestionnaire_emprunts)
                 
                 	-- Lister les utilisateurs
-                    when 1 then
+                    when 2 then
 						gestionnaire_utilisateurs.lister_utilisateurs
 						
                     -- Consulter un utilisateur						
-                    when 2 then
+                    when 3 then
                         gestionnaire_utilisateurs.consulter
                      
                     -- Ajouter un utilisateur    
-                    when 3 then
+                    when 4 then
                         gestionnaire_utilisateurs.ajouter_form_utilisateur
                     
                     -- Supprimer un utilisateur    
-                    when 4 then
+                    when 5 then
                         gestionnaire_utilisateurs.supprimer(gestionnaire_emprunts)
                         
                     -- lister les medias    
-                    when 5 then
+                    when 6 then
                         gestionnaire_medias.consulter
                         
                     -- Ajouter un media     
-                    when 6 then
+                    when 7 then
                         gestionnaire_medias.ajouter
                         
                     -- Modifier un média    
-                    when 7 then
+                    when 8 then
                         gestionnaire_medias.mettre_a_jour
                         
                     -- Emprunter    
-                    when 8 then
+                    when 9 then
                         gestionnaire_emprunts.ajouter
                         
                     -- Retour d'emprunt    
-                    when 9 then
+                    when 10 then
                         gestionnaire_emprunts.rendre
+
+					-- Emprunts non rendus à la date fixée
+					when 11 then
+						gestionnaire_emprunts.delais_depasse
                         
                     -- deconnecter
                     when 0 then

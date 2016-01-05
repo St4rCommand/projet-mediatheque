@@ -154,4 +154,29 @@ feature {ANY}
 	        liste_emprunts.remove(liste_emprunts.index_of(p_emprunt, 0))
 	    end
 
+	delais_depasse: ARRAY[EMPRUNT] is
+		local
+			i:INTEGER
+			emprunt_courant:EMPRUNT
+			emprunt_depasse:ARRAY[EMPRUNT]
+			date_retour:TIME_IN_FRENCH
+			date_emprunt:TIME
+		do
+			create emprunt_depasse.make(0,0)
+			create date_emprunt
+            date_emprunt.update
+
+			from i := 1
+			until i = liste_emprunts.count
+			loop
+				emprunt_courant := liste_emprunts.item(i)
+				date_retour := emprunt_courant.get_date_rendu
+				if date_retour.time > date_emprunt then
+					emprunt_depasse.add_last(emprunt_courant)
+				end
+				
+			end
+			Result := emprunt_depasse
+		end
+
 end
