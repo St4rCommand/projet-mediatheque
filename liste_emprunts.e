@@ -151,7 +151,7 @@ feature {ANY}
 		
 	supprimer(p_emprunt : EMPRUNT) is
 	    do
-	        liste_emprunts.remove(liste_emprunts.index_of(p_emprunt, 0)-1)
+	        liste_emprunts.remove(liste_emprunts.index_of(p_emprunt, 0))
 	    end
 
 end

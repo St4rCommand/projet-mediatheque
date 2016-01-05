@@ -136,8 +136,8 @@ feature {ANY}
                         if choix_menu = 0 then
                             autre_emprunt := False
                         else
-                            emprunts.remove(choix_menu)
                             liste_emprunts.supprimer(emprunts.item(choix_menu))
+                            emprunts.remove(choix_menu)
                         end
                         
                         if emprunts.count = 1 then

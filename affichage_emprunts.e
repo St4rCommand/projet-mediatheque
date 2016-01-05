@@ -82,7 +82,7 @@ feature {ANY}
     afficher_autre_rendu is
         do
             io.put_string(" *** %N")
-            io.put_string(" 1 - Supprimer d'autres emprunts %N")
+            io.put_string(" 1 - Rendre des médias pour un autre utilisateur %N")
             io.put_string(" 0 - Quitter%N")
             io.put_string("%N --- %N%N")
         end
@@ -90,7 +90,7 @@ feature {ANY}
     afficher_supprimer_autre_emprunt is
         do
             io.put_string(" *** %N")
-            io.put_string(" 1 - Supprimer un autre emprunt pour cet utilisateur %N")
+            io.put_string(" 1 - Rendre un autre média pour cet utilisateur %N")
             io.put_string(" 0 - Quitter%N")
             io.put_string("%N --- %N%N")
         end
