@@ -1,7 +1,4 @@
-class MEDIA
-
-creation {ANY}
-    nouveau
+deferred class MEDIA
 
 feature {NONE}
 
@@ -15,9 +12,7 @@ feature {ANY}
 
     -- Constructeur vide
     nouveau is
-        do
-            create titre.make_empty
-            nombre := 1
+        deferred
         end
 
     -- Set titre
@@ -58,12 +53,6 @@ feature {ANY}
         
     -- Comparaison
     standard_equal(p_media: MEDIA): BOOLEAN is
-        do            
-            if  p_media.get_titre.as_lower.has_substring(titre.as_lower)
-            then
-                Result := True
-            else
-                Result := False
-            end
+        deferred
         end
 end

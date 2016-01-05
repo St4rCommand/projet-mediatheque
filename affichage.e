@@ -1,4 +1,4 @@
-class AFFICHAGE
+deferred class AFFICHAGE
 
 feature {ANY}
 

@@ -8,9 +8,7 @@ inherit
 	MEDIA
 
     redefine
-        nouveau,
-        to_string,
-        standard_equal
+        to_string
     end 
 
 creation {ANY}
