@@ -7,12 +7,15 @@ feature {NONE}
     -- Liste des emprunts
     liste_emprunts: ARRAY[EMPRUNT]
     
+    delai_emprunt_media: INTEGER
+    
 feature {ANY}
 
     -- Constructeur
-    nouveau is
+    nouveau(delai_emprunt_media:INTEGER) is
         do
             create liste_emprunts.make(0,0)
+            delai_emprunt_media := p_delai_emprunt_media
         end
 
 	-- Lister tous les emprunts	de la médiathèque

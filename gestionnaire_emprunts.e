@@ -23,7 +23,7 @@ feature {ANY}
 
     nouveau(p_gestionnaire_utilisateurs: GESTIONNAIRE_UTILISATEURS ; p_gestionnaire_medias: GESTIONNAIRE_MEDIAS ; p_nombre_emprunts_par_utilisateur: INTEGER ; p_delai_emprunt_media: INTEGER) is
         do
-            create liste_emprunts.nouveau
+            create liste_emprunts.nouveau(delai_emprunt_media)
             create affichage_emprunts.nouveau(p_delai_emprunt_media)
             gestionnaire_utilisateurs := p_gestionnaire_utilisateurs
             gestionnaire_medias := p_gestionnaire_medias

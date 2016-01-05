@@ -72,8 +72,7 @@ feature {ANY}
             create date_rendu
             create date
             date.copy(date_debut.time)
-            --date.add_day(7*delai_emprunt_media)
-            date.add_day(7*4)
+            date.add_day(7*delai_emprunt_media)
             date_rendu.set_time(date)
             date_rendu.set_short_mode(True)
             
