@@ -17,15 +17,18 @@ feature {NONE}
     
     nombre_emprunts_par_utilisateur: INTEGER
     
+    delai_emprunt_media: INTEGER
+    
 feature {ANY}
 
-    nouveau(p_gestionnaire_utilisateurs: GESTIONNAIRE_UTILISATEURS ; p_gestionnaire_medias: GESTIONNAIRE_MEDIAS ; p_nombre_emprunts_par_utilisateur: INTEGER) is
+    nouveau(p_gestionnaire_utilisateurs: GESTIONNAIRE_UTILISATEURS ; p_gestionnaire_medias: GESTIONNAIRE_MEDIAS ; p_nombre_emprunts_par_utilisateur: INTEGER ; p_delai_emprunt_media: INTEGER) is
         do
             create liste_emprunts.nouveau
-            create affichage_emprunts
+            create affichage_emprunts.nouveau(p_delai_emprunt_media)
             gestionnaire_utilisateurs := p_gestionnaire_utilisateurs
             gestionnaire_medias := p_gestionnaire_medias
             nombre_emprunts_par_utilisateur := p_nombre_emprunts_par_utilisateur
+            delai_emprunt_media := p_delai_emprunt_media
         end
    
    -- vérifier que le média peut encore être emprunté

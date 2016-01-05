@@ -64,6 +64,22 @@ feature {ANY}
             Result := date_debut
         end
         
+    get_date_rendu: TIME_IN_FRENCH is
+        local
+            date_rendu: TIME_IN_FRENCH
+            date: TIME
+        do
+            create date_rendu
+            create date
+            date.copy(date_debut.time)
+            --date.add_day(7*delai_emprunt_media)
+            date.add_day(7*4)
+            date_rendu.set_time(date)
+            date_rendu.set_short_mode(True)
+            
+            Result := date_rendu
+        end
+        
 	to_string: STRING is
         do 
             Result := utilisateur.to_string+ " emprunte "+media.to_string

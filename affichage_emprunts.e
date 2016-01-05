@@ -3,7 +3,18 @@ class AFFICHAGE_EMPRUNTS
 inherit 
 	AFFICHAGE
 	
+creation
+    nouveau
+    
+feature {NONE}
+    delai_emprunt_media: INTEGER
+	
 feature {ANY}
+
+    nouveau (p_delai_emprunt_media: INTEGER) is
+        do
+            delai_emprunt_media := p_delai_emprunt_media
+        end
 
     afficher_nouvel_emprunt is
         do
@@ -71,7 +82,7 @@ feature {ANY}
     -- Un seul utilisateur : afficher tous ses emprunts   
     afficher_detail_emprunt(p_emprunt: EMPRUNT) is
         do
-            io.put_string("| "+p_emprunt.get_media.get_titre+" emprunté le "+p_emprunt.get_date_debut.to_string+"%N")
+            io.put_string("| "+p_emprunt.get_media.get_titre+" à rendre le "+p_emprunt.get_date_rendu.to_string+"%N")
         end
         
     afficher_limite_emprunts_atteinte is
