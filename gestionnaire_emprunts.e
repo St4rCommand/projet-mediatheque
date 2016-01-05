@@ -67,11 +67,17 @@ feature {ANY}
                         media := gestionnaire_medias.rechercher_media
                         
                         if media /= Void then
-                            create emprunt.nouveau(utilisateur,media,date_emprunt)
                             
-                            emprunts.add_last(emprunt)
-                        
-                            nombre_emprunts := nombre_emprunts + 1
+                            if liste_emprunts.is_empruntable(media) then
+                                create emprunt.nouveau(utilisateur,media,date_emprunt)
+                                
+                                liste_emprunts.ajouter(emprunt)
+                                emprunts.add_last(emprunt)
+                            
+                                nombre_emprunts := nombre_emprunts + 1
+                            else
+                                affichage_emprunts.afficher_media_indisponible
+                            end
                         end
                         
                         affichage_emprunts.afficher_ajouter_autre_media
@@ -89,7 +95,7 @@ feature {ANY}
                     
                     if emprunts.count > 1 then
                         affichage_emprunts.afficher_emprunts(emprunts)
-                        liste_emprunts.ajouter_liste(emprunts)
+--                        liste_emprunts.ajouter_liste(emprunts)
                     end
                     
                 end

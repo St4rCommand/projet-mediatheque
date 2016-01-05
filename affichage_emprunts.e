@@ -131,5 +131,10 @@ feature {ANY}
             
             io.put_string(" --- %N%N")
         end
+        
+    afficher_media_indisponible is
+        do
+            afficher_message_erreur("Le média que vous avez sélectionné %N *** ne peut pas être emprunté %N *** car il n'est plus disponible")
+        end
 
 end

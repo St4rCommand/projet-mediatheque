@@ -124,6 +124,20 @@ feature {ANY}
 		Result := exemplaire_emprunte
 			
 		end
+		
+	is_empruntable(p_media:MEDIA):BOOLEAN is
+	    local
+	        nb_exemplaires_empruntes: INTEGER
+        do
+            nb_exemplaires_empruntes := nb_exemplaire_emprunte(p_media)
+            
+            if nb_exemplaires_empruntes = p_media.get_nombre then
+                Result := False
+            else
+                Result := True
+            end
+            
+        end
 
 	-- Le nombre d'emprunts pour un utilisateur
 	nombre_emprunts(p_utilisateur: UTILISATEUR):INTEGER is
