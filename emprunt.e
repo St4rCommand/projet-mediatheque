@@ -64,7 +64,7 @@ feature {ANY}
             Result := date_debut
         end
         
-    get_date_rendu: TIME_IN_FRENCH is
+    get_date_rendu(delai_emprunt_media: INTEGER): TIME_IN_FRENCH is
         local
             date_rendu: TIME_IN_FRENCH
             date: TIME

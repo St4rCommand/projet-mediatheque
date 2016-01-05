@@ -12,7 +12,7 @@ feature {NONE}
 feature {ANY}
 
     -- Constructeur
-    nouveau(delai_emprunt_media:INTEGER) is
+    nouveau(p_delai_emprunt_media:INTEGER) is
         do
             create liste_emprunts.make(0,0)
             delai_emprunt_media := p_delai_emprunt_media
@@ -187,7 +187,7 @@ feature {ANY}
 			until i = liste_emprunts.count
 			loop
 				emprunt_courant := liste_emprunts.item(i)
-				date_retour := emprunt_courant.get_date_rendu
+				date_retour := emprunt_courant.get_date_rendu(delai_emprunt_media)
 				if date_retour.time > date_emprunt then
 					emprunt_depasse.add_last(emprunt_courant)
 				end

@@ -85,7 +85,7 @@ feature {ANY}
     -- Un seul utilisateur : afficher tous ses emprunts   
     afficher_detail_emprunt(p_emprunt: EMPRUNT) is
         do
-            io.put_string("| "+p_emprunt.get_media.get_titre+" à rendre le "+p_emprunt.get_date_rendu.to_string+"%N")
+            io.put_string("| "+p_emprunt.get_media.get_titre+" à rendre le "+p_emprunt.get_date_rendu(delai_emprunt_media).to_string+"%N")
         end
         
     afficher_limite_emprunts_atteinte is
