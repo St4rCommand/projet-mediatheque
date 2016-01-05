@@ -192,6 +192,7 @@ feature {ANY}
 					emprunt_depasse.add_last(emprunt_courant)
 				end
 				
+				i := i+1
 			end
 			Result := emprunt_depasse
 		end
