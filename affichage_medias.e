@@ -237,7 +237,7 @@ feature {ANY}
             io.put_string(" Type de média à rechercher : %N%N")
             io.put_string(" 1 - DVD %N")
             io.put_string(" 2 - Livre%N")
-            io.put_string(" 3 - Tout%N")
+            io.put_string(" 3 - Tout (sur le titre uniquement)%N")
             io.put_string("%N 0 - Quitter%N")
         end
         
@@ -316,6 +316,11 @@ feature {ANY}
             io.put_string(" 0 - Continuer%N")
             io.put_string(" 1 - Modifier %N")
             io.put_string(" 2 - Supprimer%N")
+        end
+        
+    afficher_nombre_emprunts_superieur is
+        do
+            afficher_message_erreur("Le nombre d'exemplaire du média ne peut %N *** pas être inférieur au nombre emprunté")
         end
 
 end

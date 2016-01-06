@@ -147,7 +147,7 @@ feature {ANY}
 		end	
 
 	-- Supprimer un utilisateur
-	supprimer(p_gestionnaire_emprunts: GESTIONNAIRE_EMPRUNTS) is
+	supprimer(p_gestionnaire_emprunts: GESTIONNAIRE_EMPRUNTS ; p_utilisateur_courant:UTILISATEUR) is
 		local
 			utilisateur:UTILISATEUR
 			nombre_emprunts:INTEGER
@@ -164,36 +164,43 @@ feature {ANY}
 
 			-- Rechercher l'utilisateur a supprimé
 			utilisateur:= rechercher_utilisateur
-			-- Rechercher si emprunt en cours
-			nombre_emprunts := gestionnaire_emprunts.get_nombre_emprunts(utilisateur)
-			-- Demande de suppression définitive
-			if nombre_emprunts = 0 then
-				-- affichage de la demande définitive
-				from
-				until rep.is_equal("o") or rep.is_equal("n")
-				loop
-					rep:= affichage_utilisateurs.afficher_demande_suppresion
-				end
+			
+			
+			if not (utilisateur = p_utilisateur_courant) then
+			    -- Rechercher si emprunt en cours
+			    nombre_emprunts := gestionnaire_emprunts.get_nombre_emprunts(utilisateur)
+			    -- Demande de suppression définitive
+			    if nombre_emprunts = 0 then
+				    -- affichage de la demande définitive
+				    from
+				    until rep.is_equal("o") or rep.is_equal("n")
+				    loop
+					    rep:= affichage_utilisateurs.afficher_demande_suppresion
+				    end
 
-				if rep.is_equal("o") then
-					identifiant := utilisateur.get_identifiant
-					-- Recherche de la position dans le tableau des utilisateurs
-					position := liste_utilisateurs.position_utilisateur(utilisateur)
+				    if rep.is_equal("o") then
+					    identifiant := utilisateur.get_identifiant
+					    -- Recherche de la position dans le tableau des utilisateurs
+					    position := liste_utilisateurs.position_utilisateur(utilisateur)
 
-					if position /= 0 then
-						utilisateurs := liste_utilisateurs.lister_utilisateurs
-						utilisateurs.remove(position)
-						-- Affichage du message de suppression
-						affichage_utilisateurs.afficher_suppression(identifiant)
-					end
-				else
-					-- Affichage suppression annulée
-					affichage_utilisateurs.afficher_suppression_annulee
-				end
-			else
-				--affichage erreur : emprunt en cours
-				affichage_utilisateurs.afficher_erreur_suppression
-			end
+					    if position /= 0 then
+						    utilisateurs := liste_utilisateurs.lister_utilisateurs
+						    utilisateurs.remove(position)
+						    -- Affichage du message de suppression
+						    affichage_utilisateurs.afficher_suppression(identifiant)
+					    end
+				    else
+					    -- Affichage suppression annulée
+					    affichage_utilisateurs.afficher_suppression_annulee
+				    end
+			    else
+				    --affichage erreur : emprunt en cours
+				    affichage_utilisateurs.afficher_erreur_suppression
+			    end
+		    else
+		        affichage_utilisateurs.afficher_suppression_impossible
+		    end
+		    
 		end
 
 	-- Récupérer un utilisateur par son identifiant	

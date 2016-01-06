@@ -11,6 +11,8 @@ feature {NONE}
     -- Affichage des médias
     affichage_medias: AFFICHAGE_MEDIAS
     
+    gestionnaire_emprunts : GESTIONNAIRE_EMPRUNTS
+    
 feature {ANY}
 
     -- Constructeur
@@ -18,6 +20,11 @@ feature {ANY}
         do
             create liste_medias.nouveau
             create affichage_medias
+        end
+        
+    set_gestionnaire_emprunts(p_gestionnaire_emprunts : GESTIONNAIRE_EMPRUNTS) is
+        do
+            gestionnaire_emprunts:=p_gestionnaire_emprunts
         end
 
     -- Ajouter des médias dans la liste existante
@@ -432,8 +439,18 @@ feature {NONE}
                 p_livre.set_auteur(auteur)
             end
 
-            nombre := affichage_medias.saisir_nombre
-            p_livre.set_nombre(nombre)
+            from
+            until nombre > 0 or nombre = -1
+            loop
+                nombre := affichage_medias.saisir_nombre
+                if nombre > 0 and nombre < gestionnaire_emprunts.get_nombre_emprunts_media(p_livre) then
+                    nombre := 0
+                    affichage_medias.afficher_nombre_emprunts_superieur
+                end
+            end
+            if nombre /= -1 then 
+                p_livre.set_nombre(nombre)
+            end
             
         end
         
@@ -464,6 +481,10 @@ feature {NONE}
             until nombre > 0 or nombre = -1
             loop
                 nombre := affichage_medias.saisir_nombre
+                if nombre > 0 and nombre < gestionnaire_emprunts.get_nombre_emprunts_media(p_dvd) then
+                    nombre := 0
+                    affichage_medias.afficher_nombre_emprunts_superieur
+                end
             end
             if nombre /= -1 then 
                 p_dvd.set_nombre(nombre)

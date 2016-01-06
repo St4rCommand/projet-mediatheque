@@ -140,7 +140,7 @@ feature {ANY}
                     until not autre_emprunt
                     loop
                     
-                        affichage_emprunts.afficher_emprunts(emprunts)
+                        affichage_emprunts.afficher_emprunts_liste(emprunts)
                         choix_menu := affichage_emprunts.saisir_emprunt_selectionne(emprunts.count-1)
                         
                         if choix_menu = 0 then
@@ -196,6 +196,12 @@ feature {ANY}
     get_nombre_emprunts(p_utilisateur : UTILISATEUR): INTEGER is
         do
             Result := liste_emprunts.nombre_emprunts(p_utilisateur)
+        end
+        
+        
+    get_nombre_emprunts_media(p_media: MEDIA): INTEGER is
+        do
+            Result := liste_emprunts.nb_exemplaire_emprunte(p_media)
         end
 
 	delais_depasse is

@@ -17,12 +17,16 @@ feature {ANY}
 
     -- Set titre
     set_titre (p_titre: STRING) is
+        require
+            p_titre.count > 0
         do
             titre := p_titre
         end
 
     -- Set nombre
     set_nombre (p_nombre: INTEGER) is
+        require
+            p_nombre >= 0
         do
             nombre := p_nombre
         end

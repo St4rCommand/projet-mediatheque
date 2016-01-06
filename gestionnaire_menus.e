@@ -33,6 +33,7 @@ feature {ANY}
             create gestionnaire_utilisateurs.nouveau
             create gestionnaire_emprunts.nouveau(gestionnaire_utilisateurs,gestionnaire_medias, nombre_emprunts_par_utilisateur, delai_emprunt_media)
             create affichage_menus
+            gestionnaire_medias.set_gestionnaire_emprunts(gestionnaire_emprunts)
             
             -- Chargement des médias depuis le fichier de données
             create medias_lus.from_collection(gestionnaire_fichier_medias.lire_fichier_medias("medias.txt"))
@@ -135,7 +136,7 @@ feature {ANY}
                     
                     -- Supprimer un utilisateur    
                     when 5 then
-                        gestionnaire_utilisateurs.supprimer(gestionnaire_emprunts)
+                        gestionnaire_utilisateurs.supprimer(gestionnaire_emprunts,utilisateur_connecte)
                         
                     -- lister les medias    
                     when 6 then

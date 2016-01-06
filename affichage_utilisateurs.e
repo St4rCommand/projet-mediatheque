@@ -246,4 +246,9 @@ feature {ANY}
             
             io.put_string(" --- %N%N")
         end
+        
+    afficher_suppression_impossible is
+        do
+            afficher_message_erreur("Vous ne pouvez pas supprimer votre propre compte")
+        end
 end

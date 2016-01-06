@@ -44,24 +44,33 @@ feature {ANY}
         end
     
     afficher_emprunts(p_emprunts: ARRAY[EMPRUNT]) is
+        require
+            p_emprunts.count > 1
+        do
+            io.put_string("  | "+p_emprunts.item(1).get_utilisateur.get_identifiant+" ("+p_emprunts.item(1).get_utilisateur.get_prenom+" "+p_emprunts.item(1).get_utilisateur.get_nom+") emprunte :%N")
+            afficher_emprunts_liste(p_emprunts)
+            io.put_string("  | à rendre le "+p_emprunts.item(1).get_date_rendu(delai_emprunt_media).to_string+"%N")
+            io.put_string("%N ****** %N%N")
+        end
+        
+    afficher_emprunts_liste(p_emprunts: ARRAY[EMPRUNT]) is
         local
-            i:INTEGER
+            i: INTEGER
             emprunt_courant: EMPRUNT
         do
             from i := 1
             until i = p_emprunts.count
             loop
                 emprunt_courant := p_emprunts.item(i)
-                io.put_string(i.to_string+"| ")
+                io.put_string(i.to_string+" | ")
                 afficher_emprunt(emprunt_courant)
                 i := i+1 
             end
-            io.put_string("%N ****** %N%N")
         end
         
     afficher_emprunt(p_emprunt: EMPRUNT) is
         do
-            io.put_string(p_emprunt.get_utilisateur.get_identifiant+" emprunte "+p_emprunt.get_media.get_titre+"%N")
+            io.put_string(p_emprunt.get_media.get_titre+"%N")
         end
 
 	-- les emprunts pour un utilisateur
