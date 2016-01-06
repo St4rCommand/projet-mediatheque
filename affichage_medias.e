@@ -29,10 +29,8 @@ feature {NONE}
         
 feature {ANY}
 
-    --
-    -- Fonction de saisie
-    --
-        
+    ---
+    --- Fonction de saisie
     saisir_titre: STRING is
         local
             titre: STRING
@@ -43,7 +41,9 @@ feature {ANY}
             
             Result := titre
         end
-        
+
+    ---
+    --- Saisir le nombre d'exemplaires        
     saisir_nombre: INTEGER is
         local
             nombre: STRING
@@ -67,7 +67,9 @@ feature {ANY}
                 Result := -1
             end
         end
-        
+
+    ---
+    --- Saisir l'auteur        
     saisir_auteur: STRING is
         local
             auteur: STRING
@@ -78,7 +80,9 @@ feature {ANY}
             
             Result := auteur
         end
-        
+
+    ---
+    --- Saisir l'année       
     saisir_annee: INTEGER is
         local
             annee: STRING
@@ -87,21 +91,24 @@ feature {ANY}
             
             io.put_string(" Saisir l'année : ")
             annee.copy(saisir_string)
-        
+
+            --- possibilité de saisir un champs vide
             from
             until annee.is_integer or annee.is_empty
             loop
                 io.put_string(" Saisir l'année : ")
                 annee.copy(saisir_string)
             end
-            
+            --- Vérification si l'année est un entier
             if annee.is_integer then           
                 Result := annee.to_integer
             else
                 Result := -1
             end
         end
-        
+      
+    ---
+    --- Saisir le réalisateur  
     saisir_realisateur: STRING is
         local
             realisateur: STRING
@@ -112,7 +119,9 @@ feature {ANY}
             
             Result := realisateur
         end
-        
+
+    ---
+    --- Saisir l'acteur       
     saisir_acteur: STRING is
         local
             acteur: STRING
@@ -123,7 +132,9 @@ feature {ANY}
             
             Result := acteur
         end
-        
+
+    ---
+    --- Saisir le type du DVD       
     saisir_type_dvd: STRING is
         local
             type: STRING
@@ -134,7 +145,9 @@ feature {ANY}
             
             Result := type
         end
-        
+
+    ---
+    --- Saisir le choix du média       
     saisir_media_selectionne(choix_max: INTEGER): INTEGER is
         local
             choix: STRING
@@ -158,7 +171,7 @@ feature {ANY}
     -- Fonction d'affichage
     --
         
-	-- Afficher une liste de médias en les affichant 1 par 1
+	--- Afficher une liste de médias en les affichant 1 par 1
     afficher_medias(p_medias: ARRAY[MEDIA]) is
         local
             i: INTEGER
@@ -216,22 +229,30 @@ feature {ANY}
             io.put_string("| Acteurs : "+tableau_to_string(p_dvd.get_acteurs)+"%N")
             io.put_string("%N")
         end
-        
+
+    ---
+    --- Titre de la fonctionnalité rechercher        
     afficher_recherche_debut is
         do
             io.put_string(" *** Rechercher des médias *** %N%N")
         end
-    
+
+    ---
+    --- Titre de la fonctionnalité rechercher DVD    
     afficher_menu_recherche_dvd is
         do
             io.put_string(" *** Rechercher des DVD *** %N%N")
         end
     
+    ---
+    --- Titre de la fonctionnalité rechercher livre
     afficher_menu_recherche_livre is
         do
             io.put_string(" *** Rechercher des livres *** %N%N")
         end
         
+    ---
+    --- Menu de la focntionnalité rechercher 
     afficher_recherche_menu_type is
         do
             io.put_string(" Type de média à rechercher : %N%N")
@@ -240,7 +261,9 @@ feature {ANY}
             io.put_string(" 3 - Tout (sur le titre uniquement)%N")
             io.put_string("%N 0 - Quitter%N")
         end
-        
+     
+    ---
+    --- Afficher une liste de médias  
     afficher_recherche_resultats(medias: ARRAY[MEDIA]) is
         local
             i: INTEGER
@@ -268,11 +291,15 @@ feature {ANY}
             io.put_string("%N --- %N")
         end
         
+    ---
+    --- Fin de la fonctionnalité recherche
     afficher_recherche_fin is
         do
             io.put_string("%N ****** %N%N")
         end
         
+    ---
+    --- Menu de la fonctionnalité ajouter
     afficher_creer_menu_type is
         do
             io.put_string(" Type de média à créer : %N%N")
@@ -281,6 +308,8 @@ feature {ANY}
             io.put_string("%N 0 - Quitter%N")
         end
         
+    ---
+    --- Faire un nouveau choix sur la fonction ajout
     afficher_ajout_suivant is
         do
             io.put_string(" *** %N")
@@ -288,6 +317,8 @@ feature {ANY}
             io.put_string("%N 0 - Quitter%N")
         end
         
+    ---
+    --- Menu pour ajouter un realisateur 
     afficher_saisir_autre_realisateur is
         do
             io.put_string(" Ajouter un autre réalisateur :%N%N")
@@ -295,6 +326,8 @@ feature {ANY}
             io.put_string(" 0 - Non%N")
         end
     
+    ---
+    --- Menu pour ajouter un acteur 
     afficher_saisir_autre_acteur is
         do
             io.put_string(" Ajouter un autre acteur : %N%N")
@@ -302,6 +335,8 @@ feature {ANY}
             io.put_string(" 0 - Non%N")
         end
         
+    ---
+    --- Menu pour modifier un realisateur 
     afficher_modifier_dvd_menu_realisateur(p_realisateur: STRING) is
         do
             io.put_string(" Réalisateur "+p_realisateur+" : %N%N")
@@ -309,7 +344,9 @@ feature {ANY}
             io.put_string(" 1 - Modifier %N")
             io.put_string(" 2 - Supprimer%N")
         end
-        
+      
+    ---
+    --- Menu pour modifier un acteur  
     afficher_modifier_dvd_menu_acteur(p_acteur: STRING) is
         do
             io.put_string(" Acteur "+p_acteur+" : %N%N")
@@ -318,6 +355,8 @@ feature {ANY}
             io.put_string(" 2 - Supprimer%N")
         end
         
+    ---
+    --- Message d'erreur pour la modification du nombre d'exemplaire
     afficher_nombre_emprunts_superieur is
         do
             afficher_message_erreur("Le nombre d'exemplaire du média ne peut %N *** pas être inférieur au nombre emprunté")

@@ -63,7 +63,8 @@ feature {ANY}
         do
             Result := date_debut
         end
-        
+    
+    --- Calcul de la date de rendu de l'emprunt    
     get_date_rendu(delai_emprunt_media: INTEGER): TIME_IN_FRENCH is
         local
             date_rendu: TIME_IN_FRENCH
@@ -78,7 +79,8 @@ feature {ANY}
             
             Result := date_rendu
         end
-        
+    
+    --- Affichage type    
 	to_string: STRING is
         do 
             Result := utilisateur.to_string+ " emprunte "+media.to_string

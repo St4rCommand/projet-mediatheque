@@ -82,7 +82,9 @@ feature {ANY}
             
             Result := choix_sous_menu.to_integer
         end
-        
+
+    ---
+    --- Menu pour pour le client        
     afficher_menu_principal_client:INTEGER is
          local
             choix_sous_menu:STRING
@@ -109,6 +111,8 @@ feature {ANY}
             Result := choix_sous_menu.to_integer
         end
         
+    ---
+    --- Erreur pour le choix de menu 
     afficher_erreur_saisie_menu is
         do
             afficher_message_erreur("Le choix du menu ne correspond à aucune option")
@@ -119,6 +123,8 @@ feature {ANY}
         
         end
         
+    ---
+    --- Fin de l'application 
     afficher_sortie_programme is
         do
             io.put_string("================================%N")
@@ -126,6 +132,8 @@ feature {ANY}
             io.put_string("================================%N%N")
         end
         
+    ---
+    --- Saisir l'identifiant pour la connexion 
 	saisir_identifiant: STRING is
         local
             identifiant:STRING
@@ -140,34 +148,37 @@ feature {ANY}
             io.put_string("%N ****** %N%N")
         end
         
+    ---
+    --- Erreur du choix de l'identifiant 
     afficher_saisie_identifiant_incorrecte is
         do
             afficher_message_erreur("Aucun utilisateur ne correspond à cet identifiant")
         end
         
-    afficher_menu_medias: INTEGER is
-        local
-            choix_menu:STRING
-        do
-            choix_menu := ""
+ 
+--    afficher_menu_medias: INTEGER is
+--        local
+--            choix_menu:STRING
+--        do
+--            choix_menu := ""
         
-            io.put_string(" *** Accueil *** %N%N")
-            io.put_string(" 1 - Consulter %N")
-            io.put_string(" 2 - Ajouter%N")
-            io.put_string(" 3 - Modifier%N")
-            io.put_string("%N 0 - Quitter%N")
+--            io.put_string(" *** Accueil *** %N%N")
+--            io.put_string(" 1 - Consulter %N")
+--            io.put_string(" 2 - Ajouter%N")
+--            io.put_string(" 3 - Modifier%N")
+--            io.put_string("%N 0 - Quitter%N")
             
-            from
-            until choix_menu.is_integer
-            loop
-                io.put_string(" Choix : ")
-                io.read_line
-                choix_menu := io.last_string
-            end
+--            from
+--            until choix_menu.is_integer
+--            loop
+--                io.put_string(" Choix : ")
+--                io.read_line
+--                choix_menu := io.last_string
+--            end
             
-            io.put_string("%N ****** %N%N")
+--            io.put_string("%N ****** %N%N")
             
-            Result := choix_menu.to_integer
-        end
+--            Result := choix_menu.to_integer
+--        end
        
 end

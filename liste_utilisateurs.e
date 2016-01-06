@@ -52,6 +52,7 @@ feature {ANY}
             end
 	    end
 		
+    --- Retourne l'utilisateur qui a l'identifiant en paramètre
 	get_utilisateur(p_identifiant : STRING):UTILISATEUR is
 		local
 			i : INTEGER	
@@ -72,6 +73,7 @@ feature {ANY}
 			end
 		end
 
+    --- Retourne la position de l'utilisateur dans la liste des utilisateurs
 	position_utilisateur(p_utilisateur:UTILISATEUR):INTEGER is
 		local
 			i:INTEGER
@@ -93,7 +95,7 @@ feature {ANY}
 
 		end
 
-
+    --- Rechercher des administrateurs
 	rechercher_admin(p_identifiant: STRING; p_nom:STRING; p_prenom:STRING; p_admin:BOOLEAN):ARRAY[UTILISATEUR] is
 		local
 			admin_courant: UTILISATEUR
@@ -122,6 +124,7 @@ feature {ANY}
             Result := admin_trouves
 		end
 
+    --- Rechercher des clients
 	rechercher_client(p_identifiant: STRING; p_nom:STRING; p_prenom:STRING; p_admin:BOOLEAN):ARRAY[UTILISATEUR] is
 		local
 			client_courant: UTILISATEUR

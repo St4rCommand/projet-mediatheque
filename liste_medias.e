@@ -77,6 +77,7 @@ feature {ANY}
             Result := medias_trouves
         end
         
+    --- Rechercher un dvd
     rechercher_dvd(p_titre: STRING; p_annee: INTEGER; p_realisateur: STRING; p_acteur:STRING): ARRAY[MEDIA] is
         local
             dvd_trouves: ARRAY[MEDIA]
@@ -104,7 +105,8 @@ feature {ANY}
             
             Result := dvd_trouves
         end
-        
+
+    --- Rechercher un livre        
     rechercher_livre(p_titre: STRING; p_auteur: STRING): ARRAY[MEDIA] is
         local
             livres_trouves: ARRAY[MEDIA]
@@ -131,15 +133,10 @@ feature {ANY}
             Result := livres_trouves
         end
         
+    --- Retourne une liste de médias
     rechercher_media: ARRAY[MEDIA] is
         do
             Result := liste_medias
         end
-
-    -- Obtenir
-    --Obtenir_media:MEDIA is
-    --    do
-    --
-    --    end
         
 end

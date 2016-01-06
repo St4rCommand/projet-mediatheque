@@ -10,7 +10,8 @@ feature {ANY}
 ----
 -- Afficher
 ----
-        
+
+    --- Afficher une liste d'utilisateurs    
     afficher_utilisateurs(p_utilisateurs: ARRAY[UTILISATEUR]) is
         local
             i: INTEGER
@@ -25,7 +26,8 @@ feature {ANY}
 				i := i+1
 		    end
         end
-        
+    
+    --- Afficher un utilisateur    
     afficher_utilisateur(p_utilisateur: UTILISATEUR) is
         do
             io.put_string("| Identifiant : "+p_utilisateur.get_identifiant+"%N")
@@ -39,22 +41,26 @@ feature {ANY}
             io.put_string("%N")
         end
         
+    --- Confirmation de l'ajout d'un utilisateur
     afficher_nouvel_utilisateur_cree(p_utilisateur : UTILISATEUR) is
         do
             io.put_string("%N%N Utilisateur créé :%N")
             afficher_utilisateur(p_utilisateur)
         end
-        
+    
+    --- Titre fonctionnalité ajout utilisateur    
     afficher_nouvel_utilisateur is
         do
             io.put_string(" *** Nouvel Utilisateur *** %N%N")
         end
 
+    --- Titre fonctionnalité supprimer utilisateur 
 	afficher_suppression_debut is
 		do
 			io.put_string(" *** Suppression d'un utilisateur *** %N%N")
 		end
 
+    ---Question pour le choix de suppression 
 	afficher_demande_suppresion : STRING is
 		local
 			choix : STRING
@@ -67,31 +73,37 @@ feature {ANY}
 			
 		end
 
+    --- Confirmation de la suppression d'un utilisateur
 	afficher_suppression(p_identifiant:STRING) is
 		do
 			io.put_string(" *** L'utilisateur : " +p_identifiant+ " a été supprimé *** %N%N")
 		end
 
+    --- Suppression de l'utilisateur annulée
 	afficher_suppression_annulee is
         do
             io.put_string(" *** Suppression annulée *** %N%N")
         end
 	
+    --- Suppression impossible 
 	afficher_erreur_suppression is
         do
             io.put_string(" *** Suppression impossible : emprunts en cours *** %N%N")
         end
 
+    --- Titre consultation des utilisateurs
     afficher_consultation is
         do
             io.put_string(" *** Consulter utilisateur *** %N%N")
         end
-        
+
+    --- Fin des fonctions        
     afficher_fin_nouvel_utilisateur is
         do
 			io.put_string(" ****** %N%N")
         end
         
+    --- Erreur lors de l'ajout d'un utilisateur
     afficher_identifiant_existe is
         do
             io.put_string(" ***%N")
@@ -99,6 +111,7 @@ feature {ANY}
             io.put_string(" ***%N%N")
         end
         
+    --- Erreur orthographique de l'identifiant dans l'ajout d'un utilisateur
     afficher_identifiant_incorrect is
         do
             io.put_string(" ***%N")
@@ -106,6 +119,7 @@ feature {ANY}
             io.put_string(" ***%N%N")
         end
 
+    --- Message lorsqu'un champ doit être rempli mais est à vide
     champ_vide is
         do
             io.put_string(" ***%N")
@@ -113,26 +127,31 @@ feature {ANY}
             io.put_string(" ***%N%N")
         end
 
+    --- Titre fonctionnalité recherche
  	afficher_recherche_debut is
         do
             io.put_string(" *** Rechercher des utilisateurs *** %N%N")
         end
 
+    --- Titre fonctionnalité recherche des admins
  	afficher_recherche_admin is
         do
             io.put_string(" *** Rechercher des administrateurs *** %N%N")
         end
 
+    --- Titre fonctionnalité recherche des clients
  	afficher_recherche_client is
         do
             io.put_string(" *** Rechercher des clients *** %N%N")
         end
  
+    --- Fin fonctionnalité
     afficher_recherche_fin is
         do
             io.put_string("%N ****** %N%N")
         end   
         
+    --- Menu de la recherche
     afficher_recherche_menu_type is
         do
             io.put_string(" Type d'utilisateurs à rechercher : %N%N")
@@ -140,7 +159,8 @@ feature {ANY}
             io.put_string(" 2 - Client%N")
             io.put_string("%N 0 - Quitter%N")
         end
-        
+      
+    --- Afficher une liste d'utilisateur  
     afficher_recherche_resultats(utilisateurs: ARRAY[UTILISATEUR]) is
         local
             i: INTEGER
@@ -162,11 +182,13 @@ feature {ANY}
             io.put_string("%N --- %N")
         end
 
+    --- Titre fonctionnalité info du compte
     info_debut is
         do
             io.put_string(" *** Mon compte client *** %N%N")
         end
 
+    --- Titre fonction emprunts
     emprunt_debut is
         do
            io.put_string(" *** Mes emprunts *** %N%N") 
@@ -176,6 +198,7 @@ feature {ANY}
 -- Saisie
 ----
 
+    --- Saisir un identifiant
 	saisir_identifiant: STRING is
         local
             identifiant:STRING
@@ -184,7 +207,8 @@ feature {ANY}
             io.put_string(" Saisir votre identifiant : ")
             io.read_line
             identifiant := io.last_string
-	       
+
+	        --- On enlève les blancs avant et aprés la saisie
 	        identifiant.left_adjust
 	        identifiant.right_adjust
            
@@ -192,6 +216,7 @@ feature {ANY}
             Result := identifiant
         end
 
+    --- Saisir un nom
 	saisir_nom: STRING is
         local
             nom:STRING
@@ -204,6 +229,7 @@ feature {ANY}
             Result := nom
         end
 
+    --- Saisir un prénom
 	saisir_prenom: STRING is
         local
             prenom:STRING
@@ -216,6 +242,7 @@ feature {ANY}
             Result := prenom
         end
 
+    --- Choix du type de l'utilisateur
 	saisir_admin: STRING is
         local
             rep:STRING
@@ -228,6 +255,7 @@ feature {ANY}
             Result := rep
         end
 
+    --- Saisir choix de l'utilisateur
     saisir_utilisateur_selectionne(choix_max: INTEGER): INTEGER is
         local
             choix: STRING
@@ -246,7 +274,8 @@ feature {ANY}
             
             io.put_string(" --- %N%N")
         end
-        
+
+    --- Erreur lors de la suppression d'un compte courant        
     afficher_suppression_impossible is
         do
             afficher_message_erreur("Vous ne pouvez pas supprimer votre propre compte")

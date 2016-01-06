@@ -76,12 +76,14 @@ feature {ANY}
         do
             acteurs.append_collection(p_acteurs)
         end
-        
+
+    -- Ajout d'un réalisateur à la liste des réalisateurs    
     add_realisateur (p_realisateur: STRING) is
         do
             realisateurs.add_last(p_realisateur)
         end
     
+    -- Ajout d'un acteur à la liste des acteurs
     add_acteur (p_acteur: STRING) is
         do
             acteurs.add_last(p_acteur)
@@ -111,7 +113,7 @@ feature {ANY}
             Result := acteurs
         end
         
-     
+    --- Vérifier si le réalisateur fait parti de la liste des réalisateurs 
     has_realisateur(p_realisateur: STRING):BOOLEAN is
         local
             i: INTEGER
@@ -129,6 +131,7 @@ feature {ANY}
             end
         end
         
+    --- Vérifier si l'acteur fait parti de la liste des acteurs 
     has_acteur(p_acteur: STRING):BOOLEAN is
         local
             i: INTEGER
@@ -146,7 +149,8 @@ feature {ANY}
             end
             
         end
-        
+    
+    --- Vérifier l'année     
     has_annee(p_annee: INTEGER):BOOLEAN is
         do
             if p_annee = -1 or p_annee = annee then

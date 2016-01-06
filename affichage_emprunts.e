@@ -125,25 +125,32 @@ feature {ANY}
         end
         
     ---
+    --- Menu pour savoir l'action suivante à faire
     afficher_autre_rendu is
         do
             io.put_string(" *** %N")
             io.put_string(" 1 - Rendre des médias pour un autre utilisateur %N")
             io.put_string(" 0 - Quitter%N")
         end
-        
+    
+    ---
+    --- Menu pour savoir l'action suivante à faire    
     afficher_supprimer_autre_emprunt is
         do
             io.put_string(" *** %N")
             io.put_string(" 1 - Rendre un autre média pour cet utilisateur %N")
             io.put_string(" 0 - Quitter%N")
         end
-        
+
+    ---
+    --- Message pour indiquer que l'utilisateur n'a pas d'emprunt à rendre   
     afficher_aucun_emprunt is
         do
             afficher_message_erreur("Aucun emprunt à supprimer pour cet utilisateur")
         end
-        
+    
+    ---
+    --- Saisir le choix d'un emprunt    
     saisir_emprunt_selectionne(choix_max: INTEGER): INTEGER is
         local
             choix: STRING
@@ -163,17 +170,23 @@ feature {ANY}
             
             io.put_string(" --- %N%N")
         end
-        
+    
+    ---
+    --- Message d'erreur pour l'indisponibilité d'un média    
     afficher_media_indisponible is
         do
             afficher_message_erreur("Le média que vous avez sélectionné %N *** ne peut pas être emprunté %N *** car il n'est plus disponible")
         end
-        
+    ---
+    --- Message quand il n'y a aucun emprunts en retard    
     afficher_aucun_retard is
         do
             io.put_string(" | Aucun emprunt n'est en retard%N%N")
         end
-        
+    
+
+    ---
+    --- Affichage du message dans les infos du compte pour les emprunts en cours    
     afficher_aucun_emprunt_utilisateur is
     do
         io.put_string(" | Aucun emprunt%N%N")

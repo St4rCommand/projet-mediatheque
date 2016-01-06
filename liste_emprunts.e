@@ -37,10 +37,6 @@ feature {ANY}
             until i = liste_emprunts.count
             loop
                 emprunt_courant := liste_emprunts.item(i)
-                
-                --if emprunt_courant /= Void
-               -- and then emprunt_courant.get_utilisateur.has_substring(p_utilisateur)
-                --and then emprunt_courant.get_utilisateur = p_utilisateur
                 if emprunt_courant.get_utilisateur = p_utilisateur
                 then
                     emprunt_trouves.add_last(emprunt_courant)
@@ -112,10 +108,6 @@ feature {ANY}
 
 				-- Recherche du type du media de l'emprunt consulté
                 type_courant := type_media(emprunt_courant.get_media)
-
---                if emprunt_courant /= Void
---				and then type_recherche.is_equal(type_courant)
---                and then emprunt_courant.get_media.has_substring(p_media)
                 if emprunt_courant.get_media = p_media
                 then
 					-- Le média a été emprunté
@@ -127,7 +119,8 @@ feature {ANY}
 		Result := exemplaire_emprunte
 			
 		end
-		
+
+    --- Verifier si un média peut être emprunté		
 	is_empruntable(p_media:MEDIA):BOOLEAN is
 	    local
 	        nb_exemplaires_empruntes: INTEGER
@@ -165,12 +158,14 @@ feature {ANY}
             
             Result := nombre_emprunt
 		end
-		
+
+    --- Supprimer un emprunt		
 	supprimer(p_emprunt : EMPRUNT) is
 	    do
 	        liste_emprunts.remove(liste_emprunts.index_of(p_emprunt, 0))
 	    end
 
+    --- Les emprunts qui sont en retard
 	delais_depasse: ARRAY[EMPRUNT] is
 		local
 			i:INTEGER
@@ -188,6 +183,7 @@ feature {ANY}
 			loop
 				emprunt_courant := liste_emprunts.item(i)
 				date_retour := emprunt_courant.get_date_rendu(delai_emprunt_media)
+                --- Selection de l'emprunt si la date de retour est supérieur à la date du jour
 				if date_retour.time > date_emprunt then
 					emprunt_depasse.add_last(emprunt_courant)
 				end
