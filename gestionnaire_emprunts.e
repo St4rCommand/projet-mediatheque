@@ -47,6 +47,7 @@ feature {ANY}
             create emprunts.make(0,0)
             create date_emprunt
             date_emprunt.update
+--            date_emprunt.add_day(7*4)
             autre_emprunt := True
                  
             from
