@@ -49,16 +49,23 @@ feature {ANY}
             nombre: STRING
         do
             create nombre.make_empty
+            
+            io.put_string(" Saisir le nombre d'exemplaires : ")
+            nombre.copy(saisir_string)
         
             from
-            until nombre.is_integer
+            until nombre.is_integer or nombre.is_empty
             loop
                 nombre.make_empty
                 io.put_string(" Saisir le nombre d'exemplaires : ")
                 nombre.copy(saisir_string)
             end
             
-            Result := nombre.to_integer
+            if nombre.is_integer then           
+                Result := nombre.to_integer
+            else
+                Result := -1
+            end
         end
         
     saisir_auteur: STRING is

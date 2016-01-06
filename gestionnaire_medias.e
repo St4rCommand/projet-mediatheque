@@ -286,10 +286,14 @@ feature {NONE}
             dvd: DVD
             realisateur: STRING
             acteur: STRING
+            date: TIME
         do
             create titre.make_empty
             create type.make_empty
+            create date
+            date.update
             annee := -1
+            nombre := -1
             
             from
             until not titre.is_empty
@@ -298,7 +302,7 @@ feature {NONE}
             end            
             
             from
-            until annee /= -1
+            until annee /= -1 and annee > 1888 and annee < date.year
             loop
                 annee := affichage_medias.saisir_annee
             end
@@ -306,8 +310,12 @@ feature {NONE}
 
             type := affichage_medias.saisir_type_dvd
 
-
-            nombre := affichage_medias.saisir_nombre
+            from
+            until nombre > 0
+            loop
+                nombre := affichage_medias.saisir_nombre
+            end
+            
             
             create realisateurs.make(0,0)
             continuer:=1
@@ -440,7 +448,10 @@ feature {NONE}
             nombre: INTEGER
             i: INTEGER
             choix_menu: INTEGER
+            date: TIME
         do
+            create date
+            date.update
         
             affichage_medias.afficher_media(p_dvd)
             
@@ -449,10 +460,20 @@ feature {NONE}
                 p_dvd.set_titre(titre)
             end
             
-            nombre := affichage_medias.saisir_nombre
-            p_dvd.set_nombre(nombre)
+            from
+            until nombre > 0 or nombre = -1
+            loop
+                nombre := affichage_medias.saisir_nombre
+            end
+            if nombre /= -1 then 
+                p_dvd.set_nombre(nombre)
+            end
             
-            annee := affichage_medias.saisir_annee
+            from
+            until annee /= -1 and annee > 1888 and annee < date.year
+            loop
+                annee := affichage_medias.saisir_annee
+            end
             if annee /= -1 then
                 p_dvd.set_annee(annee)
             end
