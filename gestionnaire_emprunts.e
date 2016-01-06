@@ -1,5 +1,9 @@
 class GESTIONNAIRE_EMPRUNTS
 
+---
+--- Gestionnaire des emprunts
+---
+
 creation {ANY}
     nouveau
     
@@ -11,17 +15,23 @@ feature {NONE}
     -- Affichage des médias
     affichage_emprunts: AFFICHAGE_EMPRUNTS
     
+    -- Gestionnaire des utilisateurs
     gestionnaire_utilisateurs: GESTIONNAIRE_UTILISATEURS
     
+    -- Gestionnaire des médias
     gestionnaire_medias: GESTIONNAIRE_MEDIAS
     
+    -- Nombre d'emprunts maximum par utilisateur
     nombre_emprunts_par_utilisateur: INTEGER
     
+    -- Délai maximum d'un emprunt (en semaines)
     delai_emprunt_media: INTEGER
     
 feature {ANY}
 
     nouveau(p_gestionnaire_utilisateurs: GESTIONNAIRE_UTILISATEURS ; p_gestionnaire_medias: GESTIONNAIRE_MEDIAS ; p_nombre_emprunts_par_utilisateur: INTEGER ; p_delai_emprunt_media: INTEGER) is
+        require
+            p_delai_emprunt_media > 0
         do
             create liste_emprunts.nouveau(delai_emprunt_media)
             create affichage_emprunts.nouveau(p_delai_emprunt_media)
@@ -29,9 +39,12 @@ feature {ANY}
             gestionnaire_medias := p_gestionnaire_medias
             nombre_emprunts_par_utilisateur := p_nombre_emprunts_par_utilisateur
             delai_emprunt_media := p_delai_emprunt_media
+        ensure
+            delai_emprunt_media > 0
         end
    
-   -- vérifier que le média peut encore être emprunté
+    ---
+    --- Créer un emprunt
     ajouter is
         local
             emprunts: ARRAY[EMPRUNT]
@@ -57,11 +70,15 @@ feature {ANY}
                 
                 affichage_emprunts.afficher_nouvel_emprunt
                 
+                -- Sélection de l'utilisateur
                 utilisateur := gestionnaire_utilisateurs.rechercher_utilisateur
                 
                 if utilisateur /= Void then
+                    
+                    -- Récupération du nombre d'emprunts déjà effectués par cet utilisateur
                     nombre_emprunts := liste_emprunts.nombre_emprunts(utilisateur)
                     
+                    -- Sélection des médias
                     from
                     until not autre_media or nombre_emprunts = nombre_emprunts_par_utilisateur
                     loop
@@ -96,7 +113,6 @@ feature {ANY}
                     
                     if emprunts.count > 1 then
                         affichage_emprunts.afficher_emprunts(emprunts)
---                        liste_emprunts.ajouter_liste(emprunts)
                     end
                     
                 end
@@ -111,7 +127,9 @@ feature {ANY}
             end
         
         end
-        
+    
+    ---
+    --- Rendre un média suite à un emprunt
     rendre is
         local
             emprunts: ARRAY[EMPRUNT]
@@ -130,12 +148,15 @@ feature {ANY}
                 
                 affichage_emprunts.afficher_nouveau_rendu
                 
+                -- Sélection de l'utilisateur
                 utilisateur := gestionnaire_utilisateurs.rechercher_utilisateur
                 
                 if utilisateur /= Void then
                 
+                    -- Recherche des emprunts de l'utilisateur
                     emprunts := liste_emprunts.rechercher_emprunt(utilisateur)
                     
+                    -- Sélection du ou des emprunts à supprimer
                     from
                     until not autre_emprunt
                     loop
@@ -177,12 +198,15 @@ feature {ANY}
         
         end
         
+    ---
+    --- Récuperer et afficher les emprunts de l'utilisateur
     emprunts_utilisateur(p_utilisateur:UTILISATEUR) is
         local
             emprunts: ARRAY[EMPRUNT]
         do
             create emprunts.make(0,0)
             
+            -- Récupération des emprunts de l'utilisateur
             emprunts := liste_emprunts.rechercher_emprunt(p_utilisateur)
             
             if emprunts.count > 1 then
@@ -192,18 +216,23 @@ feature {ANY}
                 affichage_emprunts.afficher_aucun_emprunt_utilisateur
             end
         end
-        
+    
+    ---
+    --- Récupérer le nombre d'emprunts de l'utilisateur
     get_nombre_emprunts(p_utilisateur : UTILISATEUR): INTEGER is
         do
             Result := liste_emprunts.nombre_emprunts(p_utilisateur)
         end
         
-        
+    ---
+    --- Récupérer le nombre d'emprunts d'un média
     get_nombre_emprunts_media(p_media: MEDIA): INTEGER is
         do
             Result := liste_emprunts.nb_exemplaire_emprunte(p_media)
         end
 
+    ---
+    --- Récuperer et afficher les emprunts dont la date de rendu est dépassée
 	delais_depasse is
 		local
 			emprunts_depasses : ARRAY[EMPRUNT]
@@ -219,13 +248,4 @@ feature {ANY}
 		    end
 			
 		end
-         
-feature {NONE}
-
-    
-        
-    rechercher_media: MEDIA is
-        local
-        do
-        end    
 end

@@ -1,9 +1,13 @@
 deferred class GESTIONNAIRE_FICHIER_DONNEES
 
+---
+--- Classe abstraite d'interaction avec les fichiers de données
+---
+
 feature {NONE} 
 
-    -- Lire un attribut d'une ligne d'un fichier
-    -- Renvoie une chaine vide si l'attribut n'existe pas
+    ---
+    --- Lire un attribut d'une ligne d'un fichier
     lire_attribut(ligne: STRING; attribut: STRING): STRING is
         local 
             index: INTEGER
@@ -17,7 +21,8 @@ feature {NONE}
             end
         end
 
-    -- Lire toutes les occurences d'un attribut sur une ligne
+    ---
+    --- Lire toutes les occurences d'un attribut sur une ligne
     lire_attribut_multiple(ligne: STRING; attribut: STRING): ARRAY[STRING] is
         local
             index: INTEGER

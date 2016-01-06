@@ -1,11 +1,16 @@
 class GESTIONNAIRE_FICHIER_UTILISATEURS
 
+---
+--- Classe pour l'interaction avec le fichier utilisateurs
+---
+
 inherit
        GESTIONNAIRE_FICHIER_DONNEES
 
 feature {ANY}
-              
-    -- Lecture du fichier utilisateurs.txt  
+       
+    ---      
+    --- Lecture du fichier de données utilisateurs
     lire_fichier_utilisateurs(fichier:STRING): ARRAY[UTILISATEUR] is
         local
             file_read: TEXT_FILE_READ
@@ -57,7 +62,8 @@ feature {ANY}
         
 feature {NONE}
 
-    -- Lecture d'un utilisateur (une ligne du fichier utilisateurs.txt)
+    ---
+    --- Lecture d'un utilisateur
     lire_utilisateur(cdc_utilisateur: STRING): UTILISATEUR is
         local
             utilisateur: UTILISATEUR

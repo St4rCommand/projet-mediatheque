@@ -1,9 +1,14 @@
 class GESTIONNAIRE_UTILISATEURS
 
+---
+--- Gestionnaire des utilisateurs
+---
+
 creation {ANY}
     nouveau
 
 feature {NONE}
+
     -- Liste des utilisateurs
     liste_utilisateurs: LISTE_UTILISATEURS
 
@@ -12,14 +17,14 @@ feature {NONE}
     
 feature {ANY}
 
-    -- Constructeur
     nouveau is
         do
             create liste_utilisateurs.nouveau
             create affichage_utilisateurs
         end
 
-    -- Lister les utilisateurs
+    ---
+    --- Lister les utilisateurs
     lister_utilisateurs is
        local
             utilisateurs: ARRAY[UTILISATEUR]
@@ -28,21 +33,24 @@ feature {ANY}
             affichage_utilisateurs.afficher_utilisateurs(utilisateurs)
         end
 
-    -- Ajouter un utilisateur avec en entrée l'utilisateur
+    ---
+    --- Ajouter un utilisateur avec en entrée l'utilisateur
     ajouter_utilisateur(p_utilisateur:UTILISATEUR) is
         do
             liste_utilisateurs.ajouter(p_utilisateur)
 			affichage_utilisateurs.afficher_utilisateur(p_utilisateur)
 			
         end
-        
-    -- Ajouter des utilisateurs
+       
+    ---
+    --- Ajouter des utilisateurs
     ajouter_utilisateurs(p_utilisateurs:ARRAY[UTILISATEUR]) is
         do
             liste_utilisateurs.ajouter_liste(p_utilisateurs)
         end
 
-	-- Formulaire de saisi pour un utilisateur
+    ---
+	--- Formulaire de saisie d'un utilisateur
 	formulaire_utilisateur:UTILISATEUR is
 		local
 			existe : BOOLEAN
@@ -128,7 +136,8 @@ feature {ANY}
 			Result := p_utilisateur
 		end	
 
-	-- Ajouter un utilisateur par le formulaire rempli 
+    ---
+	--- Ajouter un utilisateur par le formulaire rempli 
 	ajouter_form_utilisateur is
 		local
 			utilisateur : UTILISATEUR
@@ -146,7 +155,8 @@ feature {ANY}
 			affichage_utilisateurs.afficher_fin_nouvel_utilisateur
 		end	
 
-	-- Supprimer un utilisateur
+    ---
+	--- Supprimer un utilisateur
 	supprimer(p_gestionnaire_emprunts: GESTIONNAIRE_EMPRUNTS ; p_utilisateur_courant:UTILISATEUR) is
 		local
 			utilisateur:UTILISATEUR
@@ -203,13 +213,15 @@ feature {ANY}
 		    
 		end
 
-	-- Récupérer un utilisateur par son identifiant	
+    ---
+	--- Récupérer un utilisateur par son identifiant	
     get_utilisateur(p_identifiant:STRING): UTILISATEUR is
         do
             Result := liste_utilisateurs.get_utilisateur(p_identifiant)
         end
 
-	-- Consulter un utilisateur
+    ---
+	--- Consulter un utilisateur
 	consulter is
 		local
 			utilisateurs: ARRAY[UTILISATEUR]
@@ -273,7 +285,8 @@ feature {ANY}
 
 		end
 
-	-- Informations du client connecté
+    ---
+	--- Informations de l'utilisateur
 	info_compte(p_utilisateur:UTILISATEUR; gestionnaire_emprunts : GESTIONNAIRE_EMPRUNTS) is
 		do
 
@@ -288,7 +301,8 @@ feature {ANY}
 
 		end
 
- 	-- rechercher           
+    ---
+ 	--- Rechercher une liste d'utilisateurs
     rechercher: ARRAY[UTILISATEUR] is
         local
             choix_recherche: INTEGER
@@ -317,6 +331,8 @@ feature {ANY}
 
         end
         
+    --- 
+    --- Rechercher un utilisateur
     rechercher_utilisateur: UTILISATEUR is
         local
 			utilisateurs: ARRAY[UTILISATEUR]
@@ -361,7 +377,8 @@ feature {ANY}
 
 feature {NONE}
 
-    -- rechercher un administrateur    
+    ---
+    --- Rechercher des administrateurs    
     rechercher_admin: ARRAY[UTILISATEUR] is
         local
             identifiant: STRING
@@ -377,7 +394,8 @@ feature {NONE}
             Result := liste_utilisateurs.rechercher_admin(identifiant, nom, prenom, admin)
         end
 
-    -- rechercher un client
+    ---
+    --- Rechercher des clients
     rechercher_client: ARRAY[UTILISATEUR] is
 	local
     	identifiant: STRING

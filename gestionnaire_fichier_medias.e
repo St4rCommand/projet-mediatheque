@@ -1,10 +1,16 @@
 class GESTIONNAIRE_FICHIER_MEDIAS
 
+---
+--- Classe pour l'interaction avec le fichier médias
+---
+
 inherit
        GESTIONNAIRE_FICHIER_DONNEES
 
 feature {ANY}
-    --lire_fichier_medias(fichier:STRING): ARRAY[MEDIA] is
+
+    ---
+    --- Lecture du fichier de données média
     lire_fichier_medias(fichier:STRING): ARRAY[MEDIA] is
         local
             file_read: TEXT_FILE_READ
@@ -55,8 +61,9 @@ feature {ANY}
         end
         
 feature {NONE}
-        
-    -- Lecture du type de média d'une ligne
+       
+    ---
+    --- Lecture du type de média d'une ligne
     lire_media(cdc_media: STRING): MEDIA is
         local
             type: STRING
@@ -74,7 +81,8 @@ feature {NONE}
             end
         end
 
-    -- Lire DVD
+    ---
+    --- Lire une ligne DVD
     lire_dvd(cdc_media: STRING): DVD is
         local
             dvd : DVD
@@ -136,7 +144,8 @@ feature {NONE}
             
         end        
 
-    -- Lire Livre
+    ---
+    --- Lire une ligne Livre
     lire_livre(cdc_media: STRING): LIVRE is
         local
             livre: LIVRE

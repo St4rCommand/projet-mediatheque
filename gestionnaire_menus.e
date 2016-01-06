@@ -1,9 +1,15 @@
 class GESTIONNAIRE_MENUS
 
+---
+--- Gestionnaire des menus
+---
+
 creation {ANY}
 	lancement
 	
-feature {}
+feature {NONE}
+
+        
        gestionnaire_fichier_utilisateurs:GESTIONNAIRE_FICHIER_UTILISATEURS
        gestionnaire_fichier_medias:GESTIONNAIRE_FICHIER_MEDIAS
        gestionnaire_medias:GESTIONNAIRE_MEDIAS
@@ -14,7 +20,8 @@ feature {}
 
 feature {ANY}
 	
-	-- Lancement de l'application
+	---
+	--- Lancement de l'application
     lancement is
         local
             utilisateurs_lus: ARRAY[UTILISATEUR]
@@ -47,7 +54,8 @@ feature {ANY}
             menu_principal
         end
     
-    -- Menu principal de l'application
+    ---
+    --- Gestion du menu principal de l'application
     menu_principal is
         local
             fin: BOOLEAN
@@ -74,7 +82,8 @@ feature {ANY}
             
         end
     
-    -- Menu public de l'application
+    ---
+    --- Gestion du menu public de l'application
     menu_principal_non_connecte: BOOLEAN is
         local
             choix_menu: INTEGER
@@ -104,7 +113,8 @@ feature {ANY}
             end
         end
     
-    -- Menu d'administration de l'application
+    ---
+    --- Gestion du menu des administrateurs de l'application
     menu_principal_admin: BOOLEAN is
         local
             choix_menu: INTEGER
@@ -171,8 +181,9 @@ feature {ANY}
                 end
             end
         end
-        
-    -- Menu clientèle de l'application
+    
+    ---    
+    --- Gestion du menu des clients de l'application
     menu_principal_client: BOOLEAN is
         local
             choix_menu: INTEGER
@@ -210,7 +221,8 @@ feature {ANY}
         
 feature {NONE}
 
-    -- Se connecter
+    ---
+    --- Gestion de la connection à l'application
 	connecter is
 		local
 			utilisateur : UTILISATEUR
@@ -226,6 +238,8 @@ feature {NONE}
             end
 		end
 		
+	---
+	--- Gestion de la deconnexion de l'application
 	deconnecter is
 	    do
 	        utilisateur_connecte := Void

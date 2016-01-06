@@ -1,5 +1,9 @@
 class GESTIONNAIRE_MEDIAS
 
+---
+--- Gestionnaire des médias
+---
+
 creation {ANY}
     nouveau
 
@@ -11,11 +15,11 @@ feature {NONE}
     -- Affichage des médias
     affichage_medias: AFFICHAGE_MEDIAS
     
+    -- Gestionnaire des emprunts
     gestionnaire_emprunts : GESTIONNAIRE_EMPRUNTS
     
 feature {ANY}
 
-    -- Constructeur
     nouveau is
         do
             create liste_medias.nouveau
@@ -27,13 +31,15 @@ feature {ANY}
             gestionnaire_emprunts:=p_gestionnaire_emprunts
         end
 
-    -- Ajouter des médias dans la liste existante
+    ---
+    --- Ajouter une liste de médias
     ajouter_liste(p_medias:ARRAY[MEDIA]) is
         do
             liste_medias.ajouter_liste(p_medias)
         end
     
-    -- Ajouter un média
+    ---
+    --- Ajouter un média
     ajouter is
         local
             choix : INTEGER
@@ -58,7 +64,8 @@ feature {ANY}
             
         end
 
-    -- Rechercher un média dans la liste des médias proposés
+    ---
+    --- Rechercher et consulter des médias
     consulter is 
         local
             medias: ARRAY[MEDIA]
@@ -120,6 +127,8 @@ feature {ANY}
             
         end
         
+    ---
+    --- Mettre à jour des médias
     mettre_a_jour is
         local
             autre_recherche: BOOLEAN
@@ -176,7 +185,8 @@ feature {ANY}
             end
         end
 
-            
+    ---
+    --- Recherche une liste de médias    
     rechercher: ARRAY[MEDIA] is
         local
             choix_recherche: INTEGER
@@ -208,6 +218,8 @@ feature {ANY}
             
         end
         
+    ---
+    --- Rechercher un média
     rechercher_media: MEDIA is
         local
             medias: ARRAY[MEDIA]
@@ -249,6 +261,8 @@ feature {ANY}
 
 feature {NONE}
        
+    ---
+    --- Rechercher sur les dvd
     rechercher_dvd: ARRAY[MEDIA] is
         local
             titre: STRING
@@ -263,6 +277,8 @@ feature {NONE}
             Result := liste_medias.rechercher_dvd(titre, annee, realisateur, acteur)
         end
     
+    ---
+    --- Recherche sur les livres
     rechercher_livres: ARRAY[MEDIA] is
         local
             titre: STRING
@@ -273,6 +289,8 @@ feature {NONE}
             Result := liste_medias.rechercher_livre(titre, auteur)
         end
     
+    ---
+    --- Recherche sur les médias
     rechercher_medias: ARRAY[MEDIA] is
         local
             titre: STRING
@@ -281,6 +299,8 @@ feature {NONE}
             Result := liste_medias.rechercher(titre)
         end
 
+    --- 
+    --- Création d'un dvd
     creer_dvd is
         local
             titre: STRING
@@ -362,6 +382,8 @@ feature {NONE}
             liste_medias.ajouter(dvd)
         end
         
+    ---
+    --- Création d'un livre
     creer_livre is
         local
             titre: STRING
@@ -391,6 +413,8 @@ feature {NONE}
             liste_medias.ajouter(livre)
         end
         
+    ---
+    --- Créer un média
     creer is
         local
             choix_menu: INTEGER
@@ -407,6 +431,8 @@ feature {NONE}
             
         end
         
+    ---
+    --- Modifier un média
     modifier(p_media: MEDIA) is
         local
             livre: LIVRE
@@ -421,6 +447,8 @@ feature {NONE}
             end
         end
         
+    ---
+    --- Modifier un livre
     modifier_livre(p_livre: LIVRE) is
         local
             titre: STRING
@@ -453,7 +481,9 @@ feature {NONE}
             end
             
         end
-        
+       
+    ---
+    --- Modifier un dvd
     modifier_dvd(p_dvd: DVD) is
         local
             titre: STRING
