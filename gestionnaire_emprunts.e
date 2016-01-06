@@ -194,7 +194,12 @@ feature {ANY}
 			create emprunts_depasses.make(0,0)
 			affichage_emprunts.afficher_retard_debut
 			emprunts_depasses := liste_emprunts.delais_depasse
-			affichage_emprunts.afficher_emprunts(emprunts_depasses)
+			
+			if emprunts_depasses.count > 1 then
+    			affichage_emprunts.afficher_emprunts(emprunts_depasses)
+			else
+			    affichage_emprunts.afficher_aucun_retard
+		    end
 			
 		end
          

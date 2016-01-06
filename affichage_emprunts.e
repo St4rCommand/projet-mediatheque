@@ -134,5 +134,10 @@ feature {ANY}
         do
             afficher_message_erreur("Le média que vous avez sélectionné %N *** ne peut pas être emprunté %N *** car il n'est plus disponible")
         end
+        
+    afficher_aucun_retard is
+        do
+            io.put_string(" | Aucun emprunt n'est en retard%N%N")
+        end
 
 end
