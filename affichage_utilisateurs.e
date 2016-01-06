@@ -255,26 +255,6 @@ feature {ANY}
             Result := rep
         end
 
-    --- Saisir choix de l'utilisateur
-    saisir_utilisateur_selectionne(choix_max: INTEGER): INTEGER is
-        local
-            choix: STRING
-        do
-            create choix.make_empty
-        
-            from
-            until choix_correct(choix, choix_max)
-            loop
-                io.put_string(" Choix (0 - Nouvelle recherche) : ")
-				io.read_line
-                choix := io.last_string
-            end
-            
-            Result := choix.to_integer
-            
-            io.put_string(" --- %N%N")
-        end
-
     --- Erreur lors de la suppression d'un compte courant        
     afficher_suppression_impossible is
         do

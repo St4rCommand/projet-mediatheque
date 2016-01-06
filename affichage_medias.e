@@ -144,28 +144,7 @@ feature {ANY}
             type.copy(saisir_string)
             
             Result := type
-        end
-
-    ---
-    --- Saisir le choix du média       
-    saisir_media_selectionne(choix_max: INTEGER): INTEGER is
-        local
-            choix: STRING
-        do
-            create choix.make_empty
-        
-            from
-            until choix_correct(choix, choix_max)
-            loop
-                io.put_string(" Choix (0 - Nouvelle recherche) : ")
-                choix.copy(saisir_string)
-            end
-            
-            Result := choix.to_integer
-            
-            io.put_string(" --- %N%N")
-        end
-        
+        end        
         
     --
     -- Fonction d'affichage

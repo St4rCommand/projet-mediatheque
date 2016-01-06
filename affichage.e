@@ -81,4 +81,24 @@ feature {ANY}
             io.put_string(" *** "+p_string+"%N")
             io.put_string(" ***%N%N")
         end
+        
+    ---
+    --- Saisir le résultat à sélectionner suite à une recherche   
+    saisir_resultat_a_selectionne(choix_max: INTEGER): INTEGER is
+        local
+            choix: STRING
+        do
+            create choix.make_empty
+        
+            from
+            until choix_correct(choix, choix_max)
+            loop
+                io.put_string(" Choix (0 - Nouvelle recherche) : ")
+                choix.copy(saisir_string)
+            end
+            
+            Result := choix.to_integer
+            
+            io.put_string(" --- %N%N")
+        end
 end

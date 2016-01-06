@@ -251,7 +251,7 @@ feature {ANY}
 			            affichage_utilisateurs.afficher_recherche_resultats(utilisateurs)
 			
 			            -- Choix de l'utilisateur a consulter
-			            choix_menu := affichage_utilisateurs.saisir_utilisateur_selectionne(utilisateurs.count-1)
+			            choix_menu := affichage_utilisateurs.saisir_resultat_a_selectionne(utilisateurs.count-1)
 			            
 			            if choix_menu = 0 then
 			                autre_consultation := False
@@ -356,7 +356,7 @@ feature {ANY}
 		            affichage_utilisateurs.afficher_recherche_resultats(utilisateurs)
 		
 		            -- Choix de l'utilisateur a consulter
-		            choix_menu := affichage_utilisateurs.saisir_utilisateur_selectionne(utilisateurs.count-1)
+		            choix_menu := affichage_utilisateurs.saisir_resultat_a_selectionne(utilisateurs.count-1)
 		            
 		            if choix_menu /= 0 then
                         Result := utilisateurs.item(choix_menu)

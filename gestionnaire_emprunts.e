@@ -162,7 +162,7 @@ feature {ANY}
                     loop
                     
                         affichage_emprunts.afficher_emprunts_liste(emprunts)
-                        choix_menu := affichage_emprunts.saisir_emprunt_selectionne(emprunts.count-1)
+                        choix_menu := affichage_emprunts.saisir_resultat_a_selectionne(emprunts.count-1)
                         
                         if choix_menu = 0 then
                             autre_emprunt := False

@@ -93,7 +93,7 @@ feature {ANY}
                     loop
                     
                         affichage_medias.afficher_recherche_resultats(medias)
-                        choix_menu := affichage_medias.saisir_media_selectionne(medias.count-1)
+                        choix_menu := affichage_medias.saisir_resultat_a_selectionne(medias.count-1)
                         
                         if choix_menu = 0 then
                             autre_consultation := False
@@ -155,7 +155,7 @@ feature {ANY}
                     loop
                     
                         affichage_medias.afficher_recherche_resultats(medias_trouves)
-                        choix_menu := affichage_medias.saisir_media_selectionne(medias_trouves.count)
+                        choix_menu := affichage_medias.saisir_resultat_a_selectionne(medias_trouves.count)
                     
                         if choix_menu = 0 then
                             autre_modification := False
@@ -241,7 +241,7 @@ feature {ANY}
                 if medias /= Void and then medias.count > 1 then
                     
                     affichage_medias.afficher_recherche_resultats(medias)
-                    choix_menu := affichage_medias.saisir_media_selectionne(medias.count-1)
+                    choix_menu := affichage_medias.saisir_resultat_a_selectionne(medias.count-1)
                     
                     if choix_menu /= 0 then
                         Result := medias.item(choix_menu)

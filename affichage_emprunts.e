@@ -150,28 +150,6 @@ feature {ANY}
         end
     
     ---
-    --- Saisir le choix d'un emprunt    
-    saisir_emprunt_selectionne(choix_max: INTEGER): INTEGER is
-        local
-            choix: STRING
-        do
-            
-            io.put_string("%N --- %N")
-            create choix.make_empty
-        
-            from
-            until choix_correct(choix, choix_max)
-            loop
-                io.put_string(" Choix (0 - Nouvelle recherche) : ")
-                choix.copy(saisir_string)
-            end
-            
-            Result := choix.to_integer
-            
-            io.put_string(" --- %N%N")
-        end
-    
-    ---
     --- Message d'erreur pour l'indisponibilité d'un média    
     afficher_media_indisponible is
         do

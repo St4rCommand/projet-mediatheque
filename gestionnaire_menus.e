@@ -9,14 +9,26 @@ creation {ANY}
 	
 feature {NONE}
 
-        
-       gestionnaire_fichier_utilisateurs:GESTIONNAIRE_FICHIER_UTILISATEURS
-       gestionnaire_fichier_medias:GESTIONNAIRE_FICHIER_MEDIAS
-       gestionnaire_medias:GESTIONNAIRE_MEDIAS
-       gestionnaire_utilisateurs:GESTIONNAIRE_UTILISATEURS
-       gestionnaire_emprunts:GESTIONNAIRE_EMPRUNTS
-       affichage_menus:AFFICHAGE_MENUS
-       utilisateur_connecte: UTILISATEUR
+    -- Gestionnaire fichier utilisateurs
+    gestionnaire_fichier_utilisateurs:GESTIONNAIRE_FICHIER_UTILISATEURS
+    
+    -- Gestionnaire fichier médias
+    gestionnaire_fichier_medias:GESTIONNAIRE_FICHIER_MEDIAS
+    
+    -- Gestionnaire médias
+    gestionnaire_medias:GESTIONNAIRE_MEDIAS
+    
+    -- Gestionnaire utilisateurs
+    gestionnaire_utilisateurs:GESTIONNAIRE_UTILISATEURS
+    
+    -- Gestionnaire emprunts
+    gestionnaire_emprunts:GESTIONNAIRE_EMPRUNTS
+    
+    -- Affichage des menus
+    affichage_menus:AFFICHAGE_MENUS
+    
+    -- Utilisateur connecté
+    utilisateur_connecte: UTILISATEUR
 
 feature {ANY}
 	
