@@ -7,6 +7,8 @@ creation
     nouveau
     
 feature {NONE}
+
+    --- durée maximale en semaine d'un emprunt
     delai_emprunt_media: INTEGER
 	
 feature {ANY}
@@ -15,20 +17,30 @@ feature {ANY}
         do
             delai_emprunt_media := p_delai_emprunt_media
         end
-
+    
+    ---
+    --- Titre fonction nouvel emprunt
     afficher_nouvel_emprunt is
         do
             io.put_string(" *** Ajouter un nouvel emprunt *** %N%N")
         end
         
+    ---
+    --- Titre fonction rendre média
     afficher_nouveau_rendu is
         do
             io.put_string(" *** Effectuer un rendu *** %N%N")
         end
+        
+    ---
+    --- Titre fonctions emprunts en retard
     afficher_retard_debut is
 		do
             io.put_string(" *** Emprunts non rendu à la date du retour fixée *** %N%N")
 		end
+		
+	---
+	--- Menu ajouter un autre média
     afficher_ajouter_autre_media is
         do
             io.put_string(" *** %N")
@@ -36,6 +48,8 @@ feature {ANY}
             io.put_string(" 0 - Fin de l'emprunt%N")
         end
     
+    ---
+    --- Menu saisir un autre emprunt
     afficher_ajouter_autre_emprunt is
         do
             io.put_string(" *** %N")
@@ -43,6 +57,8 @@ feature {ANY}
             io.put_string(" 0 - Quitter%N")
         end
     
+    ---
+    --- Afficher une liste d'emprunts avec l'emprunteur et la date de rendu
     afficher_emprunts(p_emprunts: ARRAY[EMPRUNT]) is
         require
             p_emprunts.count > 1
@@ -52,7 +68,9 @@ feature {ANY}
             io.put_string("  | à rendre le "+p_emprunts.item(1).get_date_rendu(delai_emprunt_media).to_string+"%N")
             io.put_string("%N ****** %N%N")
         end
-        
+    
+    --- 
+    --- Afficher une liste d'emprunts
     afficher_emprunts_liste(p_emprunts: ARRAY[EMPRUNT]) is
         local
             i: INTEGER
@@ -67,13 +85,16 @@ feature {ANY}
                 i := i+1 
             end
         end
-        
+    
+    ---
+    --- Afficher le nom du média emprunté
     afficher_emprunt(p_emprunt: EMPRUNT) is
         do
             io.put_string(p_emprunt.get_media.get_titre+"%N")
         end
 
-	-- les emprunts pour un utilisateur
+    ---
+	--- Afficher la liste des emprunts d'un utilisateur
     afficher_details_emprunts(p_emprunts: ARRAY[EMPRUNT]) is
         local
             i:INTEGER
@@ -89,17 +110,21 @@ feature {ANY}
             io.put_string("%N")
         end
 
-    -- Un seul utilisateur : afficher tous ses emprunts   
+    ---
+    --- Afficher tous les emprunts d'un utilisateur
     afficher_detail_emprunt(p_emprunt: EMPRUNT) is
         do
             io.put_string("| "+p_emprunt.get_media.get_titre+" à rendre le "+p_emprunt.get_date_rendu(delai_emprunt_media).to_string+"%N")
         end
         
+    --- 
+    --- Affichage limite du nombre d'emprunts pour un utilisateur
     afficher_limite_emprunts_atteinte is
         do
             afficher_message_erreur("Vous avez atteint le nombre maximum d'emprunts pour cet utilisateur !")
         end
         
+    ---
     afficher_autre_rendu is
         do
             io.put_string(" *** %N")

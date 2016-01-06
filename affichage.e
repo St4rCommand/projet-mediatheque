@@ -1,7 +1,13 @@
 deferred class AFFICHAGE
 
+---
+--- Classe abstraitre regroupant les fonctions d'affichages
+---
+
 feature {ANY}
 
+    ---
+    --- Menu pour choisir l'action suivante (consultation ou recherche)
     afficher_consultation_suivante is
     do
         io.put_string(" *** %N")
@@ -10,6 +16,8 @@ feature {ANY}
         io.put_string("%N 0 - Quitter%N")
     end
     
+    ---
+    --- Saisir une chaine de caractère
     saisir_string: STRING is
     local
     do
@@ -18,6 +26,8 @@ feature {ANY}
         Result := io.last_string
     end
     
+    ---
+    --- Saisir le choix d'un menu
     saisir_choix_menu(choix_max: INTEGER): INTEGER is
     local
         choix: STRING
@@ -38,6 +48,8 @@ feature {ANY}
         Result := choix.to_integer
     end
     
+    ---
+    --- Vérifier si le choix du menu est correct
     choix_correct(choix: STRING; choix_max: INTEGER):BOOLEAN is
     do
         if choix.is_integer then
@@ -52,6 +64,8 @@ feature {ANY}
     
     end
     
+    ---
+    --- Affichage où la recherche ne retourne aucun résultat
     afficher_recherche_incorrecte is
     do
         io.put_string("Résultats de la recherche : %N%N")
@@ -59,6 +73,8 @@ feature {ANY}
         io.put_string("%N --- %N%N")
     end
 
+    ---
+    --- Afficher un message d'erreur
     afficher_message_erreur(p_string: STRING) is
         do
             io.put_string(" ***%N")
