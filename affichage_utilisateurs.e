@@ -59,7 +59,7 @@ feature {ANY}
 		local
 			choix : STRING
         do
-            io.put_string(" Confirmez-vous la suppression ?(O/N) : ")
+            io.put_string(" Confirmez-vous la suppression ?(o/n) : ")
 			io.read_line
             choix := io.last_string
 

@@ -117,7 +117,7 @@ feature {ANY}
 			loop
 			    rep.copy(affichage_utilisateurs.saisir_admin)			
 			end
-            if rep.is_equal("O") then
+            if rep.is_equal("o") then
                 admin := True
             else
                 admin := False
@@ -170,12 +170,12 @@ feature {ANY}
 			if nombre_emprunts = 0 then
 				-- affichage de la demande définitive
 				from
-				until rep.is_equal("O") or rep.is_equal("N")
+				until rep.is_equal("o") or rep.is_equal("n")
 				loop
 					rep:= affichage_utilisateurs.afficher_demande_suppresion
 				end
 
-				if rep.is_equal("O") then
+				if rep.is_equal("o") then
 					identifiant := utilisateur.get_identifiant
 					-- Recherche de la position dans le tableau des utilisateurs
 					position := liste_utilisateurs.position_utilisateur(utilisateur)
@@ -223,7 +223,7 @@ feature {ANY}
 			    -- Choix du type d'utilisateur
 			    utilisateurs := rechercher
 			    
-			    if utilisateurs /= Void and utilisateurs.count > 1 then
+			    if utilisateurs /= Void and then utilisateurs.count > 1 then
 			        from 
 			        until not autre_consultation
 			        loop
