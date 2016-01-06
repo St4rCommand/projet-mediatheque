@@ -232,7 +232,6 @@ feature {ANY}
             io.put_string(" 2 - Livre%N")
             io.put_string(" 3 - Tout%N")
             io.put_string("%N 0 - Quitter%N")
-            io.put_string("%N --- %N")
         end
         
     afficher_recherche_resultats(medias: ARRAY[MEDIA]) is
@@ -273,7 +272,6 @@ feature {ANY}
             io.put_string(" 1 - DVD %N")
             io.put_string(" 2 - Livre%N")
             io.put_string("%N 0 - Quitter%N")
-            io.put_string("%N --- %N")
         end
         
     afficher_ajout_suivant is
@@ -281,7 +279,6 @@ feature {ANY}
             io.put_string(" *** %N")
             io.put_string(" 1 - Nouvel ajout %N")
             io.put_string("%N 0 - Quitter%N")
-            io.put_string("%N --- %N")
         end
         
     afficher_saisir_autre_realisateur is
@@ -289,7 +286,6 @@ feature {ANY}
             io.put_string(" Ajouter un autre réalisateur :%N%N")
             io.put_string(" 1 - Oui %N")
             io.put_string(" 0 - Non%N")
-            io.put_string("%N --- %N")
         end
     
     afficher_saisir_autre_acteur is
@@ -297,7 +293,6 @@ feature {ANY}
             io.put_string(" Ajouter un autre acteur : %N%N")
             io.put_string(" 1 - Oui %N")
             io.put_string(" 0 - Non%N")
-            io.put_string("%N --- %N")
         end
         
     afficher_modifier_dvd_menu_realisateur(p_realisateur: STRING) is
@@ -306,7 +301,6 @@ feature {ANY}
             io.put_string(" 0 - Continuer%N")
             io.put_string(" 1 - Modifier %N")
             io.put_string(" 2 - Supprimer%N")
-            io.put_string("%N --- %N")
         end
         
     afficher_modifier_dvd_menu_acteur(p_acteur: STRING) is
@@ -315,7 +309,6 @@ feature {ANY}
             io.put_string(" 0 - Continuer%N")
             io.put_string(" 1 - Modifier %N")
             io.put_string(" 2 - Supprimer%N")
-            io.put_string("%N --- %N")
         end
 
 end

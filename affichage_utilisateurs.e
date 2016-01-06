@@ -133,19 +133,12 @@ feature {ANY}
             io.put_string("%N ****** %N%N")
         end   
         
-    afficher_recherche_menu_type : INTEGER is
-		local
-			choix : STRING
+    afficher_recherche_menu_type is
         do
             io.put_string(" Type d'utilisateurs à rechercher : %N%N")
             io.put_string(" 1 - Admin %N")
             io.put_string(" 2 - Client%N")
             io.put_string("%N 0 - Quitter%N")
-            io.put_string("%N Choix : ")
-			io.read_line
-            choix := io.last_string
-
-			Result := choix.to_integer
         end
         
     afficher_recherche_resultats(utilisateurs: ARRAY[UTILISATEUR]) is

@@ -34,7 +34,6 @@ feature {ANY}
             io.put_string(" *** %N")
             io.put_string(" 1 - Ajouter un autre média %N")
             io.put_string(" 0 - Fin de l'emprunt%N")
-            io.put_string("%N --- %N%N")
         end
     
     afficher_ajouter_autre_emprunt is
@@ -42,7 +41,6 @@ feature {ANY}
             io.put_string(" *** %N")
             io.put_string(" 1 - Saisir un autre emprunt%N")
             io.put_string(" 0 - Quitter%N")
-            io.put_string("%N --- %N%N")
         end
     
     afficher_emprunts(p_emprunts: ARRAY[EMPRUNT]) is
@@ -98,7 +96,6 @@ feature {ANY}
             io.put_string(" *** %N")
             io.put_string(" 1 - Rendre des médias pour un autre utilisateur %N")
             io.put_string(" 0 - Quitter%N")
-            io.put_string("%N --- %N%N")
         end
         
     afficher_supprimer_autre_emprunt is
@@ -106,7 +103,6 @@ feature {ANY}
             io.put_string(" *** %N")
             io.put_string(" 1 - Rendre un autre média pour cet utilisateur %N")
             io.put_string(" 0 - Quitter%N")
-            io.put_string("%N --- %N%N")
         end
         
     afficher_aucun_emprunt is
@@ -118,6 +114,8 @@ feature {ANY}
         local
             choix: STRING
         do
+            
+            io.put_string("%N --- %N")
             create choix.make_empty
         
             from

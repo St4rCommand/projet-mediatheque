@@ -293,7 +293,8 @@ feature {ANY}
         
             affichage_utilisateurs.afficher_recherche_debut
             
-            choix_recherche := affichage_utilisateurs.afficher_recherche_menu_type
+            affichage_utilisateurs.afficher_recherche_menu_type
+            choix_recherche := affichage_utilisateurs.saisir_choix_menu(2)
             
             inspect choix_recherche
                 when 1 then

@@ -8,7 +8,6 @@ feature {ANY}
         io.put_string(" 1 - Nouvelle recherche %N")
         io.put_string(" 2 - Sélectionnez en un autre %N")
         io.put_string("%N 0 - Quitter%N")
-        io.put_string("%N --- %N")
     end
     
     saisir_string: STRING is
@@ -23,6 +22,8 @@ feature {ANY}
     local
         choix: STRING
     do
+        
+        io.put_string("%N --- %N")
         create choix.make_empty
     
         from
@@ -32,7 +33,7 @@ feature {ANY}
             choix.copy(saisir_string)
         end
         
-        io.put_string("%N ****** %N%N")
+        io.put_string(" --- %N%N")
         
         Result := choix.to_integer
     end

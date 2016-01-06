@@ -23,8 +23,8 @@ feature {ANY}
             io.put_string(" 1 - Se connecter %N")
             io.put_string(" 2 - Consulter médias%N")
             io.put_string("%N 0 - Quitter%N")
-            io.put_string("%N --- %N")
             
+            io.put_string("%N --- %N")
             from
             until choix_menu.is_integer
             loop
@@ -32,8 +32,9 @@ feature {ANY}
                 io.read_line
                 choix_menu := io.last_string
             end
+            io.put_string(" --- %N%N")
             
-            io.put_string("%N ****** %N%N")
+            io.put_string(" ****** %N%N")
             
             Result := choix_menu.to_integer
         end
@@ -66,8 +67,8 @@ feature {ANY}
             io.put_string(" 10 - Rendre des medias%N")
 			io.put_string(" 11 - Emprunts avec délais dépassé%N")                                   
             io.put_string("%N 0 - Se deconnecter%N")
-            io.put_string("%N --- %N")
             
+            io.put_string("%N --- %N")
             from
             until choix_sous_menu.is_integer
             loop
@@ -75,8 +76,9 @@ feature {ANY}
                 io.read_line
                 choix_sous_menu := io.last_string
             end
+            io.put_string(" --- %N%N")
             
-            io.put_string("%N ****** %N%N")
+            io.put_string(" ****** %N%N")
             
             Result := choix_sous_menu.to_integer
         end
@@ -92,8 +94,8 @@ feature {ANY}
             io.put_string(" 2 - Lister les médias%N")
             io.put_string(" 3 - Consulter un média%N")                               
             io.put_string("%N 0 - Se deconnecter%N")
-            io.put_string("%N --- %N")
             
+            io.put_string("%N --- %N")
             from
             until choix_sous_menu.is_integer
             loop
@@ -101,8 +103,9 @@ feature {ANY}
                 io.read_line
                 choix_sous_menu := io.last_string
             end
+            io.put_string(" --- %N%N")
             
-            io.put_string("%N ****** %N%N")
+            io.put_string(" ****** %N%N")
             
             Result := choix_sous_menu.to_integer
         end
@@ -154,7 +157,6 @@ feature {ANY}
             io.put_string(" 2 - Ajouter%N")
             io.put_string(" 3 - Modifier%N")
             io.put_string("%N 0 - Quitter%N")
-            io.put_string("%N --- %N")
             
             from
             until choix_menu.is_integer
