@@ -192,12 +192,8 @@ feature {ANY}
                     -- lister les medias    
                     when 2 then
                         gestionnaire_medias.consulter
-                    
-                    -- Consulter un média    
-                    when 3 then
-                        io.put_string(" Fonctionnalité à implémenter %N ")
                         
-                    -- Réserver un média    
+                    -- Réserver un média
                     --when 10 then
                     --    io.put_string(" Fonctionnalité à implémenter %N ")
                         

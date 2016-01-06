@@ -91,8 +91,7 @@ feature {ANY}
         
             io.put_string(" *** Menu client *** %N%N")
             io.put_string(" 1 - Consulter mon compte%N")
-            io.put_string(" 2 - Lister les médias%N")
-            io.put_string(" 3 - Consulter un média%N")                               
+            io.put_string(" 2 - Consulter un média%N")                               
             io.put_string("%N 0 - Se deconnecter%N")
             
             io.put_string("%N --- %N")
