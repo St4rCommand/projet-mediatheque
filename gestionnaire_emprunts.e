@@ -176,10 +176,20 @@ feature {ANY}
         
         end
         
-    emprunts_utilisateur(p_utilisateur:UTILISATEUR) is 
+    emprunts_utilisateur(p_utilisateur:UTILISATEUR) is
+        local
+            emprunts: ARRAY[EMPRUNT]
         do
-			-- affichage des emprunts
-			affichage_emprunts.afficher_details_emprunts(liste_emprunts.rechercher_emprunt(p_utilisateur))
+            create emprunts.make(0,0)
+            
+            emprunts := liste_emprunts.rechercher_emprunt(p_utilisateur)
+            
+            if emprunts.count > 1 then
+	    		-- affichage des emprunts
+	    		affichage_emprunts.afficher_details_emprunts(emprunts)
+			else
+                affichage_emprunts.afficher_aucun_emprunt_utilisateur
+            end
         end
         
     get_nombre_emprunts(p_utilisateur : UTILISATEUR): INTEGER is

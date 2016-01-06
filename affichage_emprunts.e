@@ -139,5 +139,10 @@ feature {ANY}
         do
             io.put_string(" | Aucun emprunt n'est en retard%N%N")
         end
+        
+    afficher_aucun_emprunt_utilisateur is
+    do
+        io.put_string(" | Aucun emprunt%N%N")
+    end
 
 end
