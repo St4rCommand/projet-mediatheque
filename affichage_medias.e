@@ -151,7 +151,7 @@ feature {ANY}
     --
         
 	--- Afficher une liste de médias en les affichant 1 par 1
-    afficher_medias(p_medias: ARRAY[MEDIA]) is
+    afficher_medias(p_medias: ARRAY[MEDIA] ; p_gestionnaire_emprunts: GESTIONNAIRE_EMPRUNTS) is
         local
             i: INTEGER
         do
@@ -164,7 +164,7 @@ feature {ANY}
 			    i = p_medias.count
 		    loop
 				-- Affichage du média à la position i dans la liste
-		        afficher_media(p_medias.item(i))
+		        afficher_media(p_medias.item(i),p_gestionnaire_emprunts)
 		        i := i+1
 		    end
 		    
@@ -172,7 +172,7 @@ feature {ANY}
         end
         
 	-- Afficher un média
-    afficher_media(p_media: MEDIA) is
+    afficher_media(p_media: MEDIA ; p_gestionnaire_emprunts: GESTIONNAIRE_EMPRUNTS) is
         local
             livre: LIVRE
             dvd: DVD
@@ -181,29 +181,35 @@ feature {ANY}
             if {LIVRE} ?:= p_media then
                 create livre.nouveau
                 livre ::= p_media
-                afficher_livre(livre)
+                afficher_livre(livre, p_gestionnaire_emprunts)
             elseif {DVD} ?:= p_media then
                 create dvd.nouveau
                 dvd ::= p_media
-                afficher_dvd(dvd)
+                afficher_dvd(dvd, p_gestionnaire_emprunts)
             end
         end
 
     -- Afficher un livre avec ses caractéristiques    
-    afficher_livre(p_livre: LIVRE) is
+    afficher_livre(p_livre: LIVRE ; p_gestionnaire_emprunts: GESTIONNAIRE_EMPRUNTS) is
+        local
+            disponible: INTEGER
         do
+            disponible := p_livre.get_nombre-p_gestionnaire_emprunts.get_nombre_emprunts_media(p_livre)
             io.put_string("| "+p_livre.get_titre+"%N")
             io.put_string("| de "+p_livre.get_auteur+"%N")
-            io.put_string("| ("+p_livre.get_nombre.to_string+" exemplaires)%N")
+            io.put_string("| ("+p_livre.get_nombre.to_string+" exemplaire(s), "+disponible.to_string+" disponible(s))%N")
             io.put_string("%N")
         end
 
     -- Afficher un DVD avec ses caractéristiques    
-    afficher_dvd(p_dvd: DVD) is
+    afficher_dvd(p_dvd: DVD ; p_gestionnaire_emprunts: GESTIONNAIRE_EMPRUNTS) is
+        local
+            disponible: INTEGER
         do
+            disponible := p_dvd.get_nombre-p_gestionnaire_emprunts.get_nombre_emprunts_media(p_dvd)
             io.put_string("| "+p_dvd.get_titre+" ("+p_dvd.get_annee.to_string+")%N")
             io.put_string("| "+p_dvd.get_type+"%N")
-            io.put_string("| ("+p_dvd.get_nombre.to_string+" exemplaires)%N")
+            io.put_string("| ("+p_dvd.get_nombre.to_string+" exemplaire(s), "+disponible.to_string+" disponible(s))%N")
             io.put_string("| Réalisateur(s) : "+tableau_to_string(p_dvd.get_realisateurs)+"%N")
             io.put_string("| Acteurs : "+tableau_to_string(p_dvd.get_acteurs)+"%N")
             io.put_string("%N")

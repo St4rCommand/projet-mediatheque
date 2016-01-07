@@ -98,7 +98,7 @@ feature {ANY}
                         if choix_menu = 0 then
                             autre_consultation := False
                         else
-                            affichage_medias.afficher_media(medias.item(choix_menu))
+                            affichage_medias.afficher_media(medias.item(choix_menu), gestionnaire_emprunts)
 
                             -- Séléctionner action suivante
                             affichage_medias.afficher_consultation_suivante
@@ -455,7 +455,7 @@ feature {NONE}
             auteur: STRING
             nombre: INTEGER
         do
-            affichage_medias.afficher_media(p_livre)
+            affichage_medias.afficher_media(p_livre, gestionnaire_emprunts)
         
             create titre.make_from_string(affichage_medias.saisir_titre)
             if not titre.is_empty then
@@ -500,7 +500,7 @@ feature {NONE}
             create date
             date.update
         
-            affichage_medias.afficher_media(p_dvd)
+            affichage_medias.afficher_media(p_dvd, gestionnaire_emprunts)
             
             create titre.make_from_string(affichage_medias.saisir_titre)
             if not titre.is_empty then
