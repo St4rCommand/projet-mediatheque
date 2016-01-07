@@ -150,7 +150,7 @@ feature {ANY}
 						
                     -- Consulter un utilisateur						
                     when 3 then
-                        gestionnaire_utilisateurs.consulter
+                        gestionnaire_utilisateurs.consulter(gestionnaire_emprunts)
                      
                     -- Ajouter un utilisateur    
                     when 4 then

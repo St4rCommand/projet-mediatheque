@@ -185,13 +185,13 @@ feature {ANY}
     --- Titre fonctionnalité info du compte
     info_debut is
         do
-            io.put_string(" *** Mon compte client *** %N%N")
+            io.put_string(" *** Compte client *** %N%N")
         end
 
     --- Titre fonction emprunts
     emprunt_debut is
         do
-           io.put_string(" *** Mes emprunts *** %N%N") 
+           io.put_string(" *** Emprunts *** %N%N") 
         end
 
 ----

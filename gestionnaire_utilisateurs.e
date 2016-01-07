@@ -222,7 +222,7 @@ feature {ANY}
 
     ---
 	--- Consulter un utilisateur
-	consulter is
+	consulter(p_gestionnaire_emprunts : GESTIONNAIRE_EMPRUNTS) is
 		local
 			utilisateurs: ARRAY[UTILISATEUR]
 			autre_recherche: BOOLEAN
@@ -256,7 +256,8 @@ feature {ANY}
 			            if choix_menu = 0 then
 			                autre_consultation := False
 		                else
-		                     affichage_utilisateurs.afficher_utilisateur(utilisateurs.item(choix_menu))
+		                     --affichage_utilisateurs.info_compte(utilisateurs.item(choix_menu), p_gestionnaire_emprunts)
+		                     info_compte(utilisateurs.item(choix_menu), p_gestionnaire_emprunts)
 		                     
 		                     affichage_utilisateurs.afficher_consultation_suivante
 		                     choix_menu := affichage_utilisateurs.saisir_choix_menu(2)
